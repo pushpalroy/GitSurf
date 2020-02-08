@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: 'variants.gradle'
+
+def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
+
+android {
+  compileSdkVersion Versions.compileSdk
+  buildToolsVersion "29.0.3"
+  defaultConfig {
+    applicationId "com.example.githubing"
+    minSdkVersion Versions.minSdk
+    targetSdkVersion Versions.targetSdk
+    versionCode Versions.versionCode
+    versionName Versions.versionName
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  lintOptions {
+    disable 'RestrictedApi'
+  }
+
+  dexOptions {
+    preDexLibraries = preDexEnabled
+  }
+
+  kapt {
+    correctErrorTypes = true
+  }
+
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+
+  dataBinding {
+    enabled = true
+  }
+
+  androidExtensions {
+    experimental = true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  sourceSets {
+    androidTest.java.srcDirs += "src/test-common/java"
+    test.java.srcDirs += "src/test-common/java"
+  }
+}
+
+task getVersionName() {
+  return "${Versions.versionMajor}.${Versions.versionMinor}.${Versions.versionPatch}"
+}
+
+dependencies {
+  implementation Dependencies.support_appcompat
+  implementation Dependencies.support_design
+  implementation Dependencies.support_cardview
+  implementation Dependencies.support_recyclerview
+  implementation Dependencies.constraintLayout
+
+  implementation Dependencies.kotlin_stdlib
+
+  implementation Dependencies.arch_lifecycle
+  implementation Dependencies.livedata_ktx
+  implementation Dependencies.arch_room
+  kapt Dependencies.arch_room_compiler
+  testImplementation Dependencies.arch_core_testing
+  testImplementation Dependencies.mockWebServer
+
+  implementation Dependencies.dagger
+  kapt Dependencies.dagger_compiler
+
+  implementation Dependencies.dagger_android
+  implementation Dependencies.dagger_android_support
+  kapt Dependencies.dagger_android_compiler
+
+  implementation Dependencies.rxjava
+  implementation Dependencies.rxandroid
+
+  implementation Dependencies.preferenceroom
+  kapt Dependencies.preferenceroom_compiler
+
+  implementation Dependencies.gson
+
+  implementation Dependencies.retrofit
+  implementation Dependencies.retrofit_gson
+
+  implementation Dependencies.timber
+  debugImplementation Dependencies.memoryLeakDebug
+
+  implementation Dependencies.glide
+  kapt Dependencies.glide_compiler
+
+  testImplementation Dependencies.junit
+  testImplementation Dependencies.mockito
+  testImplementation Dependencies.mockitoKotlin
+  androidTestImplementation Dependencies.mockitoAndroid
+  androidTestImplementation Dependencies.espresso
+}

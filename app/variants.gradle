@@ -1,0 +1,20 @@
+apply plugin: 'com.android.application'
+
+android {
+  buildTypes {
+    release {
+      debuggable false
+      versionNameSuffix '-release'
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-common.txt', 'proguard-specific.txt'
+      buildConfigField 'boolean', "ENABLE_LOGGING", 'false'
+    }
+    debug {
+      debuggable true
+      versionNameSuffix '-debug'
+      applicationIdSuffix '.debug'
+      buildConfigField 'boolean', "ENABLE_LOGGING", 'true'
+    }
+  }
+}
