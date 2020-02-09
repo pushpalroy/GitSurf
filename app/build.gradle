@@ -2,14 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
 apply from: 'variants.gradle'
 
 def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
 
 android {
   compileSdkVersion Versions.compileSdk
-  buildToolsVersion "29.0.3"
   defaultConfig {
     applicationId "com.example.githubing"
     minSdkVersion Versions.minSdk
@@ -36,7 +34,7 @@ android {
   }
 
   dataBinding {
-    enabled = true
+    setEnabled(true)
   }
 
   androidExtensions {
@@ -61,18 +59,18 @@ task getVersionName() {
 dependencies {
   implementation Dependencies.support_appcompat
   implementation Dependencies.support_design
-  implementation Dependencies.support_cardview
-  implementation Dependencies.support_recyclerview
-  implementation Dependencies.constraintLayout
+  implementation Dependencies.support_card_view
+  implementation Dependencies.support_recycler_view
+  implementation Dependencies.constraint_layout
 
   implementation Dependencies.kotlin_stdlib
 
   implementation Dependencies.arch_lifecycle
-  implementation Dependencies.livedata_ktx
+  implementation Dependencies.liveData_ktx
   implementation Dependencies.arch_room
   kapt Dependencies.arch_room_compiler
   testImplementation Dependencies.arch_core_testing
-  testImplementation Dependencies.mockWebServer
+  testImplementation Dependencies.mock_web_server
 
   implementation Dependencies.dagger
   kapt Dependencies.dagger_compiler
@@ -81,11 +79,11 @@ dependencies {
   implementation Dependencies.dagger_android_support
   kapt Dependencies.dagger_android_compiler
 
-  implementation Dependencies.rxjava
-  implementation Dependencies.rxandroid
+  implementation Dependencies.rx_java
+  implementation Dependencies.rx_android
 
-  implementation Dependencies.preferenceroom
-  kapt Dependencies.preferenceroom_compiler
+  implementation Dependencies.preference_room
+  kapt Dependencies.preference_room_compiler
 
   implementation Dependencies.gson
 
@@ -93,14 +91,14 @@ dependencies {
   implementation Dependencies.retrofit_gson
 
   implementation Dependencies.timber
-  debugImplementation Dependencies.memoryLeakDebug
+  debugImplementation Dependencies.memory_leak_debug
 
   implementation Dependencies.glide
   kapt Dependencies.glide_compiler
 
   testImplementation Dependencies.junit
   testImplementation Dependencies.mockito
-  testImplementation Dependencies.mockitoKotlin
-  androidTestImplementation Dependencies.mockitoAndroid
+  testImplementation Dependencies.mockito_kotlin
+  androidTestImplementation Dependencies.mockito_android
   androidTestImplementation Dependencies.espresso
 }

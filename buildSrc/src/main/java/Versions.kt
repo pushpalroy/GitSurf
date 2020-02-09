@@ -1,4 +1,3 @@
-@Suppress("unused", "SpellCheckingInspection")
 object Versions {
   private const val versionMajor = 1
   private const val versionMinor = 0
@@ -13,10 +12,10 @@ object Versions {
 
   const val gradle = "3.5.3"
   const val junit = "4.12"
-  const val androidx = "1.0.0"
-  const val accompat = "1.1.0-alpha05"
+  const val androidX = "1.0.0"
+  const val appCompat = "1.1.0-alpha05"
   const val constraint = "1.1.3"
-  const val livedataKtx = "2.1.0-beta01"
+  const val liveDataKtx = "2.1.0-beta01"
   const val material = "1.1.0-alpha01"
   const val kotlin = "1.3.41"
   const val archComponent = "2.0.0"
