@@ -35,4 +35,7 @@ object Versions {
   const val mockitoKotlin = "2.1.0"
   const val mockWebServer = "3.14.0"
   const val espresso = "3.0.2"
+  const val jaxbCore = "2.3.0.1"
+  const val jaxbApi = "2.3.1"
+  const val jaxbImpl = "2.3.2"
 }

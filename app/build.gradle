@@ -101,4 +101,18 @@ dependencies {
   testImplementation Dependencies.mockito_kotlin
   androidTestImplementation Dependencies.mockito_android
   androidTestImplementation Dependencies.espresso
+
+  // Add missing dependencies for JDK 9+
+  if (JavaVersion.current().ordinal() >= JavaVersion.VERSION_1_9.ordinal()) {
+    // Add both if you're using both Kotlin and Java
+
+    // If you're using Kotlin
+    kapt Dependencies.jaxb_core
+    kapt Dependencies.jaxb_api
+    kapt Dependencies.jaxb_impl
+
+    // If you're using Java
+    annotationProcessor Dependencies.jaxb_core
+    annotationProcessor Dependencies.jaxb_api
+  }
 }

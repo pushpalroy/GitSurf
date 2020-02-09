@@ -37,4 +37,7 @@ object Dependencies {
   val mockito_android = "org.mockito:mockito-android:${Versions.mockito}"
   val mock_web_server = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
   val espresso = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
+  val jaxb_core = "com.sun.xml.bind:jaxb-core:${Versions.jaxbCore}"
+  val jaxb_api = "javax.xml.bind:jaxb-api:${Versions.jaxbApi}"
+  val jaxb_impl = "com.sun.xml.bind:jaxb-impl:${Versions.jaxbImpl}"
 }
