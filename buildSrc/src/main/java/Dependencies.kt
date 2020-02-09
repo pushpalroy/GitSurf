@@ -40,4 +40,5 @@ object Dependencies {
   val jaxb_core = "com.sun.xml.bind:jaxb-core:${Versions.jaxbCore}"
   val jaxb_api = "javax.xml.bind:jaxb-api:${Versions.jaxbApi}"
   val jaxb_impl = "com.sun.xml.bind:jaxb-impl:${Versions.jaxbImpl}"
+  val android_junit_runner = "androidx.test.runner.AndroidJUnitRunner"
 }

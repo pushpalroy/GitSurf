@@ -1,8 +1,9 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
 object Versions {
-  private const val versionMajor = 1
-  private const val versionMinor = 0
-  private const val versionPatch = 0
-  private const val versionBuild = 0
+  const val versionMajor = 1
+  const val versionMinor = 0
+  const val versionPatch = 0
+  const val versionBuild = 0
 
   const val compileSdk = 29
   const val minSdk = 21
@@ -10,6 +11,10 @@ object Versions {
   const val versionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
   const val versionName = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
 
+  const val proguard_android = "proguard-android.txt"
+  const val proguard_common = "proguard-common.txt"
+  const val proguard_specific = "proguard-specific.txt"
+  const val applicationId = "com.example.githubing"
   const val gradle = "3.5.3"
   const val junit = "4.12"
   const val androidX = "1.0.0"
