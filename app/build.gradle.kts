@@ -16,7 +16,10 @@ android {
       versionNameSuffix = "-release"
       isMinifyEnabled = true
       isShrinkResources = true
-      proguardFiles(getDefaultProguardFile(Versions.proguard_android), Versions.proguard_common, Versions.proguard_specific)
+      proguardFiles(
+          getDefaultProguardFile(Versions.proguard_android), Versions.proguard_common,
+          Versions.proguard_specific
+      )
       buildConfigField("boolean", "ENABLE_LOGGING", "false")
     }
   }
@@ -42,10 +45,6 @@ android {
     isEnabled = true
   }
 
-  androidExtensions {
-    isExperimental = true
-  }
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -63,16 +62,19 @@ tasks {
 dependencies {
   implementation(Dependencies.support_appcompat)
   implementation(Dependencies.support_design)
-  implementation(Dependencies.support_card_view)
-  implementation(Dependencies.support_recycler_view)
   implementation(Dependencies.constraint_layout)
 
   implementation(Dependencies.kotlin_stdlib)
 
-  implementation(Dependencies.arch_lifecycle)
-  implementation(Dependencies.liveData_ktx)
-  implementation(Dependencies.arch_room)
-  kapt(Dependencies.arch_room_compiler)
+  implementation(Dependencies.lifecycle_extensions)
+  implementation(Dependencies.lifecycle_view_model)
+  implementation(Dependencies.lifecycle_live_data)
+  kapt(Dependencies.lifecycle_compiler)
+
+  implementation(Dependencies.room)
+  implementation(Dependencies.room_ktx)
+  kapt(Dependencies.room_compiler)
+
   testImplementation(Dependencies.arch_core_testing)
   testImplementation(Dependencies.mock_web_server)
 
@@ -86,13 +88,12 @@ dependencies {
   implementation(Dependencies.rx_java)
   implementation(Dependencies.rx_android)
 
-  implementation(Dependencies.preference_room)
-  kapt(Dependencies.preference_room_compiler)
-
   implementation(Dependencies.gson)
 
   implementation(Dependencies.retrofit)
   implementation(Dependencies.retrofit_gson)
+  implementation(Dependencies.ok_http)
+  implementation(Dependencies.ok_http_logger)
 
   implementation(Dependencies.timber)
   debugImplementation(Dependencies.memory_leak_debug)

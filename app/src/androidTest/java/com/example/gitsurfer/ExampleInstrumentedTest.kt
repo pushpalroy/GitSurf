@@ -1,4 +1,4 @@
-package com.example.githubing
+package com.example.gitsurfer
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.platform.app.InstrumentationRegistry

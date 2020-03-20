@@ -1,4 +1,4 @@
-package com.example.githubing
+package com.example.gitsurfer
 
 import org.junit.Test
 
