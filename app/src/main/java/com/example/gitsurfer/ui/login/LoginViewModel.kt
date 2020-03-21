@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.example.gitsurfer.model.network.NetworkManager
 import com.example.gitsurfer.model.usecases.exceptions.ValidationException
 import com.example.gitsurfer.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class LoginViewModel(val networkManager: NetworkManager) : BaseViewModel() {
+class LoginViewModel @Inject constructor(val networkManager: NetworkManager) : BaseViewModel() {
 
   private val _userLoggedInLiveData = MutableLiveData<Boolean>()
   val userLoggedInLiveData: LiveData<Boolean>

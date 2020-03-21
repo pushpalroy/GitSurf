@@ -8,14 +8,16 @@ import com.example.gitsurfer.injection.module.ViewModelFactoryModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
       AppModule::class,
-      ActivityBindingModule::class,
-      RepositoryModule::class,
       ViewModelFactoryModule::class,
-      AndroidSupportInjectionModule::class
+      AndroidSupportInjectionModule::class,
+      ActivityBindingModule::class,
+      RepositoryModule::class
     ]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
