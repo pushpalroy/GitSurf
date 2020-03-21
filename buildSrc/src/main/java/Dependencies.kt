@@ -42,6 +42,7 @@ object Dependencies {
   val memory_leak_debug = "com.squareup.leakcanary:leakcanary-android:${Versions.memoryLeak}"
   val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
   val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+  val progress_button = "com.github.razir.progressbutton:progressbutton:${Versions.progressButton}"
   val base_adapter = "com.github.skydoves:baserecyclerviewadapter:${Versions.baseAdapter}"
   val android_veil = "com.github.skydoves:androidveil:${Versions.androidVeil}"
   val mockito = "org.mockito:mockito-core:${Versions.mockito}"
