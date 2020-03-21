@@ -9,36 +9,36 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(val networkManager: NetworkManager) : BaseViewModel() {
 
-  private val _userLoggedInLiveData = MutableLiveData<Boolean>()
-  val userLoggedInLiveData: LiveData<Boolean>
-    get() = _userLoggedInLiveData
+    private val _userLoggedInLiveData = MutableLiveData<Boolean>()
+    val userLoggedInLiveData: LiveData<Boolean>
+        get() = _userLoggedInLiveData
 
-  var username: String? = null
-  var password: String? = null
+    var username: String? = null
+    var password: String? = null
 
-  fun loginUser() {
-    try {
-      isValidForm()
-    } catch (ex: ValidationException) {
-      updateLiveDataException(ex)
+    fun loginUser() {
+        try {
+            isValidForm()
+        } catch (exception: ValidationException) {
+            updateLiveDataException(exception)
+        }
     }
-  }
 
-  @Throws(ValidationException::class)
-  private fun isValidForm(): Boolean {
-    when {
-      isLoading() -> {
-        throw ValidationException.OperationInQueue
-      }
-      username.isNullOrEmpty() -> {
-        throw ValidationException.UsernameEmpty
-      }
-      password.isNullOrEmpty() -> {
-        throw ValidationException.PasswordEmpty
-      }
+    @Throws(ValidationException::class)
+    private fun isValidForm(): Boolean {
+        when {
+            isLoading() -> {
+                throw ValidationException.OperationInQueue
+            }
+            username.isNullOrEmpty() -> {
+                throw ValidationException.UsernameEmpty
+            }
+            password.isNullOrEmpty() -> {
+                throw ValidationException.PasswordEmpty
+            }
+        }
+        return true
     }
-    return true
-  }
 
-  internal fun isLoading(): Boolean = progressLiveData.value == true
+    internal fun isLoading(): Boolean = progressLiveData.value == true
 }

@@ -39,7 +39,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : DaggerApp
   }
 
   protected fun showSnackBarMessage(
-    message: String?,
+    message: Int?,
     duration: Int = Snackbar.LENGTH_SHORT
   ) {
     snackBar = snackBar?.let {

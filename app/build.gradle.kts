@@ -101,6 +101,8 @@ dependencies {
   implementation(Dependencies.glide)
   kapt(Dependencies.glide_compiler)
 
+  implementation("com.github.razir.progressbutton:progressbutton:2.0.1")
+
   testImplementation(Dependencies.junit)
   testImplementation(Dependencies.mockito)
   testImplementation(Dependencies.mockito_kotlin)
