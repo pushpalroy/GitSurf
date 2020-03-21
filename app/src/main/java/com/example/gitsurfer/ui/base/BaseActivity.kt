@@ -31,7 +31,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : DaggerApp
   private fun initView() {
     viewModel = ViewModelProvider(this).get(getViewModelClass())
     binding = DataBindingUtil.setContentView(this, getLayoutId())
-    binding.setVariable(BR.viewmodel, viewModel)
+    binding.setVariable(BR.viewModel, viewModel)
   }
 
   override fun onDestroy() {
