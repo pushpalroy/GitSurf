@@ -27,8 +27,8 @@ class LoginViewModel @Inject constructor(
   val userLoggedInLiveData: LiveData<Boolean>
     get() = _userLoggedInLiveData
 
-  var username: String? = "pushpalroy"
-  var password: String? = "iamamadboypush22"
+  var username: String? = ""
+  var password: String? = ""
 
   fun loginUser() {
     try {
