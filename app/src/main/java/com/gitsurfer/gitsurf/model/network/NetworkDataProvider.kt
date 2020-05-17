@@ -1,15 +1,26 @@
 package com.gitsurfer.gitsurf.model.network
 
-import com.gitsurfer.gitsurf.model.network.api.RetrofitApi
+import com.gitsurfer.gitsurf.model.network.api.LoginApi
+import com.gitsurfer.gitsurf.model.network.api.UserApi
 import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
 import com.gitsurfer.gitsurf.utils.networkCall
 
 class NetworkDataProvider(
-  private val retrofitApi: RetrofitApi
+  private val loginApi: LoginApi,
+  private val userApi: UserApi
 ) {
 
-  suspend fun authorizations(authRequestModel: AuthRequestModel) = networkCall {
-    retrofitApi.authorizations(authRequestModel)
+  suspend fun getBasicToken(
+    credential: String,
+    authRequestModel: AuthRequestModel
+  ) = networkCall {
+    loginApi.getBasicToken(credential, authRequestModel)
+  }
+
+  suspend fun getUserInfo(
+    authToken: String
+  ) = networkCall {
+    userApi.getUserInformation(authToken)
   }
 
   suspend fun getAccessToken(
@@ -18,6 +29,6 @@ class NetworkDataProvider(
     code: String,
     state: String
   ) = networkCall {
-    retrofitApi.getAccessToken(clientId, clientSecret, code, state)
+    loginApi.getAccessToken(clientId, clientSecret, code, state)
   }
 }

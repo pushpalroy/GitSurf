@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
   id("com.android.application")
   kotlin("android")
@@ -31,6 +33,9 @@ android {
     versionCode = Versions.versionCode
     versionName = Versions.versionName
     testInstrumentationRunner = Dependencies.android_junit_runner
+    buildConfigField("String", "CLIENT_ID", "\"${loadPropertiesFile()["CLIENT_ID"]}\"")
+    buildConfigField("String", "CLIENT_SECRET", "\"${loadPropertiesFile()["CLIENT_SECRET"]}\"")
+    buildConfigField("String", "CALLBACK_URL", "\"${loadPropertiesFile()["CALLBACK_URL"]}\"")
   }
 
   dexOptions {
@@ -57,6 +62,15 @@ tasks {
   fun getVersionName(): String {
     return "${Versions.versionMajor}.${Versions.versionMinor}.${Versions.versionPatch}"
   }
+}
+
+fun loadPropertiesFile(): Properties {
+  val propertiesFile = file("$rootDir/privateConfig/private.properties")
+  val properties = Properties()
+  if (propertiesFile.exists()) {
+    properties.load(propertiesFile.inputStream())
+  }
+  return properties
 }
 
 dependencies {

@@ -4,19 +4,28 @@ import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
 import com.gitsurfer.gitsurf.model.network.models.BasicToken
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface RetrofitApi {
+interface LoginApi {
 
-  @POST("authorizations")
+  /**
+   * Returns basic authorization token
+   * @param authRequestModel
+   */
+  @POST("/authorizations")
   @Headers("Accept: application/json")
-  suspend fun authorizations(
+  suspend fun getBasicToken(
+    @Header("Authorization") credential: String,
     @Body authRequestModel: AuthRequestModel
   ): Response<BasicToken>
 
-  @POST("login/oauth/access_token")
+  /**
+   * Returns basic token
+   */
+  @POST("/login/oauth/access_token")
   @Headers("Accept: application/json")
   suspend fun getAccessToken(
     @Query("client_id") clientId: String,

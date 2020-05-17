@@ -40,7 +40,7 @@ class AppModule {
   @Provides
   @Singleton
   fun provideNetworkManager(connectivityManager: ConnectivityManager): NetworkManager {
-    return NetworkManager(connectivityManager)
+    return NetworkManager(connectivityManager = connectivityManager)
   }
 
   @Provides

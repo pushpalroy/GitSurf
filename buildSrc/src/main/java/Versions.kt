@@ -16,7 +16,7 @@ object Versions {
   const val proguard_android = "proguard-android.txt"
   const val proguard_common = "proguard-common.txt"
   const val proguard_specific = "proguard-specific.txt"
-  const val applicationId = "com.example.gitsurfing"
+  const val applicationId = "com.gitsurfer.gitsurf"
 
   const val gradle = "3.5.3"
   const val junit = "4.12"

@@ -9,10 +9,18 @@ class AppRepository(
   private val localDataProvider: LocalDataProvider
 ) {
 
-  private suspend fun loginUserAsyncInternal(
+  suspend fun getBasicToken(
+    credential: String,
     authRequestModel: AuthRequestModel
-  ) = networkDataProvider.authorizations(
+  ) = networkDataProvider.getBasicToken(
+      credential = credential,
       authRequestModel = authRequestModel
+  )
+
+  suspend fun getUserInfo(
+    authToken: String
+  ) = networkDataProvider.getUserInfo(
+      authToken = authToken
   )
 
   suspend fun getAccessToken(

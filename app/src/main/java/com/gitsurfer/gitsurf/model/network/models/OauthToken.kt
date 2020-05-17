@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class OauthToken(
   @SerializedName("access_token") val accessToken: String,
-  val scope: String
+  @SerializedName("scope") val scope: String
 )
