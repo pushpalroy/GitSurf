@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.NetworkManager
-import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
-import com.gitsurfer.gitsurf.model.network.models.BasicToken
+import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
+import com.gitsurfer.gitsurf.model.network.models.response.BasicToken
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException
+import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.utils.APPLICATION_ID
 import com.gitsurfer.gitsurf.utils.CALLBACK_URL
@@ -20,8 +21,13 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
   private val appRepository: AppRepository,
-  private val networkManager: NetworkManager
+  private val networkManager: NetworkManager,
+  private val sharedPrefUtils: SharedPrefUtils
 ) : BaseViewModel() {
+
+  companion object {
+    private const val TAG = "Login"
+  }
 
   private val _userLoggedInLiveData = MutableLiveData<Boolean>()
   val userLoggedInLiveData: LiveData<Boolean>
@@ -64,13 +70,17 @@ class LoginViewModel @Inject constructor(
     username: String?,
     password: String?
   ) {
-    val authRequestModel = AuthRequestModel(
-        scopes = listOf("user", "repo", "gist", "notifications"),
-        applicationId = APPLICATION_ID,
-        clientId = CLIENT_ID,
-        clientSecret = CLIENT_SECRET,
-        callbackUrl = CALLBACK_URL
-    )
+
+    sharedPrefUtils.userName = username
+
+    val authRequestModel =
+      AuthRequestModel(
+          scopes = listOf("user", "repo", "gist", "notifications"),
+          applicationId = APPLICATION_ID,
+          clientId = CLIENT_ID,
+          clientSecret = CLIENT_SECRET,
+          callbackUrl = CALLBACK_URL
+      )
 
     val credential =
       username?.let {
@@ -92,11 +102,16 @@ class LoginViewModel @Inject constructor(
             )
 
             basicTokenResponse.first?.let { basicToken ->
-              Timber.d("BasicToken: $basicToken")
+              Timber.tag(TAG)
+                  .i("BasicToken: $basicToken")
+              _userLoggedInLiveData.value = true
               getUserInfo(basicToken)
+              sharedPrefUtils.authToken = basicToken.token
             }
             basicTokenResponse.second?.let {
-              Timber.d("Exception: $it")
+              _userLoggedInLiveData.value = false
+              Timber.tag(TAG)
+                  .e("Exception: $it")
             }
           }
         }
@@ -113,15 +128,17 @@ class LoginViewModel @Inject constructor(
           )
 
           userInfoResponse.first?.let {
-            Timber.d("UserBio: ${it.bio}")
+            Timber.tag(TAG)
+                .i("UserBio: ${it.bio}")
           }
           userInfoResponse.second?.let {
-            Timber.d("Exception: $it")
+            Timber.tag(TAG)
+                .e("Exception: $it")
           }
         }
       }
     }
   }
 
-  internal fun isLoading(): Boolean = progressLiveData.value == true
+  private fun isLoading(): Boolean = progressLiveData.value == true
 }

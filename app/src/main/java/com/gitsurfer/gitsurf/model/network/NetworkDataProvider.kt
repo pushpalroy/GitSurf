@@ -2,7 +2,7 @@ package com.gitsurfer.gitsurf.model.network
 
 import com.gitsurfer.gitsurf.model.network.api.LoginApi
 import com.gitsurfer.gitsurf.model.network.api.UserApi
-import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
+import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.utils.networkCall
 
 class NetworkDataProvider(
@@ -21,6 +21,13 @@ class NetworkDataProvider(
     authToken: String
   ) = networkCall {
     userApi.getUserInformation(authToken)
+  }
+
+  suspend fun getReceivedFeeds(
+    authToken: String?,
+    user: String?
+  ) = networkCall {
+    userApi.getReceivedFeeds(authToken, user)
   }
 
   suspend fun getAccessToken(

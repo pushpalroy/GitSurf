@@ -13,7 +13,9 @@ import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.OperationInQueue
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.PasswordEmpty
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.UsernameEmpty
+import com.gitsurfer.gitsurf.ui.base.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
+import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.utils.clearErrorOnTextChange
 import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
 import com.gitsurfer.gitsurf.utils.hideKeyboard
@@ -79,6 +81,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
           else -> {
             showSnackBarMessage(R.string.msg_unknown_error)
           }
+        }
+      }
+    })
+
+    viewModel.userLoggedInLiveData.observe(this, Observer { isLoggedIn ->
+      run {
+        if (isLoggedIn) {
+          AppNavigator.startActivity(MainActivity::class.java, this, clearBackStack = true)
         }
       }
     })

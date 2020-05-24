@@ -73,10 +73,10 @@ class RepositoryModule {
     @ApplicationContext context: Context
   ): AppDatabase {
     return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            ROOM_DATABASE_NAME
-        )
+        context,
+        AppDatabase::class.java,
+        ROOM_DATABASE_NAME
+    )
         .build()
   }
 

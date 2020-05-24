@@ -11,4 +11,4 @@ import javax.inject.Scope
     AnnotationTarget.PROPERTY_GETTER,
     AnnotationTarget.PROPERTY_SETTER
 )
-annotation class FragmentScoped
+annotation class FragmentScope

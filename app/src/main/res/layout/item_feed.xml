@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+
+    <variable
+        name="feed"
+        type="com.gitsurfer.gitsurf.model.network.models.response.Feed"
+        />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <ImageView
+        android:id="@+id/iv_person_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:setImageUrl="@{feed.actor.avatarUrl}"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        />
+    <TextView
+        android:id="@+id/tv_person_display_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@{feed.actor.displayLoginn}"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
+        tools:text="pushpalroy"
+        />
+    <TextView
+        android:id="@+id/tv_action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@{feed.payload.action + feed.repo.name}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_person_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/iv_person_avatar"
+        tools:text="Stared pushpalroy/GooglePlayCloned"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

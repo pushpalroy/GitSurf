@@ -1,10 +1,11 @@
-import java.util.*
+import java.util.Properties
 
 plugins {
   id("com.android.application")
   kotlin("android")
   kotlin("android.extensions")
   kotlin("kapt")
+  id("androidx.navigation.safeargs.kotlin")
 }
 
 val preDexEnabled = "true" == System.getProperty("pre-dex", "true")
@@ -84,6 +85,11 @@ dependencies {
   implementation(Dependencies.lifecycle_view_model)
   implementation(Dependencies.lifecycle_live_data)
   kapt(Dependencies.lifecycle_compiler)
+
+  implementation(Dependencies.navigation_fragment)
+  implementation(Dependencies.navigation_ui)
+  implementation(Dependencies.navigation_dynamic_feature)
+  testImplementation(Dependencies.navigation_testing)
 
   implementation(Dependencies.room)
   implementation(Dependencies.room_ktx)

@@ -1,7 +1,7 @@
 package com.gitsurfer.gitsurf.model
 
 import com.gitsurfer.gitsurf.model.network.NetworkDataProvider
-import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
+import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.model.roomdatabase.LocalDataProvider
 
 class AppRepository(
@@ -21,6 +21,14 @@ class AppRepository(
     authToken: String
   ) = networkDataProvider.getUserInfo(
       authToken = authToken
+  )
+
+  suspend fun getReceivedFeeds(
+    authToken: String?,
+    user: String?
+  ) = networkDataProvider.getReceivedFeeds(
+      authToken = authToken,
+      user = user
   )
 
   suspend fun getAccessToken(

@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.model.network.models
+package com.gitsurfer.gitsurf.model.network.models.request
 
 import com.google.gson.annotations.SerializedName
 

@@ -11,6 +11,12 @@ object Dependencies {
   val lifecycle_live_data = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
   val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycleVersion}"
 
+  val navigation_safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationSafeArgs}"
+  val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}"
+  val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}"
+  val navigation_dynamic_feature = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigationVersion}"
+  val navigation_testing = "androidx.navigation:navigation-testing:${Versions.navigationVersion}"
+
   val activity = "androidx.activity:activity-ktx:${Versions.activityVersion}"
   val fragment = "androidx.fragment:fragment-ktx:${Versions.fragmentVersion}"
 

@@ -11,4 +11,7 @@
   <string name="msg_username_empty">Please enter a valid username</string>
   <string name="msg_password_empty">Please enter a valid password</string>
   <string name="msg_unknown_error">An unknown error has occurred</string>
+  <string name="nav_profile">Profile</string>
+  <string name="nav_repo">My Repositories</string>
+  <string name="action_feed">Feeds</string>
 </resources>

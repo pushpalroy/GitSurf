@@ -1,7 +1,7 @@
 package com.gitsurfer.gitsurf.model.network.api
 
-import com.gitsurfer.gitsurf.model.network.models.AuthRequestModel
-import com.gitsurfer.gitsurf.model.network.models.BasicToken
+import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
+import com.gitsurfer.gitsurf.model.network.models.response.BasicToken
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
