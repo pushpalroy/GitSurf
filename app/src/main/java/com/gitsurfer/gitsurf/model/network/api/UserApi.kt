@@ -11,7 +11,7 @@ interface UserApi {
 
   /**
    * Lists public and private profile information when authenticated
-   * through basic auth or OAuth with the user scope.
+   * through basic auth or OAuth with the user scope
    * @param authToken
    */
   @GET("/user")

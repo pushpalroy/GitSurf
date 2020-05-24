@@ -51,6 +51,9 @@ object Dependencies {
   val progress_button = "com.github.razir.progressbutton:progressbutton:${Versions.progressButton}"
   val base_adapter = "com.github.skydoves:baserecyclerviewadapter:${Versions.baseAdapter}"
   val android_veil = "com.github.skydoves:androidveil:${Versions.androidVeil}"
+
+  val circularImageView = "de.hdodenhof:circleimageview:${Versions.circularImageView}"
+
   val mockito = "org.mockito:mockito-core:${Versions.mockito}"
   val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
   val mockito_android = "org.mockito:mockito-android:${Versions.mockito}"

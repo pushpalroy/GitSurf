@@ -10,47 +10,68 @@
         name="feed"
         type="com.gitsurfer.gitsurf.model.network.models.response.Feed"
         />
+    <variable
+        name="HtmlCompat"
+        type="androidx.core.text.HtmlCompat"
+        />
   </data>
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimen_3dp"
+      android:layout_marginBottom="@dimen/dimen_3dp"
+      app:cardCornerRadius="@dimen/dimen_0dp"
+      app:cardElevation="@dimen/dimen_2dp"
       >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dimen_8dp"
+        android:paddingTop="@dimen/dimen_10dp"
+        android:paddingEnd="@dimen/dimen_8dp"
+        android:paddingBottom="@dimen/dimen_10dp"
+        >
 
-    <ImageView
-        android:id="@+id/iv_person_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:setImageUrl="@{feed.actor.avatarUrl}"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        />
-    <TextView
-        android:id="@+id/tv_person_display_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@{feed.actor.displayLoginn}"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
-        tools:text="pushpalroy"
-        />
-    <TextView
-        android:id="@+id/tv_action"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@{feed.payload.action + feed.repo.name}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/iv_person_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/iv_person_avatar"
-        tools:text="Stared pushpalroy/GooglePlayCloned"
-        />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/iv_person_avatar"
+          android:layout_width="@dimen/dimen_30dp"
+          android:layout_height="@dimen/dimen_30dp"
+          android:contentDescription="@string/con_desc_avatar"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:setImageUrl="@{feed.actor.avatarUrl}"
+          app:srcCompat="@android:drawable/ic_menu_my_calendar"
+          />
+
+      <TextView
+          android:id="@+id/tv_person_display_name"
+          android:layout_width="@dimen/dimen_0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/dimen_8dp"
+          android:fontFamily="@font/muli_bold"
+          android:text="@{feed.actor.displayLoginn}"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
+          app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
+          tools:text="pushpalroy"
+          />
+
+      <TextView
+          android:id="@+id/tv_action"
+          android:layout_width="@dimen/dimen_0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/dimen_8dp"
+          android:fontFamily="@font/muli_regular"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@+id/iv_person_avatar"
+          app:layout_constraintTop_toBottomOf="@+id/iv_person_avatar"
+          tools:text="Starred pushpalroy/GooglePlayCloned"
+          />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+
 </layout>

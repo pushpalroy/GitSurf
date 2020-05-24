@@ -11,12 +11,10 @@ import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
-import com.gitsurfer.gitsurf.ui.main.feed.adapter.FeedAdapter
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
-  private lateinit var feedAdapter: FeedAdapter
 
   override fun getViewModelClass() = FeedViewModel::class.java
   override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java

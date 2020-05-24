@@ -121,6 +121,8 @@ dependencies {
   implementation(Dependencies.glide)
   kapt(Dependencies.glide_compiler)
 
+  implementation(Dependencies.circularImageView)
+
   implementation(Dependencies.progress_button)
 
   testImplementation(Dependencies.junit)

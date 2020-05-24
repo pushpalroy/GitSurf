@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.ui.main.feed.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R
@@ -50,7 +51,13 @@ class FeedAdapter constructor(
       viewModel: FeedViewModel,
       position: Int
     ) {
-      binding.feed = viewModel.feedListLiveData.value?.get(position)
+      val feed = viewModel.feedListLiveData.value?.get(position)
+      feed?.let {
+        binding.feed = feed
+        val action = feed.payload.action + " <b>" + feed.repo.name + "</b>"
+        HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.tvAction.text = HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
+      }
     }
   }
 }

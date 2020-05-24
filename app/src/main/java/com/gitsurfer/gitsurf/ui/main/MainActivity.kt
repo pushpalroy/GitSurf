@@ -8,7 +8,9 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
+import com.gitsurfer.gitsurf.ui.base.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
+import com.gitsurfer.gitsurf.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -20,8 +22,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    checkAuthorization()
     setSupportActionBar(toolbar)
     setUpNavigation()
+  }
+
+  private fun checkAuthorization() {
+    if (!viewModel.isAuthorized()) {
+      AppNavigator.startActivity(
+          LoginActivity::class.java,
+          this,
+          clearBackStack = true
+      )
+    }
   }
 
   override fun onSupportNavigateUp(): Boolean {
