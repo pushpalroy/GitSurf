@@ -34,6 +34,7 @@ class FeedViewModel @Inject constructor(
   }
 
   fun loadPersonalFeed() {
+    updateLiveDataProgress(progress = true)
     viewModelScope.launch {
       when {
         networkManager.hasInternetAccess() -> {
@@ -43,6 +44,7 @@ class FeedViewModel @Inject constructor(
           )
 
           feedListResponse.first?.let { feedList: List<Feed> ->
+            updateLiveDataProgress(progress = false)
             _feedListLiveData.value = feedList
           }
         }

@@ -44,6 +44,13 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
       viewModel.feedListLiveData.observe(owner, Observer { feedList ->
         viewModel.updateAdapter(feedList)
       })
+
+      viewModel.progressLiveData.observe(owner, Observer { isLoading ->
+        when (isLoading) {
+          true -> binding.pbLoader.visibility = View.VISIBLE
+          false -> binding.pbLoader.visibility = View.GONE
+        }
+      })
     }
   }
 }
