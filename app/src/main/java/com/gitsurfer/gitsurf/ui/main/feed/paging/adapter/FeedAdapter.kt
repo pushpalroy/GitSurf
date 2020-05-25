@@ -1,19 +1,17 @@
-package com.gitsurfer.gitsurf.ui.main.feed.adapter
+package com.gitsurfer.gitsurf.ui.main.feed.paging.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
-import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
-import com.gitsurfer.gitsurf.ui.main.feed.adapter.FeedAdapter.FeedViewHolder
 
-class FeedAdapter constructor(
-  private val viewModel: FeedViewModel
-) : RecyclerView.Adapter<FeedViewHolder>() {
+class FeedAdapter : PagedListAdapter<Feed, FeedAdapter.FeedViewHolder>(FEED_COMPARATOR) {
 
   private var feedItemsList: List<Feed> = listOf()
 
@@ -41,23 +39,34 @@ class FeedAdapter constructor(
     holder: FeedViewHolder,
     position: Int
   ) {
-    holder.bind(viewModel = viewModel, position = position)
+    val feed = getItem(position)
+    feed?.let { holder.bind(it) }
   }
 
   class FeedViewHolder(private val binding: ItemFeedBinding) :
       RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(
-      viewModel: FeedViewModel,
-      position: Int
-    ) {
-      val feed = viewModel.feedListLiveData.value?.get(position)
-      feed?.let {
-        binding.feed = feed
-        val action = feed.payload.action + " <b>" + feed.repo.name + "</b>"
-        HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
-        binding.tvAction.text = HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
-      }
+    fun bind(feed: Feed) {
+      binding.feed = feed
+      val action = feed.payload.action + " <b>" + feed.repo.name + "</b>"
+      HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
+      binding.tvAction.text = HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+  }
+
+  companion object {
+    private val FEED_COMPARATOR = object : DiffUtil.ItemCallback<Feed>() {
+      override fun areItemsTheSame(
+        oldItem: Feed,
+        newItem: Feed
+      ): Boolean =
+        oldItem.id == newItem.id
+
+      override fun areContentsTheSame(
+        oldItem: Feed,
+        newItem: Feed
+      ): Boolean =
+        newItem == oldItem
     }
   }
 }

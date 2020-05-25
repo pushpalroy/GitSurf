@@ -2,12 +2,13 @@ package com.gitsurfer.gitsurf.utils
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 @BindingAdapter(value = ["setAdapter"])
-fun RecyclerView.bindRecyclerViewAdapter(adapter: RecyclerView.Adapter<*>) {
+fun RecyclerView.bindRecyclerViewAdapter(adapter: PagedListAdapter<*, *>) {
   this.run {
     this.setHasFixedSize(true)
     this.layoutManager = LinearLayoutManager(context)

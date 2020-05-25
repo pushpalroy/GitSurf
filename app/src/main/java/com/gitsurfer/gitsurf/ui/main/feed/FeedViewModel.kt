@@ -1,54 +1,49 @@
 package com.gitsurfer.gitsurf.ui.main.feed
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.gitsurfer.gitsurf.model.AppRepository
-import com.gitsurfer.gitsurf.model.network.NetworkManager
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
-import com.gitsurfer.gitsurf.ui.main.feed.adapter.FeedAdapter
-import kotlinx.coroutines.launch
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSourceFactory
+import com.gitsurfer.gitsurf.ui.main.feed.paging.adapter.FeedAdapter
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
-  private val appRepository: AppRepository,
-  private val networkManager: NetworkManager,
-  private val prefUtils: SharedPrefUtils
+  appRepository: AppRepository,
+  prefUtils: SharedPrefUtils
 ) : BaseViewModel() {
 
-  val adapter: FeedAdapter = FeedAdapter(this)
+  val adapter: FeedAdapter = FeedAdapter()
 
   companion object {
     private const val TAG = "Feed"
   }
 
-  private val _feedListLiveData = MutableLiveData<List<Feed>>()
-  val feedListLiveData: LiveData<List<Feed>>
-    get() = _feedListLiveData
+  var feedPagedList: LiveData<PagedList<Feed>>
+
+  init {
+    val itemDataSourceFactory = FeedDataSourceFactory(
+        appRepository = appRepository,
+        prefUtils = prefUtils,
+        scope = viewModelScope
+    )
+    val config = PagedList.Config.Builder()
+        .setEnablePlaceholders(true)
+        .setInitialLoadSizeHint(30)
+        .setPageSize(FeedDataSource.PAGE_SIZE)
+        .build()
+    feedPagedList = LivePagedListBuilder(itemDataSourceFactory, config).build()
+  }
+
+  fun getFeed(): LiveData<PagedList<Feed>> = feedPagedList
 
   fun updateAdapter(items: List<Feed>) {
     adapter.setItems(items)
     adapter.notifyDataSetChanged()
-  }
-
-  fun loadPersonalFeed() {
-    updateLiveDataProgress(progress = true)
-    viewModelScope.launch {
-      when {
-        networkManager.hasInternetAccess() -> {
-          val feedListResponse = appRepository.getReceivedFeeds(
-              prefUtils.authToken,
-              prefUtils.userName
-          )
-
-          feedListResponse.first?.let { feedList: List<Feed> ->
-            updateLiveDataProgress(progress = false)
-            _feedListLiveData.value = feedList
-          }
-        }
-      }
-    }
   }
 }

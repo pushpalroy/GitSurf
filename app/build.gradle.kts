@@ -95,6 +95,8 @@ dependencies {
   implementation(Dependencies.room_ktx)
   kapt(Dependencies.room_compiler)
 
+  implementation(Dependencies.paging)
+
   testImplementation(Dependencies.arch_core_testing)
   testImplementation(Dependencies.mock_web_server)
 

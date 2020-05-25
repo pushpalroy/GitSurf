@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface UserApi {
 
@@ -22,6 +23,7 @@ interface UserApi {
   @GET("/users/{user}/received_events")
   suspend fun getReceivedFeeds(
     @Header("Authorization") authToken: String?,
-    @Path("user") user: String?
+    @Path("user") user: String?,
+    @Query("page") page: Int?
   ): Response<List<Feed>>
 }

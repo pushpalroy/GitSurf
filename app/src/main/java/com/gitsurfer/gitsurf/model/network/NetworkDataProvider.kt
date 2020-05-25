@@ -25,9 +25,10 @@ class NetworkDataProvider(
 
   suspend fun getReceivedFeeds(
     authToken: String?,
-    user: String?
+    user: String?,
+    page: Int?
   ) = networkCall {
-    userApi.getReceivedFeeds(authToken, user)
+    userApi.getReceivedFeeds(authToken, user, page)
   }
 
   suspend fun getAccessToken(

@@ -24,6 +24,8 @@ object Dependencies {
   val room_compiler = "androidx.room:room-compiler:${Versions.roomVersion}"
   val room_ktx = "androidx.room:room-ktx:${Versions.roomVersion}"
 
+  val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+
   val dagger = "com.google.dagger:dagger:${Versions.dagger}"
   val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
   val dagger_android = "com.google.dagger:dagger-android:${Versions.dagger}"

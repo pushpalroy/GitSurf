@@ -35,16 +35,16 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
   private fun init() {
     binding.viewModel = viewModel
-    viewModel.loadPersonalFeed()
     listenToLiveData()
   }
 
   private fun listenToLiveData() {
     activity?.let { owner ->
-      viewModel.feedListLiveData.observe(owner, Observer { feedList ->
-        viewModel.updateAdapter(feedList)
-      })
-
+      viewModel.getFeed()
+          .observe(owner, Observer { feedList ->
+            viewModel.updateAdapter(feedList)
+            viewModel.adapter.submitList(feedList)
+          })
       viewModel.progressLiveData.observe(owner, Observer { isLoading ->
         when (isLoading) {
           true -> binding.pbLoader.visibility = View.VISIBLE
