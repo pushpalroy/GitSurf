@@ -24,6 +24,7 @@ interface UserApi {
   suspend fun getReceivedFeeds(
     @Header("Authorization") authToken: String?,
     @Path("user") user: String?,
-    @Query("page") page: Int?
+    @Query("page") page: Int?,
+    @Query("per_page") perPage: Int?
   ): Response<List<Feed>>
 }

@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.ui.main
 
 import android.os.Bundle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -22,19 +23,26 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    checkAuthorization()
+    viewModel.setAuthorizedFromPref()
     setSupportActionBar(toolbar)
     setUpNavigation()
+    listenToLiveData()
   }
 
-  private fun checkAuthorization() {
-    if (!viewModel.isAuthorized()) {
-      AppNavigator.startActivity(
-          LoginActivity::class.java,
-          this,
-          clearBackStack = true
-      )
-    }
+  private fun listenToLiveData() {
+    viewModel.isAuthorizedLiveData.observe(this, Observer { isAuthorized ->
+      if (!isAuthorized) {
+        navigateToLoginActivity()
+      }
+    })
+  }
+
+  private fun navigateToLoginActivity() {
+    AppNavigator.startActivity(
+        activityClass = LoginActivity::class.java,
+        activity = this,
+        clearBackStack = true
+    )
   }
 
   override fun onSupportNavigateUp(): Boolean {

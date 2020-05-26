@@ -11,6 +11,7 @@ import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import com.gitsurfer.gitsurf.utils.exceptions.LoggedOutException
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
@@ -49,6 +50,11 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
         when (isLoading) {
           true -> binding.pbLoader.visibility = View.VISIBLE
           false -> binding.pbLoader.visibility = View.GONE
+        }
+      })
+      viewModel.exceptionLiveData.observe(owner, Observer { exception ->
+        if (exception is LoggedOutException) {
+          activityViewModel.setAuthorized(false)
         }
       })
     }

@@ -1,5 +1,7 @@
 package com.gitsurfer.gitsurf.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.NetworkManager
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
@@ -12,7 +14,19 @@ class MainViewModel @Inject constructor(
   private val prefUtils: SharedPrefUtils
 ) : BaseViewModel() {
 
-  fun isAuthorized(): Boolean {
-    return prefUtils.authToken != null
+  private val _isAuthorizedLiveData = MutableLiveData<Boolean>()
+  val isAuthorizedLiveData: LiveData<Boolean>
+    get() = _isAuthorizedLiveData
+
+  fun setAuthorizedFromPref() {
+    _isAuthorizedLiveData.value = prefUtils.authToken != null
+  }
+
+  fun setAuthorized(isAuthorized: Boolean) {
+    if (!isAuthorized) {
+      prefUtils.userName = null
+      prefUtils.authToken = null
+    }
+    _isAuthorizedLiveData.value = isAuthorized
   }
 }

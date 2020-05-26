@@ -26,11 +26,13 @@ class AppRepository(
   suspend fun getReceivedFeeds(
     authToken: String?,
     user: String?,
-    page: Int?
+    page: Int?,
+    perPage: Int?
   ) = networkDataProvider.getReceivedFeeds(
       authToken = authToken,
       user = user,
-      page = page
+      page = page,
+      perPage = perPage
   )
 
   suspend fun getAccessToken(
