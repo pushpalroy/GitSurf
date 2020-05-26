@@ -16,11 +16,11 @@ abstract class BaseViewModel : ViewModel() {
   val exceptionLiveData: LiveData<Exception>
     get() = _exceptionLiveData
 
-  internal fun updateLiveDataProgress(progress: Boolean) {
+  internal fun updateProgressLiveData(progress: Boolean) {
     progressLiveData.call(progress)
   }
 
-  internal fun updateLiveDataException(exception: Exception?) {
+  internal fun updateExceptionLiveData(exception: Exception?) {
     _exceptionLiveData.postValue(exception)
   }
 

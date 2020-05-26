@@ -24,4 +24,3 @@ fun ImageView.bindImageUrl(url: String?) {
         .into(this)
   }
 }
-

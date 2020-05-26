@@ -21,16 +21,16 @@ class FeedDataSource constructor(
     params: LoadInitialParams<Int>,
     callback: LoadInitialCallback<Int, Feed>
   ) {
-    showProgress()
+    showInitialProgress()
     scope.launch {
       val feedListResponse = getReceivedFeeds(FIRST_PAGE)
       feedListResponse.first?.let { feedList: List<Feed> ->
-        hideProgress()
+        hideInitialProgress()
         callback.onResult(feedList, null, FIRST_PAGE + 1)
       }
       feedListResponse.second?.let { exception ->
         Timber.e(exception)
-        viewModel.updateLiveDataException(exception)
+        viewModel.updateExceptionLiveData(exception)
       }
     }
   }
@@ -49,7 +49,7 @@ class FeedDataSource constructor(
       }
       feedListResponse.second?.let { exception ->
         Timber.e(exception)
-        viewModel.updateLiveDataException(exception)
+        viewModel.updateExceptionLiveData(exception)
       }
     }
   }
@@ -68,7 +68,7 @@ class FeedDataSource constructor(
       }
       feedListResponse.second?.let { exception ->
         Timber.e(exception)
-        viewModel.updateLiveDataException(exception)
+        viewModel.updateExceptionLiveData(exception)
       }
     }
   }
@@ -82,12 +82,20 @@ class FeedDataSource constructor(
     )
   }
 
+  private fun showInitialProgress() {
+    viewModel.updateInitialProgressLiveData(progress = true)
+  }
+
+  private fun hideInitialProgress() {
+    viewModel.updateInitialProgressLiveData(progress = false)
+  }
+
   private fun showProgress() {
-    viewModel.updateLiveDataProgress(progress = true)
+    viewModel.updateProgressLiveData(progress = true)
   }
 
   private fun hideProgress() {
-    viewModel.updateLiveDataProgress(progress = false)
+    viewModel.updateProgressLiveData(progress = false)
   }
 
   override fun invalidate() {

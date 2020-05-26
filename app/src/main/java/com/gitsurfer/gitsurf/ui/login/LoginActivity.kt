@@ -71,12 +71,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             is PasswordEmpty -> {
               showSnackBarMessage(R.string.msg_password_empty)
             }
-            is OperationInQueue -> {
-              // No Action
-            }
-            else -> {
-              // No Action
-            }
           }
           else -> {
             showSnackBarMessage(R.string.msg_unknown_error)

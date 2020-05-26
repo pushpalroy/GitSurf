@@ -12,11 +12,12 @@
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
+
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
     <ProgressBar
-        android:id="@+id/pb_loader"
+        android:id="@+id/pb_initial_loader"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,16 +31,27 @@
         android:id="@+id/rv_feed"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
         android:fadeScrollbars="false"
         android:orientation="vertical"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pb_loader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pb_loader"
+        app:layout_constraintTop_toBottomOf="@+id/pb_initial_loader"
         app:setAdapter="@{viewModel.adapter}"
         tools:listitem="@layout/item_feed"
+        />
+    <ProgressBar
+        android:id="@+id/pb_loader"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:indeterminate="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

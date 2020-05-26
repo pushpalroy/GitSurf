@@ -11,7 +11,8 @@ import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.INITIAL_LOAD_SIZE_HINT
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.PAGE_SIZE
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSourceFactory
-import com.gitsurfer.gitsurf.ui.main.feed.paging.adapter.FeedAdapter
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter
+import com.gitsurfer.gitsurf.utils.SingleLiveData
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
@@ -19,13 +20,13 @@ class FeedViewModel @Inject constructor(
   prefUtils: SharedPrefUtils
 ) : BaseViewModel() {
 
-  val adapter: FeedAdapter = FeedAdapter()
-
   companion object {
     private const val TAG = "Feed"
   }
 
-  var feedPagedList: LiveData<PagedList<Feed>>
+  private var feedPagedList: LiveData<PagedList<Feed>>
+  val adapter: FeedPagedListAdapter = FeedPagedListAdapter()
+  val initialProgressLiveData = SingleLiveData<Boolean>()
 
   init {
     val feedDataSourceFactory = FeedDataSourceFactory(
@@ -43,6 +44,10 @@ class FeedViewModel @Inject constructor(
   }
 
   fun getFeed(): LiveData<PagedList<Feed>> = feedPagedList
+
+  internal fun updateInitialProgressLiveData(progress: Boolean) {
+    initialProgressLiveData.call(progress)
+  }
 
   fun updateAdapter(items: List<Feed>) {
     adapter.setItems(items)

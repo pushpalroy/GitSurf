@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.paging.adapter
+package com.gitsurfer.gitsurf.ui.main.feed.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.gitsurfer.gitsurf.R
+import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHolder
 
-class FeedAdapter : PagedListAdapter<Feed, FeedAdapter.FeedViewHolder>(FEED_COMPARATOR) {
+class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
+    FEED_COMPARATOR
+) {
 
   private var feedItemsList: List<Feed> = listOf()
 
@@ -22,7 +25,7 @@ class FeedAdapter : PagedListAdapter<Feed, FeedAdapter.FeedViewHolder>(FEED_COMP
     return FeedViewHolder(
         DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_feed, parent, false
+            layout.item_feed, parent, false
         )
     )
   }

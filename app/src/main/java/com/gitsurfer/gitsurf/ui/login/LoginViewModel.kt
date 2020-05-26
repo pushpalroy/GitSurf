@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
       isValidForm()
       basicAuth(username, password)
     } catch (exception: ValidationException) {
-      updateLiveDataException(exception)
+      updateExceptionLiveData(exception)
     }
   }
 
