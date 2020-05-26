@@ -1,10 +1,11 @@
 package com.gitsurfer.gitsurf.utils
 
 import com.gitsurfer.gitsurf.model.network.models.ResponseUnauthorized
+import com.gitsurfer.gitsurf.utils.exceptions.ForbiddenException
 import com.gitsurfer.gitsurf.utils.exceptions.HttpNotSuccessException
-import com.gitsurfer.gitsurf.utils.exceptions.LoggedOutException
 import com.gitsurfer.gitsurf.utils.exceptions.NetworkException
 import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
+import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -58,8 +59,11 @@ suspend fun <T> networkCall(function: suspend () -> Response<T>): Pair<T?, Excep
 
 private fun <T> handleFailure(response: Response<T>): Pair<Nothing?, Exception> {
   return when {
+    response.code() == HttpURLConnection.HTTP_UNAUTHORIZED -> {
+      Pair(null, UnauthorizedException())
+    }
     response.code() == HttpURLConnection.HTTP_FORBIDDEN -> {
-      Pair(null, LoggedOutException(false))
+      Pair(null, ForbiddenException(false))
     }
     response.code() != HttpURLConnection.HTTP_OK -> {
       Pair(null, handleApiError(response))

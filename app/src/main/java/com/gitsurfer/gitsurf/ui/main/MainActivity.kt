@@ -12,6 +12,8 @@ import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
 import com.gitsurfer.gitsurf.ui.base.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.login.LoginActivity
+import com.gitsurfer.gitsurf.utils.exceptions.ForbiddenException
+import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -33,6 +35,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     viewModel.isAuthorizedLiveData.observe(this, Observer { isAuthorized ->
       if (!isAuthorized) {
         navigateToLoginActivity()
+      }
+    })
+
+    viewModel.exceptionLiveData.observe(this, Observer { exception ->
+      if (exception is UnauthorizedException || exception is ForbiddenException) {
+        viewModel.setAuthorized(isAuthorized = false)
       }
     })
   }
