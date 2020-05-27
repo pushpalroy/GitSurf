@@ -5,6 +5,7 @@ import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
+import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -75,7 +76,7 @@ class FeedDataSource constructor(
 
   private suspend fun getReceivedFeeds(page: Int?): Pair<List<Feed>?, Exception?> {
     return appRepository.getReceivedFeeds(
-        authToken = prefUtils.authToken,
+        authToken = TOKEN_PREFIX + prefUtils.authToken,
         user = prefUtils.userName,
         page = page,
         perPage = PAGE_SIZE

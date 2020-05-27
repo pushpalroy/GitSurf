@@ -14,6 +14,7 @@ import com.gitsurfer.gitsurf.utils.APPLICATION_ID
 import com.gitsurfer.gitsurf.utils.CALLBACK_URL
 import com.gitsurfer.gitsurf.utils.CLIENT_ID
 import com.gitsurfer.gitsurf.utils.CLIENT_SECRET
+import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.launch
 import okhttp3.Credentials
 import timber.log.Timber
@@ -124,7 +125,7 @@ class LoginViewModel @Inject constructor(
       when {
         networkManager.hasInternetAccess() -> {
           val userInfoResponse = appRepository.getUserInfo(
-              authToken = "token ${basicToken.token}"
+              authToken = TOKEN_PREFIX + basicToken.token
           )
 
           userInfoResponse.first?.let {

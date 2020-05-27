@@ -50,7 +50,7 @@
         android:indeterminateBehavior="repeat"
         android:paddingTop="@dimen/dimen_10dp"
         android:paddingBottom="@dimen/dimen_10dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>

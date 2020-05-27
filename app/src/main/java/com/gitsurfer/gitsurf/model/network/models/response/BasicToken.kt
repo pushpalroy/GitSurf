@@ -7,6 +7,8 @@ data class BasicToken(
   @SerializedName("id") val id: Int,
   @SerializedName("url") val url: String,
   @SerializedName("token") val token: String,
+  @SerializedName("token_last_eight") val tokenLastEightDigit: String,
+  @SerializedName("hashed_token") val hashedToken: String,
   @SerializedName("created_at") val createdAt: Date,
   @SerializedName("updated_at") val createdUpdatedAt: Date,
   @SerializedName("scopes") val scopes: List<String>
