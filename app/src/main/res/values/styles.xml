@@ -1,11 +1,27 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
 
+  <style name="ToolBarStyle" parent="Theme.AppCompat">
+    <item name="android:textColorPrimary">@android:color/black</item>
+    <item name="android:textColorSecondary">@android:color/black</item>
+    <item name="actionMenuTextColor">@android:color/black</item>
+  </style>
+
+  <style name="scrollbar_style">
+    <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+    <item name="android:scrollbarStyle">outsideOverlay</item>
+    <item name="android:scrollbars">vertical</item>
+    <item name="android:fadeScrollbars">false</item>
+    <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+    <item name="android:scrollbarSize">8dp</item>
+    <item name="android:scrollbarFadeDuration">800</item>
+    <item name="android:scrollbarDefaultDelayBeforeFade">500</item>
+  </style>
 </resources>
