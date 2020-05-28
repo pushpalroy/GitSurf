@@ -7,7 +7,7 @@ object Versions {
   const val versionBuild = 0
 
   const val compileSdk = 29
-  const val minSdk = 21
+  const val minSdk = 24
   const val targetSdk = 29
   const val versionCode =
     versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild

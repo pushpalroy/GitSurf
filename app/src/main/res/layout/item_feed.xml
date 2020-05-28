@@ -30,6 +30,7 @@
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_40dp"
         android:contentDescription="@string/con_desc_avatar"
+        android:src="@color/veryLightGrey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:setImageUrl="@{feed.actor.avatarUrl}"
@@ -37,33 +38,31 @@
         />
 
     <TextView
-        android:id="@+id/tv_person_display_name"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_8dp"
-        android:fontFamily="@font/muli_bold"
-        android:text="@{feed.actor.displayLoginn}"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/textBlackDark"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
-        tools:text="pushpalroy"
-        />
-
-    <TextView
         android:id="@+id/tv_action"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_16dp"
         android:fontFamily="@font/muli_regular"
+        android:textColor="@color/textBlackDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
+        tools:text="pushpalroy starred john/repo pushpalroy starred john/repo"
+        />
+    <TextView
+        android:id="@+id/tv_timestamp"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/muli_light"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/textBlackMedium"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/iv_person_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/iv_person_avatar"
-        tools:text="Starred pushpalroy/GooglePlayCloned"
+        app:layout_constraintStart_toStartOf="@+id/tv_action"
+        app:layout_constraintTop_toBottomOf="@+id/tv_action"
+        tools:text="4 days ago"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 

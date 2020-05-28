@@ -6,10 +6,10 @@ object GithubUtil {
   private const val EVENT_FORK = "ForkEvent"
   private const val EVENT_CREATE = "CreateEvent"
 
-  private const val ACTION_STARRED = "Starred"
-  private const val ACTION_FORKED = "Forked"
-  private const val ACTION_CREATED = "Created"
-  private const val ACTION_STARTED = "Started"
+  private const val ACTION_STARRED = "starred"
+  private const val ACTION_FORKED = "forked"
+  private const val ACTION_CREATED = "created"
+  private const val ACTION_STARTED = "started"
 
   @JvmStatic
   fun getActionFromEventType(eventType: String?): String {

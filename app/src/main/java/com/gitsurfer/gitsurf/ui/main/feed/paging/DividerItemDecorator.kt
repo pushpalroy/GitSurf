@@ -39,7 +39,7 @@ class DividerItemDecorator constructor(
     super.onDraw(c, parent, state)
 
     val dividerLeft: Int =
-      (parent.paddingStart + context?.resources!!.getDimension(R.dimen.dimen_10dp)
+      (parent.paddingStart + context?.resources!!.getDimension(R.dimen.dimen_60dp)
           ).roundToInt()
     val dividerRight: Int =
       (parent.width - parent.paddingEnd - context.resources!!.getDimension(R.dimen.dimen_10dp)
