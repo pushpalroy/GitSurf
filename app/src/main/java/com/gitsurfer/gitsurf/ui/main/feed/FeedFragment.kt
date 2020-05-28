@@ -11,6 +11,7 @@ import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import com.gitsurfer.gitsurf.ui.main.feed.paging.DividerItemDecorator
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
@@ -35,6 +36,10 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
   private fun init() {
     binding.viewModel = viewModel
+    binding.rvFeed.addItemDecoration(
+        DividerItemDecorator(context, resources.getDrawable(R.drawable.divider_drawable, null))
+    )
+
     listenToLiveData()
   }
 

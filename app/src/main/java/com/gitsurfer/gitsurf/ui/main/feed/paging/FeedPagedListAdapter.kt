@@ -11,6 +11,7 @@ import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHolder
+import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
 
 class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     FEED_COMPARATOR
@@ -51,9 +52,9 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
 
     fun bind(feed: Feed) {
       binding.feed = feed
-      val action = feed.payload.action + " <b>" + feed.repo.name + "</b>"
-      HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
-      binding.tvAction.text = HtmlCompat.fromHtml(action, HtmlCompat.FROM_HTML_MODE_LEGACY)
+      val event = getActionFromEventType(feed.type) + " <b>" + feed.repo.name + "</b>"
+      HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
+      binding.tvAction.text = HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
   }
 

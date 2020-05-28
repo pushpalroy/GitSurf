@@ -40,11 +40,11 @@ class FeedDataSource constructor(
     params: LoadParams<Int>,
     callback: LoadCallback<Int, Feed>
   ) {
-    showProgress()
+    //showProgress()
     scope.launch {
       val feedListResponse = getReceivedFeeds(params.key)
       feedListResponse.first?.let { feedList: List<Feed> ->
-        hideProgress()
+        //hideProgress()
         val key = params.key + 1
         callback.onResult(feedList, key)
       }
@@ -59,11 +59,11 @@ class FeedDataSource constructor(
     params: LoadParams<Int>,
     callback: LoadCallback<Int, Feed>
   ) {
-    showProgress()
+    //showProgress()
     scope.launch {
       val feedListResponse = getReceivedFeeds(params.key)
       feedListResponse.first?.let { feedList: List<Feed> ->
-        hideProgress()
+        //hideProgress()
         val key = if (params.key > 1) params.key - 1 else 0
         callback.onResult(feedList, key)
       }
