@@ -1,6 +1,7 @@
 package com.gitsurfer.gitsurf.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -41,6 +42,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     viewModel.exceptionLiveData.observe(this, Observer { exception ->
       if (exception is UnauthorizedException || exception is ForbiddenException) {
         viewModel.setAuthorized(isAuthorized = false)
+      }
+    })
+
+    viewModel.progressLiveData.observe(this, Observer { isLoading ->
+      when (isLoading) {
+        true -> binding.pbInitialLoader.visibility = View.VISIBLE
+        false -> binding.pbInitialLoader.visibility = View.GONE
       }
     })
   }

@@ -52,10 +52,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
           })
 
       viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
-        when (isLoading) {
-          true -> binding.pbInitialLoader.visibility = View.VISIBLE
-          false -> binding.pbInitialLoader.visibility = View.GONE
-        }
+        activityViewModel.progressLiveData.value = isLoading
       })
 
       viewModel.progressLiveData.observe(owner, Observer { isLoading ->
