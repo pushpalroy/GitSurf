@@ -18,7 +18,7 @@ object Versions {
   const val proguard_specific = "proguard-specific.txt"
   const val applicationId = "com.gitsurfer.gitsurf"
 
-  const val gradle = "3.5.3"
+  const val gradle = "4.0.0"
   const val junit = "4.12"
   const val appCompat = "1.1.0"
   const val constraint = "1.1.3"

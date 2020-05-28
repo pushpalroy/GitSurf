@@ -75,11 +75,10 @@ fun loadPropertiesFile(): Properties {
 }
 
 dependencies {
+  implementation(Dependencies.kotlin_stdlib)
   implementation(Dependencies.support_appcompat)
   implementation(Dependencies.support_design)
   implementation(Dependencies.constraint_layout)
-
-  implementation(Dependencies.kotlin_stdlib)
 
   implementation(Dependencies.lifecycle_extensions)
   implementation(Dependencies.lifecycle_view_model)
@@ -89,7 +88,6 @@ dependencies {
   implementation(Dependencies.navigation_fragment)
   implementation(Dependencies.navigation_ui)
   implementation(Dependencies.navigation_dynamic_feature)
-  testImplementation(Dependencies.navigation_testing)
 
   implementation(Dependencies.room)
   implementation(Dependencies.room_ktx)
@@ -97,21 +95,16 @@ dependencies {
 
   implementation(Dependencies.paging)
 
-  testImplementation(Dependencies.arch_core_testing)
-  testImplementation(Dependencies.mock_web_server)
-
   implementation(Dependencies.dagger)
-  kapt(Dependencies.dagger_compiler)
-
   implementation(Dependencies.dagger_android)
   implementation(Dependencies.dagger_android_support)
   kapt(Dependencies.dagger_android_compiler)
+  kapt(Dependencies.dagger_compiler)
 
   implementation(Dependencies.rx_java)
   implementation(Dependencies.rx_android)
 
   implementation(Dependencies.gson)
-
   implementation(Dependencies.retrofit)
   implementation(Dependencies.retrofit_gson)
   implementation(Dependencies.ok_http)
@@ -124,9 +117,11 @@ dependencies {
   kapt(Dependencies.glide_compiler)
 
   implementation(Dependencies.circularImageView)
-
   implementation(Dependencies.progress_button)
 
+  testImplementation(Dependencies.navigation_testing)
+  testImplementation(Dependencies.arch_core_testing)
+  testImplementation(Dependencies.mock_web_server)
   testImplementation(Dependencies.junit)
   testImplementation(Dependencies.mockito)
   testImplementation(Dependencies.mockito_kotlin)
