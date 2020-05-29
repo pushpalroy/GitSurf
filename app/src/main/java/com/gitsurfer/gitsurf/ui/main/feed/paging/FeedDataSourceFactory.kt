@@ -27,4 +27,8 @@ class FeedDataSourceFactory constructor(
     feedLiveDataSource.postValue(feedDataSource)
     return feedDataSource
   }
+
+  fun getFeedLiveDataSource(): MutableLiveData<FeedDataSource> {
+    return feedLiveDataSource
+  }
 }

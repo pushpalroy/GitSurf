@@ -25,6 +25,7 @@ object Dependencies {
   val room_ktx = "androidx.room:room-ktx:${Versions.roomVersion}"
 
   val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+  val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
 
   val dagger = "com.google.dagger:dagger:${Versions.dagger}"
   val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"

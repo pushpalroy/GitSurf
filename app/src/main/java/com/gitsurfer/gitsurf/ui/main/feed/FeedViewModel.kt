@@ -27,14 +27,14 @@ class FeedViewModel @Inject constructor(
   private var feedPagedList: LiveData<PagedList<Feed>>
   val adapter: FeedPagedListAdapter = FeedPagedListAdapter()
   val initialProgressLiveData = SingleLiveData<Boolean>()
+  private var feedDataSourceFactory = FeedDataSourceFactory(
+      appRepository = appRepository,
+      prefUtils = prefUtils,
+      scope = viewModelScope,
+      viewModel = this
+  )
 
   init {
-    val feedDataSourceFactory = FeedDataSourceFactory(
-        appRepository = appRepository,
-        prefUtils = prefUtils,
-        scope = viewModelScope,
-        viewModel = this
-    )
     val config = PagedList.Config.Builder()
         .setEnablePlaceholders(true)
         .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
@@ -44,6 +44,10 @@ class FeedViewModel @Inject constructor(
   }
 
   fun getFeed(): LiveData<PagedList<Feed>> = feedPagedList
+
+  fun refresh() {
+    feedDataSourceFactory.getFeedLiveDataSource().value?.invalidate()
+  }
 
   internal fun updateInitialProgressLiveData(progress: Boolean) {
     initialProgressLiveData.call(progress)

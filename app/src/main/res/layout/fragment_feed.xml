@@ -16,19 +16,26 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_feed"
-        style="@style/scrollbar_style"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/pb_loader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:setAdapter="@{viewModel.adapter}"
-        tools:listitem="@layout/item_feed"
-        />
+        >
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv_feed"
+          style="@style/scrollbar_style"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:setAdapter="@{viewModel.adapter}"
+          tools:listitem="@layout/item_feed"
+          />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <ProgressBar
         android:id="@+id/pb_loader"
         style="@style/Widget.AppCompat.ProgressBar"

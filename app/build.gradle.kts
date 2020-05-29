@@ -94,6 +94,7 @@ dependencies {
   kapt(Dependencies.room_compiler)
 
   implementation(Dependencies.paging)
+  implementation(Dependencies.swipeRefresh)
 
   implementation(Dependencies.dagger)
   implementation(Dependencies.dagger_android)

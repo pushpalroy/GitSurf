@@ -39,8 +39,10 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
     binding.rvFeed.addItemDecoration(
         DividerItemDecorator(context, resources.getDrawable(R.drawable.divider_drawable, null))
     )
+    binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
 
     listenToLiveData()
+    setListeners()
   }
 
   private fun listenToLiveData() {
@@ -53,6 +55,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
       viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
         activityViewModel.progressLiveData.value = isLoading
+        binding.swipeContainer.isRefreshing = isLoading
       })
 
       viewModel.progressLiveData.observe(owner, Observer { isLoading ->
@@ -65,6 +68,12 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
       viewModel.exceptionLiveData.observe(owner, Observer { exception ->
         activityViewModel.updateExceptionLiveData(exception)
       })
+    }
+  }
+
+  private fun setListeners() {
+    binding.swipeContainer.setOnRefreshListener {
+      viewModel.refresh()
     }
   }
 }

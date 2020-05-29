@@ -7,7 +7,6 @@ import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
 import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -97,11 +96,6 @@ class FeedDataSource constructor(
 
   private fun hideProgress() {
     viewModel.updateProgressLiveData(progress = false)
-  }
-
-  override fun invalidate() {
-    super.invalidate()
-    scope.cancel()
   }
 
   companion object {

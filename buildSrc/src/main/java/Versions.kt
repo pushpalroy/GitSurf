@@ -31,6 +31,7 @@ object Versions {
   const val navigationSafeArgs = "2.2.2"
   const val roomVersion = "2.2.5"
   const val paging = "2.1.2"
+  const val swipeRefresh = "1.0.0"
   const val archCoreTesting = "2.1.0"
   const val dagger = "2.25.2"
   const val rxJava = "2.2.11"
