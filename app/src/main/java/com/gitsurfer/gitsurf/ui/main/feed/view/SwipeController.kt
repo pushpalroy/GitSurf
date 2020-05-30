@@ -33,7 +33,7 @@ class SwipeController constructor(
 
   private var swipeBack: Boolean = false
   private var buttonShowedState: ButtonState = GONE
-  private var currentItemViewHolder: ViewHolder? = null
+  private var itemViewHolder: ViewHolder? = null
   private var buttonInstance: RectF? = null
 
   companion object {
@@ -99,7 +99,7 @@ class SwipeController constructor(
     if (buttonShowedState == GONE) {
       super.onChildDraw(c, recyclerView, viewHolder, dx, dY, actionState, isCurrentlyActive)
     }
-    currentItemViewHolder = viewHolder
+    itemViewHolder = viewHolder
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -174,7 +174,7 @@ class SwipeController constructor(
           }
         }
         buttonShowedState = GONE
-        currentItemViewHolder = null
+        itemViewHolder = null
       }
       false
     }
@@ -193,19 +193,18 @@ class SwipeController constructor(
     c: Canvas,
     viewHolder: ViewHolder
   ) {
-    val buttonWidthWithoutPadding = buttonWidth
     val itemView: View = viewHolder.itemView
     val p = Paint()
 
     val leftBtnBg = RectF(
         itemView.left.toFloat(),
         itemView.top.toFloat(),
-        itemView.left + buttonWidthWithoutPadding,
+        itemView.right.toFloat() / 2,
         itemView.bottom.toFloat()
     )
 
     val rightBtnBg = RectF(
-        itemView.right - buttonWidthWithoutPadding,
+        itemView.right.toFloat() / 2,
         itemView.top.toFloat(),
         itemView.right.toFloat(),
         itemView.bottom.toFloat()
@@ -229,7 +228,7 @@ class SwipeController constructor(
           .toBitmap()
       c.drawBitmap(
           rightBitmap,
-          itemView.right.toFloat() - rightBitmap.width - 48,
+          itemView.right.toFloat() - (rightBitmap.width + 48),
           itemView.top.toFloat() + 28,
           p
       )
@@ -243,8 +242,10 @@ class SwipeController constructor(
   }
 
   fun onDraw(c: Canvas?) {
-    if (currentItemViewHolder != null) {
-      drawButtons(c!!, currentItemViewHolder!!)
+    c?.let {
+      if (itemViewHolder != null) {
+        drawButtons(c, itemViewHolder!!)
+      }
     }
   }
 }
