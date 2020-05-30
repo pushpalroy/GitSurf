@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.paging
+package com.gitsurfer.gitsurf.ui.main.feed.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -39,7 +39,7 @@ class DividerItemDecorator constructor(
     super.onDraw(c, parent, state)
 
     val dividerLeft: Int =
-      (parent.paddingStart + context?.resources!!.getDimension(R.dimen.dimen_60dp)
+      (parent.paddingStart + context?.resources!!.getDimension(R.dimen.dimen_65dp)
           ).roundToInt()
     val dividerRight: Int =
       (parent.width - parent.paddingEnd - context.resources!!.getDimension(R.dimen.dimen_10dp)

@@ -13,6 +13,7 @@ import com.gitsurfer.gitsurf.model.network.models.response.Feed
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHolder
 import com.gitsurfer.gitsurf.utils.DateUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
+import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction
 
 class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     FEED_COMPARATOR
@@ -53,11 +54,15 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
 
     fun bind(feed: Feed) {
       binding.feed = feed
+      val action = getActionFromEventType(feed.type)
+      val description = getDescriptionFromAction(action, feed)
+
       val event =
-        feed.actor.displayLoginn +
+        feed.actor.displayLogin +
             " <b>" +
-            getActionFromEventType(feed.type) +
+            action +
             "</b> " +
+            description +
             feed.repo.name
       HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
       binding.tvAction.text =

@@ -1,18 +1,26 @@
 package com.gitsurfer.gitsurf.ui.main.feed
 
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import androidx.recyclerview.widget.RecyclerView.State
 import com.gitsurfer.gitsurf.R
+import com.gitsurfer.gitsurf.R.drawable
 import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
-import com.gitsurfer.gitsurf.ui.main.feed.paging.DividerItemDecorator
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedOnScrollListener
+import com.gitsurfer.gitsurf.ui.main.feed.view.DividerItemDecorator
+import com.gitsurfer.gitsurf.ui.main.feed.view.SwipeClickActions
+import com.gitsurfer.gitsurf.ui.main.feed.view.SwipeController
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
@@ -38,9 +46,33 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
   private fun init() {
     binding.viewModel = viewModel
     binding.rvFeed.addItemDecoration(
-        DividerItemDecorator(context, resources.getDrawable(R.drawable.divider_drawable, null))
+        DividerItemDecorator(
+            context, resources.getDrawable(drawable.divider_drawable, null)
+        )
     )
     binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
+
+    val swipeController = SwipeController(context, object : SwipeClickActions() {
+      override fun onLeftClicked(position: Int) {
+        showToast("Feed Bookmarked")
+      }
+
+      override fun onRightClicked(position: Int) {
+        showToast("Repository Starred")
+      }
+    })
+    val itemTouchHelper = ItemTouchHelper(swipeController)
+    itemTouchHelper.attachToRecyclerView(binding.rvFeed)
+
+    binding.rvFeed.addItemDecoration(object : ItemDecoration() {
+      override fun onDraw(
+        c: Canvas,
+        parent: RecyclerView,
+        state: State
+      ) {
+        swipeController.onDraw(c)
+      }
+    })
 
     listenToLiveData()
     setListeners()
