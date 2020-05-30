@@ -218,7 +218,7 @@ class SwipeController constructor(
       c.drawBitmap(
           leftBitmap,
           itemView.left.toFloat() + 32,
-          itemView.top.toFloat() + 28,
+          itemView.top.toFloat() + 34,
           p
       )
 
@@ -229,7 +229,7 @@ class SwipeController constructor(
       c.drawBitmap(
           rightBitmap,
           itemView.right.toFloat() - (rightBitmap.width + 48),
-          itemView.top.toFloat() + 28,
+          itemView.top.toFloat() + 34,
           p
       )
     }

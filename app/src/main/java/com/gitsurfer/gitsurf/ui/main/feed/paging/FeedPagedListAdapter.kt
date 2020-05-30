@@ -14,6 +14,7 @@ import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHo
 import com.gitsurfer.gitsurf.utils.DateUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
 import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction
+import com.gitsurfer.gitsurf.utils.GithubUtil.getIconFromEventType
 
 class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     FEED_COMPARATOR
@@ -68,6 +69,7 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
       binding.tvAction.text =
         HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
       binding.tvTimestamp.text = DateUtil.getTimeAgo(feed.createdAt.time)
+      binding.ivIcon.setImageResource(getIconFromEventType(feed.type))
     }
   }
 

@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.utils
 
+import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
 
 object GithubUtil {
@@ -27,6 +28,20 @@ object GithubUtil {
       }
     }
     return ACTION_STARTED
+  }
+
+  @JvmStatic
+  fun getIconFromEventType(eventType: String?): Int {
+    eventType?.let {
+      return when (eventType) {
+        EVENT_WATCH -> R.drawable.ic_star
+        EVENT_FORK -> R.drawable.ic_fork
+        EVENT_CREATE -> R.drawable.ic_created
+        EVENT_MEMBER -> R.drawable.ic_add
+        else -> R.drawable.ic_star
+      }
+    }
+    return R.drawable.ic_star
   }
 
   @JvmStatic

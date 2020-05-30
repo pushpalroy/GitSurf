@@ -51,18 +51,30 @@
         app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
         tools:text="pushpalroy starred john/repo pushpalroy starred john/repo"
         />
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/con_desc_feed_icon"
+        android:src="@drawable/ic_fork"
+        app:layout_constraintStart_toStartOf="@+id/tv_action"
+        app:layout_constraintTop_toBottomOf="@+id/tv_action"
+        />
     <TextView
         android:id="@+id/tv_timestamp"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/muli_light"
+        android:gravity="center_vertical"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/textBlackMedium"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_action"
-        app:layout_constraintTop_toBottomOf="@+id/tv_action"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_icon"
         tools:text="4 days ago"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
