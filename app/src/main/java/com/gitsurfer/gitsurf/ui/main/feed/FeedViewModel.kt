@@ -27,6 +27,8 @@ class FeedViewModel @Inject constructor(
   private var feedPagedList: LiveData<PagedList<Feed>>
   val adapter: FeedPagedListAdapter = FeedPagedListAdapter()
   val initialProgressLiveData = SingleLiveData<Boolean>()
+  private var noMoreItemsToLoad: Boolean = false
+
   private var feedDataSourceFactory = FeedDataSourceFactory(
       appRepository = appRepository,
       prefUtils = prefUtils,
@@ -51,6 +53,14 @@ class FeedViewModel @Inject constructor(
 
   internal fun updateInitialProgressLiveData(progress: Boolean) {
     initialProgressLiveData.call(progress)
+  }
+
+  fun setNoMoreItemsToLoad(flag: Boolean) {
+    noMoreItemsToLoad = flag
+  }
+
+  fun isNoMoreItemsToLoad(): Boolean {
+    return noMoreItemsToLoad
   }
 
   fun updateAdapter(items: List<Feed>) {

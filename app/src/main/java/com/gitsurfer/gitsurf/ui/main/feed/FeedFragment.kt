@@ -12,6 +12,7 @@ import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.DividerItemDecorator
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedOnScrollListener
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
@@ -73,7 +74,16 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
   private fun setListeners() {
     binding.swipeContainer.setOnRefreshListener {
+      viewModel.setNoMoreItemsToLoad(false)
       viewModel.refresh()
     }
+
+    binding.rvFeed.addOnScrollListener(object : FeedOnScrollListener() {
+      override fun onLoadMore() {
+        if (!viewModel.isNoMoreItemsToLoad()) {
+          viewModel.updateProgressLiveData(true)
+        }
+      }
+    })
   }
 }

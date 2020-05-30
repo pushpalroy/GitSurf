@@ -26,7 +26,7 @@ class FeedDataSource constructor(
       val feedListResponse = getReceivedFeeds(FIRST_PAGE)
       feedListResponse.first?.let { feedList: List<Feed> ->
         hideInitialProgress()
-        callback.onResult(feedList, null, FIRST_PAGE + 1)
+        callback.onResult(feedList, null, FIRST_PAGE)
       }
       feedListResponse.second?.let { exception ->
         Timber.e(exception)
@@ -39,13 +39,16 @@ class FeedDataSource constructor(
     params: LoadParams<Int>,
     callback: LoadCallback<Int, Feed>
   ) {
-    //showProgress()
     scope.launch {
       val feedListResponse = getReceivedFeeds(params.key)
       feedListResponse.first?.let { feedList: List<Feed> ->
-        //hideProgress()
         val key = params.key + 1
         callback.onResult(feedList, key)
+        newItemsLoaded()
+
+        if (feedList.isEmpty()) {
+          setNoMoreItemsToLoad()
+        }
       }
       feedListResponse.second?.let { exception ->
         Timber.e(exception)
@@ -58,11 +61,9 @@ class FeedDataSource constructor(
     params: LoadParams<Int>,
     callback: LoadCallback<Int, Feed>
   ) {
-    //showProgress()
     scope.launch {
       val feedListResponse = getReceivedFeeds(params.key)
       feedListResponse.first?.let { feedList: List<Feed> ->
-        //hideProgress()
         val key = if (params.key > 1) params.key - 1 else 0
         callback.onResult(feedList, key)
       }
@@ -90,17 +91,17 @@ class FeedDataSource constructor(
     viewModel.updateInitialProgressLiveData(progress = false)
   }
 
-  private fun showProgress() {
-    viewModel.updateProgressLiveData(progress = true)
+  private fun newItemsLoaded() {
+    viewModel.updateProgressLiveData(false)
   }
 
-  private fun hideProgress() {
-    viewModel.updateProgressLiveData(progress = false)
+  private fun setNoMoreItemsToLoad() {
+    viewModel.setNoMoreItemsToLoad(true)
   }
 
   companion object {
     const val FIRST_PAGE = 1
-    const val PAGE_SIZE = 10
-    const val INITIAL_LOAD_SIZE_HINT = 10
+    const val PAGE_SIZE = 20
+    const val INITIAL_LOAD_SIZE_HINT = 20
   }
 }
