@@ -14,6 +14,7 @@ import com.gitsurfer.gitsurf.model.roomdatabase.base.AppDatabase
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.utils.BASE_URL
 import com.gitsurfer.gitsurf.utils.ROOM_DATABASE_NAME
+import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -90,7 +91,7 @@ class RepositoryModule {
 
   @Provides
   @Singleton
-  fun provideOkHttpClient(): OkHttpClient {
+  fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
     val httpBuilder = OkHttpClient.Builder()
     when {
       BuildConfig.DEBUG -> {
@@ -98,6 +99,8 @@ class RepositoryModule {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         httpBuilder.interceptors()
             .add(httpLoggingInterceptor)
+        httpBuilder.interceptors()
+            .add(ChuckInterceptor(context))
       }
     }
     return httpBuilder.build()

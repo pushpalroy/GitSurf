@@ -57,6 +57,9 @@ object Dependencies {
 
   val circularImageView = "de.hdodenhof:circleimageview:${Versions.circularImageView}"
 
+  val chuckDebug = "com.readystatesoftware.chuck:library:${Versions.chuck}"
+  val chuckRelease = "com.readystatesoftware.chuck:library-no-op:${Versions.chuck}"
+
   val mockito = "org.mockito:mockito-core:${Versions.mockito}"
   val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
   val mockito_android = "org.mockito:mockito-android:${Versions.mockito}"

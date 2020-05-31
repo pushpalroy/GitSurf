@@ -120,6 +120,9 @@ dependencies {
   implementation(Dependencies.circularImageView)
   implementation(Dependencies.progress_button)
 
+  debugImplementation(Dependencies.chuckDebug)
+  releaseImplementation(Dependencies.chuckRelease)
+
   testImplementation(Dependencies.navigation_testing)
   testImplementation(Dependencies.arch_core_testing)
   testImplementation(Dependencies.mock_web_server)
