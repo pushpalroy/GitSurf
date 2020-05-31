@@ -35,9 +35,17 @@ object AppNavigator {
   fun startActivityWithData(
     activityClass: Class<out AppCompatActivity>,
     bundle: Bundle,
-    activity: AppCompatActivity
+    activity: AppCompatActivity,
+    clearBackStack: Boolean = false
   ) {
     val intent = Intent(activity, activityClass)
+    if (clearBackStack) {
+      intent.addFlags(
+          Intent.FLAG_ACTIVITY_CLEAR_TOP or
+              Intent.FLAG_ACTIVITY_CLEAR_TASK or
+              Intent.FLAG_ACTIVITY_NEW_TASK
+      )
+    }
     intent.putExtras(bundle)
     activity.startActivity(intent)
   }

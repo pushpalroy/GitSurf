@@ -10,7 +10,6 @@ import com.github.razir.progressbutton.showProgress
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ActivityLoginBinding
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException
-import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.OperationInQueue
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.PasswordEmpty
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.UsernameEmpty
 import com.gitsurfer.gitsurf.ui.base.AppNavigator

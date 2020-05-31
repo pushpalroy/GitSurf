@@ -3,6 +3,7 @@ package com.gitsurfer.gitsurf.model.roomdatabase
 import androidx.room.RoomDatabase
 import com.gitsurfer.gitsurf.model.roomdatabase.base.AppDatabase
 import com.gitsurfer.gitsurf.model.roomdatabase.base.BaseDataProvider
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser
 
 class LocalDataProvider(
   private val appDatabase: AppDatabase
@@ -10,8 +11,12 @@ class LocalDataProvider(
 
   override fun roomDatabase() = appDatabase
 
-  suspend fun getUser(accessToken: String) {
+  suspend fun insertUser(roomUser: RoomUser) {
     appDatabase.userDao()
-        .getUser(accessToken)
+        .insertUser(roomUser = roomUser)
   }
+
+  suspend fun getUser(login: String): RoomUser? =
+    appDatabase.userDao()
+        .getUser(login = login)
 }

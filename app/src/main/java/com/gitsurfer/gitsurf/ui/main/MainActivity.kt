@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
 import com.gitsurfer.gitsurf.ui.base.AppNavigator
@@ -18,6 +19,9 @@ import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.nav_header.view.iv_person_avatar
+import kotlinx.android.synthetic.main.nav_header.view.tv_person_login
+import kotlinx.android.synthetic.main.nav_header.view.tv_person_name
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -30,6 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     setSupportActionBar(toolbar)
     setUpNavigation()
     listenToLiveData()
+    viewModel.getLocalUserDetails()
   }
 
   private fun listenToLiveData() {
@@ -50,6 +55,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         true -> binding.pbInitialLoader.visibility = View.VISIBLE
         false -> binding.pbInitialLoader.visibility = View.GONE
       }
+    })
+
+    viewModel.roomUserLiveData.observe(this, Observer { roomUser ->
+      navigationView.getHeaderView(0).tv_person_name.text = roomUser.name
+      navigationView.getHeaderView(0).tv_person_login.text = roomUser.login
+      Glide.with(this)
+          .load(roomUser.avatarUrl)
+          .into(navigationView.getHeaderView(0).iv_person_avatar)
     })
   }
 

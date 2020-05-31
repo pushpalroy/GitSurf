@@ -9,18 +9,20 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = ROOM_USER)
 @Parcelize
 data class RoomUser(
-  @PrimaryKey val accessToken: String,
-  val authTime: Long,
-  val expireIn: Int,
-  val scope: String,
-  val selected: Boolean,
-  val loginId: String,
+  val authToken: String,
+  @PrimaryKey val login: String,
   val name: String,
-  val avatar: String
+  val avatarUrl: String,
+  val profileUrl: String,
+  val company: String,
+  val blog: String,
+  val location: String,
+  val email: String,
+  val bio: String,
+  val type: String
 ) : Parcelable {
 
   companion object {
     const val ROOM_USER = "user_table"
   }
-
 }

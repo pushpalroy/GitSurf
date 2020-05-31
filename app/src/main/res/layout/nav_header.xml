@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data></data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:paddingTop="@dimen/dimen_40dp"
+      android:paddingStart="@dimen/dimen_16dp"
+      android:paddingEnd="@dimen/dimen_16dp"
+      android:paddingBottom="@dimen/dimen_40dp"
+      >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_person_avatar"
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_60dp"
+        android:contentDescription="@string/con_desc_avatar"
+        android:src="@color/veryLightGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        />
+
+    <TextView
+        android:id="@+id/tv_person_name"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:fontFamily="@font/muli_bold"
+        android:textColor="@color/textBlackDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_person_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
+        tools:text="Pushpal Roy"
+        />
+    <TextView
+        android:id="@+id/tv_person_login"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_regular"
+        android:textColor="@color/textBlackDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_person_name"
+        tools:text="pushpalroy"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

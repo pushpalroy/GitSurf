@@ -7,6 +7,8 @@ import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.NetworkManager
 import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.model.network.models.response.BasicToken
+import com.gitsurfer.gitsurf.model.network.models.response.User
+import com.gitsurfer.gitsurf.model.network.models.response.toRoomUser
 import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
@@ -33,6 +35,8 @@ class LoginViewModel @Inject constructor(
   private val _userLoggedInLiveData = MutableLiveData<Boolean>()
   val userLoggedInLiveData: LiveData<Boolean>
     get() = _userLoggedInLiveData
+
+  var user: User? = null
 
   var username: String? = ""
   var password: String? = ""
@@ -105,7 +109,6 @@ class LoginViewModel @Inject constructor(
             basicTokenResponse.first?.let { basicToken ->
               Timber.tag(TAG)
                   .i("BasicToken: $basicToken")
-              _userLoggedInLiveData.value = true
               getUserInfo(basicToken)
               sharedPrefUtils.authToken = basicToken.token
             }
@@ -128,9 +131,10 @@ class LoginViewModel @Inject constructor(
               authToken = TOKEN_PREFIX + basicToken.token
           )
 
-          userInfoResponse.first?.let {
+          userInfoResponse.first?.let { user ->
             Timber.tag(TAG)
-                .i("UserBio: ${it.bio}")
+                .i("User: $user")
+            insertUserInDb(user, basicToken.token)
           }
           userInfoResponse.second?.let {
             Timber.tag(TAG)
@@ -138,6 +142,16 @@ class LoginViewModel @Inject constructor(
           }
         }
       }
+    }
+  }
+
+  private fun insertUserInDb(
+    user: User,
+    authToken: String
+  ) {
+    viewModelScope.launch {
+      appRepository.insertUserLocal(roomUser = user.toRoomUser(authToken))
+      _userLoggedInLiveData.value = true
     }
   }
 

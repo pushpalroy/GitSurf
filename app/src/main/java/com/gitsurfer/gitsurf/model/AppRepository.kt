@@ -3,6 +3,7 @@ package com.gitsurfer.gitsurf.model
 import com.gitsurfer.gitsurf.model.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.model.roomdatabase.LocalDataProvider
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser
 
 class AppRepository(
   private val networkDataProvider: NetworkDataProvider,
@@ -47,9 +48,15 @@ class AppRepository(
       state = state
   )
 
+  suspend fun insertUserLocal(
+    roomUser: RoomUser
+  ) = localDataProvider.insertUser(
+      roomUser = roomUser
+  )
+
   suspend fun getUserLocal(
-    accessToken: String
-  ) = localDataProvider.getUser(
-      accessToken = accessToken
+    login: String
+  ): RoomUser? = localDataProvider.getUser(
+      login = login
   )
 }

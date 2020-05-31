@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
@@ -21,4 +22,32 @@ data class User(
   @SerializedName("following") val following: Int,
   @SerializedName("createdAt") val createdAt: Date,
   @SerializedName("updatedAt") val updatedAt: Date
+)
+
+fun User.toRoomUser() = RoomUser(
+    authToken = "",
+    login = login,
+    name = name,
+    avatarUrl = avatarUrl,
+    profileUrl = profileUrl,
+    company = company,
+    blog = blog,
+    location = location,
+    email = email,
+    bio = bio,
+    type = type
+)
+
+fun User.toRoomUser(authToken: String) = RoomUser(
+    authToken = authToken,
+    login = login,
+    name = name,
+    avatarUrl = avatarUrl,
+    profileUrl = profileUrl,
+    company = company,
+    blog = blog,
+    location = location,
+    email = email,
+    bio = bio,
+    type = type
 )

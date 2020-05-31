@@ -8,6 +8,6 @@
   <fragment
       android:id="@+id/feedFragment"
       android:name="com.gitsurfer.gitsurf.ui.main.feed.FeedFragment"
-      android:label="@string/action_feed"
+      android:label="@string/feeds"
       tools:layout="@layout/fragment_feed" />
 </navigation>
