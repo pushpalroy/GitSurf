@@ -123,6 +123,8 @@ dependencies {
   debugImplementation(Dependencies.chuckDebug)
   releaseImplementation(Dependencies.chuckRelease)
 
+  debugImplementation(Dependencies.dbInspector)
+
   testImplementation(Dependencies.navigation_testing)
   testImplementation(Dependencies.arch_core_testing)
   testImplementation(Dependencies.mock_web_server)
