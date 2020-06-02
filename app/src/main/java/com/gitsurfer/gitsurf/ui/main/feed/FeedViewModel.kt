@@ -6,6 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
+import com.gitsurfer.gitsurf.model.network.models.response.toRoomFeed
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.INITIAL_LOAD_SIZE_HINT
@@ -13,10 +14,12 @@ import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.PAGE_S
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSourceFactory
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter
 import com.gitsurfer.gitsurf.utils.SingleLiveData
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
-  appRepository: AppRepository,
+  private val appRepository: AppRepository,
   prefUtils: SharedPrefUtils
 ) : BaseViewModel() {
 
@@ -66,5 +69,18 @@ class FeedViewModel @Inject constructor(
   fun updateAdapter(items: List<Feed>) {
     adapter.setItems(items)
     adapter.notifyDataSetChanged()
+  }
+
+  fun bookmarkFeed(position: Int) {
+    viewModelScope.launch {
+      adapter.getFeedItem(position)
+          ?.let { roomFeed ->
+            val res = appRepository.insertFeedLocal(
+                roomFeed.toRoomFeed()
+            )
+            Timber.tag(TAG)
+                .i(res.toString())
+          }
+    }
   }
 }

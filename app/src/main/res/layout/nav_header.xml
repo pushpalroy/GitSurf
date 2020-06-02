@@ -4,27 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-  <data></data>
+  <data>
+    <variable
+        name="roomUser"
+        type="com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser"
+        />
+  </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/white"
-      android:paddingTop="@dimen/dimen_40dp"
       android:paddingStart="@dimen/dimen_16dp"
+      android:paddingTop="@dimen/dimen_70dp"
       android:paddingEnd="@dimen/dimen_16dp"
       android:paddingBottom="@dimen/dimen_40dp"
       >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_person_avatar"
-        android:layout_width="@dimen/dimen_60dp"
-        android:layout_height="@dimen/dimen_60dp"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
         android:contentDescription="@string/con_desc_avatar"
         android:src="@color/veryLightGrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:setImageUrl="@{roomUser.avatarUrl}"
         app:srcCompat="@android:drawable/ic_menu_my_calendar"
         />
 
@@ -33,10 +39,11 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_3dp"
         android:fontFamily="@font/muli_bold"
+        android:text="@{roomUser.name}"
         android:textColor="@color/textBlackDark"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_person_login"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
         app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
@@ -47,11 +54,13 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/muli_regular"
+        android:text="@{roomUser.login}"
         android:textColor="@color/textBlackDark"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_person_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_person_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_person_name"
         tools:text="pushpalroy"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>

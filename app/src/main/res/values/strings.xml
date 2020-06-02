@@ -16,4 +16,6 @@
   <string name="feeds">Feeds</string>
   <string name="con_desc_avatar">Avatar</string>
   <string name="con_desc_feed_icon">Feed icon</string>
+  <string name="starred">Starred</string>
+  <string name="bookmarks">Bookmarks</string>
 </resources>

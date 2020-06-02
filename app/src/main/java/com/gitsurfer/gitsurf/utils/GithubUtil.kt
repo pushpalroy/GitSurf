@@ -51,7 +51,7 @@ object GithubUtil {
   ): String {
     action?.let {
       if (action == ACTION_ADDED) {
-        return " " + feed.payload.member.login + " as a collaborator to "
+        return " " + feed.payload?.member?.login + " as a collaborator to "
       }
     }
     return ""

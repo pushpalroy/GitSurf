@@ -3,14 +3,15 @@ package com.gitsurfer.gitsurf.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.bumptech.glide.Glide
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
+import com.gitsurfer.gitsurf.databinding.NavHeaderBinding
 import com.gitsurfer.gitsurf.ui.base.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.login.LoginActivity
@@ -19,9 +20,6 @@ import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
-import kotlinx.android.synthetic.main.nav_header.view.iv_person_avatar
-import kotlinx.android.synthetic.main.nav_header.view.tv_person_login
-import kotlinx.android.synthetic.main.nav_header.view.tv_person_name
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -58,11 +56,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     })
 
     viewModel.roomUserLiveData.observe(this, Observer { roomUser ->
-      navigationView.getHeaderView(0).tv_person_name.text = roomUser.name
-      navigationView.getHeaderView(0).tv_person_login.text = roomUser.login
-      Glide.with(this)
-          .load(roomUser.avatarUrl)
-          .into(navigationView.getHeaderView(0).iv_person_avatar)
+      val navHeaderBinding: NavHeaderBinding = NavHeaderBinding
+          .bind(navigationView.getHeaderView(0))
+      navHeaderBinding.roomUser = roomUser
     })
   }
 
@@ -87,16 +83,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     // non-root destination and the hamburger icon will be displayed when on the root destination
     setupActionBarWithNavController(navController, drawerLayout)
 
-    // Handle nav drawer item clicks
-    navigationView.setNavigationItemSelectedListener { menuItem ->
-      menuItem.isChecked = true
-      drawerLayout.closeDrawers()
-      true
-    }
-
     // Ensures that the selected item in the NavigationView will automatically be updated
     // when the destination changes
     setupWithNavController(navigationView, navController)
+
+    // Handle nav drawer item clicks
+    navigationView.setNavigationItemSelectedListener { menuItem ->
+      drawerLayout.closeDrawers()
+
+      if (!menuItem.isChecked) {
+        when (menuItem.itemId) {
+          R.id.nav_feed -> navController.navigate(R.id.feedFragment)
+        }
+        menuItem.isChecked = true
+      }
+
+      true
+    }
+
+    navigationView.menu[0].isChecked = true
   }
 
   override fun onBackPressed() {

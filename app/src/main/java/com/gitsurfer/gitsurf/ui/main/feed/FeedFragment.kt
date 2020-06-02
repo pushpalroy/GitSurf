@@ -55,6 +55,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
     val swipeController = SwipeController(context, object : SwipeClickActions() {
       override fun onLeftClicked(position: Int) {
         showToast("Feed Bookmarked")
+        viewModel.bookmarkFeed(position)
       }
 
       override fun onRightClicked(position: Int) {

@@ -38,6 +38,10 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     feedItemsList = items
   }
 
+  fun getFeedItem(position: Int): Feed? {
+    return getItem(position)
+  }
+
   override fun getItemCount(): Int {
     return feedItemsList.size
   }

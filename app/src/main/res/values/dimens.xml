@@ -12,4 +12,5 @@
   <dimen name="dimen_16dp">16dp</dimen>
   <dimen name="dimen_60dp">60dp</dimen>
   <dimen name="dimen_65dp">65dp</dimen>
+  <dimen name="dimen_50dp">50dp</dimen>
 </resources>

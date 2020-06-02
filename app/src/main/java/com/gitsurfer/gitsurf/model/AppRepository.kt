@@ -3,6 +3,7 @@ package com.gitsurfer.gitsurf.model
 import com.gitsurfer.gitsurf.model.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.model.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.model.roomdatabase.LocalDataProvider
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomFeed
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser
 
 class AppRepository(
@@ -58,5 +59,11 @@ class AppRepository(
     login: String
   ): RoomUser? = localDataProvider.getUser(
       login = login
+  )
+
+  suspend fun insertFeedLocal(
+    roomFeed: RoomFeed
+  ) = localDataProvider.insertFeed(
+      roomFeed = roomFeed
   )
 }

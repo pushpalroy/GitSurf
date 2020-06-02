@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomMember
 import com.google.gson.annotations.SerializedName
 
 data class Member(
@@ -21,5 +22,8 @@ data class Member(
   @SerializedName("received_events_url") val receivedEventsUrl: String,
   @SerializedName("type") val type: String,
   @SerializedName("site_admin") val siteAdmin: Boolean
+)
 
+fun Member.toRoomMember() = RoomMember(
+    login, id, avatarUrl, gravatarId, profileApiUrl, htmlUrl, type, siteAdmin
 )

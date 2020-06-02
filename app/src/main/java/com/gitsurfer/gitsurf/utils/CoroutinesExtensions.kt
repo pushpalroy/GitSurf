@@ -25,17 +25,6 @@ suspend fun <T> withIOContext(function: suspend () -> T): Pair<T?, Exception?> {
   }
 }
 
-suspend fun <T> withDefaultContext(function: suspend () -> T): Pair<T?, Exception?> {
-  return withContext(Dispatchers.Default) {
-    try {
-      Pair(function.invoke(), null)
-    } catch (ex: Exception) {
-      Timber.e(ex)
-      Pair(null, ex)
-    }
-  }
-}
-
 suspend fun <T> networkCall(function: suspend () -> Response<T>): Pair<T?, Exception?> {
   return withContext(Dispatchers.IO) {
     try {

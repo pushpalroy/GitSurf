@@ -9,8 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = ROOM_USER)
 @Parcelize
 data class RoomUser(
+  @PrimaryKey(autoGenerate = false)
+  val login: String,
   val authToken: String,
-  @PrimaryKey val login: String,
   val name: String,
   val avatarUrl: String,
   val profileUrl: String,
