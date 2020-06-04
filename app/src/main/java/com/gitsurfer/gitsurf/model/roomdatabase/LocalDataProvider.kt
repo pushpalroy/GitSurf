@@ -26,4 +26,13 @@ class LocalDataProvider(
     appDatabase.feedDao()
         .insert(obj = roomFeed)
   }
+
+  fun getAllFeeds() =
+    appDatabase.feedDao()
+        .getAllFeeds()
+
+  suspend fun deleteFeed(roomFeed: RoomFeed) = withIOContext {
+    appDatabase.feedDao()
+        .delete(roomFeed)
+  }
 }

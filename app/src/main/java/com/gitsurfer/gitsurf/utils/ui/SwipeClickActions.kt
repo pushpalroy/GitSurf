@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.view
+package com.gitsurfer.gitsurf.utils.ui
 
 abstract class SwipeClickActions {
   abstract fun onLeftClicked(position: Int)

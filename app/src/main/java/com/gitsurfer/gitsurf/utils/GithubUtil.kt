@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.utils
 
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.model.network.models.response.Feed
+import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomFeed
 
 object GithubUtil {
 
@@ -52,6 +53,19 @@ object GithubUtil {
     action?.let {
       if (action == ACTION_ADDED) {
         return " " + feed.payload?.member?.login + " as a collaborator to "
+      }
+    }
+    return ""
+  }
+
+  @JvmStatic
+  fun getDescriptionFromAction(
+    action: String?,
+    roomFeed: RoomFeed
+  ): String {
+    action?.let {
+      if (action == ACTION_ADDED) {
+        return " " + roomFeed.payload?.member?.login + " as a collaborator to "
       }
     }
     return ""

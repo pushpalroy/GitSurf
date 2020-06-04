@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.view
+package com.gitsurfer.gitsurf.utils.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.gitsurfer.gitsurf.R
-import com.gitsurfer.gitsurf.ui.main.feed.view.ButtonState.GONE
-import com.gitsurfer.gitsurf.ui.main.feed.view.ButtonState.LEFT_VISIBLE
-import com.gitsurfer.gitsurf.ui.main.feed.view.ButtonState.RIGHT_VISIBLE
+import com.gitsurfer.gitsurf.utils.ui.ButtonState.GONE
+import com.gitsurfer.gitsurf.utils.ui.ButtonState.LEFT_VISIBLE
+import com.gitsurfer.gitsurf.utils.ui.ButtonState.RIGHT_VISIBLE
 
 internal enum class ButtonState {
   GONE,
@@ -86,7 +86,9 @@ class SwipeController constructor(
     if (actionState == ACTION_STATE_SWIPE) {
       if (buttonShowedState != GONE) {
         if (buttonShowedState == LEFT_VISIBLE) {
-          dx = dX.coerceAtLeast(buttonWidth)
+          dx = dX.coerceAtLeast(
+              buttonWidth
+          )
         }
         if (buttonShowedState == RIGHT_VISIBLE) {
           dx = dX.coerceAtMost(-buttonWidth)

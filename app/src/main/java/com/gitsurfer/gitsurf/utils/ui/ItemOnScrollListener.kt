@@ -1,9 +1,9 @@
-package com.gitsurfer.gitsurf.ui.main.feed.paging
+package com.gitsurfer.gitsurf.utils.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class FeedOnScrollListener : RecyclerView.OnScrollListener() {
+abstract class ItemOnScrollListener : RecyclerView.OnScrollListener() {
 
   override fun onScrolled(
     rv: RecyclerView,

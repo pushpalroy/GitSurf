@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.view
+package com.gitsurfer.gitsurf.utils.ui
 
 import android.content.Context
 import android.graphics.Canvas

@@ -150,7 +150,7 @@ class LoginViewModel @Inject constructor(
     authToken: String
   ) {
     viewModelScope.launch {
-      appRepository.insertUserLocal(
+      appRepository.insertRoomUser(
           roomUser = user.toRoomUser(authToken)
       )
       _userLoggedInLiveData.value = true

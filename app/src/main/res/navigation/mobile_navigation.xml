@@ -10,4 +10,10 @@
       android:name="com.gitsurfer.gitsurf.ui.main.feed.FeedFragment"
       android:label="@string/feeds"
       tools:layout="@layout/fragment_feed" />
+
+  <fragment
+      android:id="@+id/bookmarksFragment"
+      android:name="com.gitsurfer.gitsurf.ui.main.bookmarks.BookmarksFragment"
+      android:label="@string/bookmarks"
+      tools:layout="@layout/fragment_bookmarks" />
 </navigation>

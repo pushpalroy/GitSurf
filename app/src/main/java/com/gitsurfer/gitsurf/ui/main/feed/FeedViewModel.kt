@@ -75,7 +75,7 @@ class FeedViewModel @Inject constructor(
     viewModelScope.launch {
       adapter.getFeedItem(position)
           ?.let { roomFeed ->
-            val res = appRepository.insertFeedLocal(
+            val res = appRepository.insertRoomFeed(
                 roomFeed.toRoomFeed()
             )
             Timber.tag(TAG)

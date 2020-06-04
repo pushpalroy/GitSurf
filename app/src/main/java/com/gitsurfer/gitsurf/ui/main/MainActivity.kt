@@ -94,6 +94,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
       if (!menuItem.isChecked) {
         when (menuItem.itemId) {
           R.id.nav_feed -> navController.navigate(R.id.feedFragment)
+          R.id.nav_bookmark -> navController.navigate(R.id.bookmarksFragment)
         }
         menuItem.isChecked = true
       }

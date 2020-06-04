@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed
+package com.gitsurfer.gitsurf.ui.main.bookmarks
 
 import android.graphics.Canvas
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.RecyclerView.State
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.R.drawable
-import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
+import com.gitsurfer.gitsurf.databinding.FragmentBookmarksBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
@@ -22,14 +22,15 @@ import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
 
-class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
+class BookmarksFragment :
+    BaseFragment<FragmentBookmarksBinding, BookmarksViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
 
-  override fun getViewModelClass() = FeedViewModel::class.java
+  override fun getViewModelClass() = BookmarksViewModel::class.java
   override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
-  override fun getActivityViewModelOwner(): ViewModelStoreOwner = (activity as MainActivity)
-  override fun getLayoutId() = R.layout.fragment_feed
+  override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
+  override fun getLayoutId(): Int = R.layout.fragment_bookmarks
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -45,18 +46,17 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
   private fun init() {
     binding.viewModel = viewModel
-    binding.rvFeed.addItemDecoration(
+    binding.rvBookmarks.addItemDecoration(
         DividerItemDecorator(
             context, resources.getDrawable(drawable.divider_drawable, null)
         )
     )
-    binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
 
     val swipeController = SwipeController(
         context, object : SwipeClickActions() {
       override fun onLeftClicked(position: Int) {
-        showToast("Feed Bookmarked")
-        viewModel.bookmarkFeed(position)
+        showToast("Bookmark Removed")
+        viewModel.removeBookmark(position)
       }
 
       override fun onRightClicked(position: Int) {
@@ -64,9 +64,9 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
       }
     })
     val itemTouchHelper = ItemTouchHelper(swipeController)
-    itemTouchHelper.attachToRecyclerView(binding.rvFeed)
+    itemTouchHelper.attachToRecyclerView(binding.rvBookmarks)
 
-    binding.rvFeed.addItemDecoration(object : ItemDecoration() {
+    binding.rvBookmarks.addItemDecoration(object : ItemDecoration() {
       override fun onDraw(
         c: Canvas,
         parent: RecyclerView,
@@ -82,41 +82,18 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
   private fun listenToLiveData() {
     activity?.let { owner ->
-      viewModel.getFeed()
-          .observe(owner, Observer { feedList ->
-            viewModel.updateAdapter(feedList)
-            viewModel.adapter.submitList(feedList)
+      viewModel.getRoomFeed()
+          .observe(owner, Observer { roomFeedList ->
+            viewModel.updateAdapter(roomFeedList)
+            viewModel.adapter.submitList(roomFeedList)
           })
-
-      viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
-        activityViewModel.progressLiveData.value = isLoading
-        binding.swipeContainer.isRefreshing = isLoading
-      })
-
-      viewModel.progressLiveData.observe(owner, Observer { isLoading ->
-        when (isLoading) {
-          true -> binding.pbLoader.visibility = View.VISIBLE
-          false -> binding.pbLoader.visibility = View.GONE
-        }
-      })
-
-      viewModel.exceptionLiveData.observe(owner, Observer { exception ->
-        activityViewModel.updateExceptionLiveData(exception)
-      })
     }
   }
 
   private fun setListeners() {
-    binding.swipeContainer.setOnRefreshListener {
-      viewModel.setNoMoreItemsToLoad(false)
-      viewModel.refresh()
-    }
-
-    binding.rvFeed.addOnScrollListener(object : ItemOnScrollListener() {
+    binding.rvBookmarks.addOnScrollListener(object : ItemOnScrollListener() {
       override fun onLoadMore() {
-        if (!viewModel.isNoMoreItemsToLoad()) {
-          viewModel.updateProgressLiveData(true)
-        }
+
       }
     })
   }

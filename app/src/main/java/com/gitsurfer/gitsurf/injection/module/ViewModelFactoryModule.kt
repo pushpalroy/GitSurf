@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.gitsurfer.gitsurf.injection.scope.ViewModelKey
 import com.gitsurfer.gitsurf.ui.login.LoginViewModel
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import com.gitsurfer.gitsurf.ui.main.bookmarks.BookmarksViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
 import dagger.Binds
 import dagger.Module
@@ -26,4 +27,9 @@ abstract class ViewModelFactoryModule {
   @IntoMap
   @ViewModelKey(FeedViewModel::class)
   abstract fun bindFeedViewModel(feedViewModel: FeedViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelKey(BookmarksViewModel::class)
+  abstract fun bindBookmarksViewModel(bookmarksViewModel: BookmarksViewModel): ViewModel
 }

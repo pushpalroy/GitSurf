@@ -40,7 +40,7 @@ class MainViewModel @Inject constructor(
   fun getLocalUserDetails() {
     viewModelScope.launch {
       prefUtils.userName?.let { userName ->
-        val roomUser = appRepository.getUserLocal(login = userName)
+        val roomUser = appRepository.getRoomUser(login = userName)
 
         roomUser?.let {
           _roomUserLiveData.value = roomUser

@@ -49,21 +49,26 @@ class AppRepository(
       state = state
   )
 
-  suspend fun insertUserLocal(
+  suspend fun insertRoomUser(
     roomUser: RoomUser
   ) = localDataProvider.insertUser(
       roomUser = roomUser
   )
 
-  suspend fun getUserLocal(
+  suspend fun getRoomUser(
     login: String
   ): RoomUser? = localDataProvider.getUser(
       login = login
   )
 
-  suspend fun insertFeedLocal(
+  suspend fun insertRoomFeed(
     roomFeed: RoomFeed
   ) = localDataProvider.insertFeed(
       roomFeed = roomFeed
   )
+
+  fun getRoomFeeds() = localDataProvider.getAllFeeds()
+
+  suspend fun removeRoomFeed(roomFeed: RoomFeed) =
+    localDataProvider.deleteFeed(roomFeed)
 }
