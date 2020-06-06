@@ -113,6 +113,8 @@ dependencies {
   implementation(Dependencies.moshi)
   implementation(Dependencies.moshi_adapter)
 
+  implementation(Dependencies.three_ten_abp)
+
   implementation(Dependencies.timber)
   debugImplementation(Dependencies.memory_leak_debug)
 

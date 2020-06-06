@@ -46,6 +46,7 @@ object Versions {
   const val baseAdapter = "0.1.3"
   const val androidVeil = "1.0.6"
   const val circularImageView = "3.1.0"
+  const val threeTenApb = "1.2.4"
   const val chuck = "1.1.0"
   const val dbInspector = "4.0.0"
   const val mockito = "3.0.0"

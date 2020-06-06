@@ -58,6 +58,7 @@ object Dependencies {
 
   val circularImageView = "de.hdodenhof:circleimageview:${Versions.circularImageView}"
 
+  val three_ten_abp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenApb}"
   val chuckDebug = "com.readystatesoftware.chuck:library:${Versions.chuck}"
   val chuckRelease = "com.readystatesoftware.chuck:library-no-op:${Versions.chuck}"
 
