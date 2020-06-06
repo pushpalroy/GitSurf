@@ -1,12 +1,12 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomRepo
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Repo(
-  @SerializedName("id") val id: Int,
-  @SerializedName("name") val name: String,
-  @SerializedName("url") val url: String
+  @Json(name = "id") val id: Int,
+  @Json(name = "name") val name: String,
+  @Json(name = "url") val url: String
 )
 
 fun Repo.toRoomRepo() = RoomRepo(

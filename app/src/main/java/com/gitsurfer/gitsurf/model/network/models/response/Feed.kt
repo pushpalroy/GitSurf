@@ -1,18 +1,18 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomFeed
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import java.util.Date
 
 data class Feed(
-  @SerializedName("id") val id: String,
-  @SerializedName("type") val type: String,
-  @SerializedName("actor") val actor: Actor,
-  @SerializedName("repo") val repo: Repo,
-  @SerializedName("payload") val payload: Payload?,
-  @SerializedName("public") val public: Boolean,
-  @SerializedName("created_at") val createdAt: Date,
-  @SerializedName("org") val org: Org
+  @Json(name = "id") val id: String,
+  @Json(name = "type") val type: String,
+  @Json(name = "actor") val actor: Actor,
+  @Json(name = "repo") val repo: Repo,
+  @Json(name = "payload") val payload: Payload?,
+  @Json(name = "public") val public: Boolean,
+  @Json(name = "created_at") val createdAt: Date,
+  @Json(name = "org") val org: Org?
 )
 
 fun Feed.toRoomFeed() = RoomFeed(

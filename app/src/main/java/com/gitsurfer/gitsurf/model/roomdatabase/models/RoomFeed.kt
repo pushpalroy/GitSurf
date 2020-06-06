@@ -27,7 +27,7 @@ data class RoomFeed(
 data class RoomActor(
   val id: String,
   val login: String,
-  val displayLogin: String,
+  val displayLogin: String?,
   val gravatarId: String,
   val profileApiUrl: String,
   val avatarUrl: String

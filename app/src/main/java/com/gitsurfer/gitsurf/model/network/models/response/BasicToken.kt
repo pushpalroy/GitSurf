@@ -1,15 +1,15 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import java.util.Date
 
 data class BasicToken(
-  @SerializedName("id") val id: Int,
-  @SerializedName("url") val url: String,
-  @SerializedName("token") val token: String,
-  @SerializedName("token_last_eight") val tokenLastEightDigit: String,
-  @SerializedName("hashed_token") val hashedToken: String,
-  @SerializedName("created_at") val createdAt: Date,
-  @SerializedName("updated_at") val createdUpdatedAt: Date,
-  @SerializedName("scopes") val scopes: List<String>
+  @Json(name = "id") val id: Int,
+  @Json(name = "url") val url: String,
+  @Json(name = "token") val token: String,
+  @Json(name = "token_last_eight") val tokenLastEightDigit: String,
+  @Json(name = "hashed_token") val hashedToken: String,
+  @Json(name = "created_at") val createdAt: Date,
+  @Json(name = "updated_at") val createdUpdatedAt: Date,
+  @Json(name = "scopes") val scopes: List<String>
 )

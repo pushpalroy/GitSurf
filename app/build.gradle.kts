@@ -105,11 +105,13 @@ dependencies {
   implementation(Dependencies.rx_java)
   implementation(Dependencies.rx_android)
 
-  implementation(Dependencies.gson)
   implementation(Dependencies.retrofit)
-  implementation(Dependencies.retrofit_gson)
+  implementation(Dependencies.retrofit_moshi)
   implementation(Dependencies.ok_http)
   implementation(Dependencies.ok_http_logger)
+
+  implementation(Dependencies.moshi)
+  implementation(Dependencies.moshi_adapter)
 
   implementation(Dependencies.timber)
   debugImplementation(Dependencies.memory_leak_debug)

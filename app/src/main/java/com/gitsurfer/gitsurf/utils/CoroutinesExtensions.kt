@@ -1,12 +1,9 @@
 package com.gitsurfer.gitsurf.utils
 
 import com.gitsurfer.gitsurf.model.network.models.ResponseUnauthorized
-import com.gitsurfer.gitsurf.utils.exceptions.ForbiddenException
-import com.gitsurfer.gitsurf.utils.exceptions.HttpNotSuccessException
-import com.gitsurfer.gitsurf.utils.exceptions.NetworkException
-import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
-import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
-import com.google.gson.Gson
+import com.gitsurfer.gitsurf.utils.exceptions.*
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -89,6 +86,10 @@ private fun <T> handleApiError(response: Response<T>): Exception {
   }
 }
 
-inline fun <reified T> String.toKotlinObject(): T {
-  return Gson().fromJson(this, T::class.java)
+inline fun <reified T> String.toKotlinObject(): T? {
+  val jsonAdapter = Moshi.Builder()
+      .add(KotlinJsonAdapterFactory())
+      .build()
+      .adapter(T::class.java)
+  return jsonAdapter.fromJson(this)
 }

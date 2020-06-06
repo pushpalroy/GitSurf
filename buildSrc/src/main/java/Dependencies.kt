@@ -43,10 +43,11 @@ object Dependencies {
   val rx_android = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
 
   val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-  val retrofit_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+  val retrofit_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+  val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+  val moshi_adapter = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
   val ok_http =  "com.squareup.okhttp3:okhttp:${Versions.okHttpVersion}"
   val ok_http_logger =  "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpVersion}"
-  val gson = "com.google.code.gson:gson:${Versions.gson}"
   val timber = "com.jakewharton.timber:timber:${Versions.timber}"
   val memory_leak_debug = "com.squareup.leakcanary:leakcanary-android:${Versions.memoryLeak}"
   val glide = "com.github.bumptech.glide:glide:${Versions.glide}"

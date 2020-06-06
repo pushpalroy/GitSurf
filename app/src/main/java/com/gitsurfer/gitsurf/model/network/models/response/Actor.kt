@@ -1,15 +1,15 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomActor
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Actor(
-  @SerializedName("id") val id: String,
-  @SerializedName("login") val login: String,
-  @SerializedName("display_login") val displayLogin: String,
-  @SerializedName("gravatar_id") val gravatarId: String,
-  @SerializedName("url") val profileApiUrl: String,
-  @SerializedName("avatar_url") val avatarUrl: String
+    @Json(name = "id") val id: String,
+    @Json(name = "login") val login: String,
+    @Json(name = "display_login") val displayLogin: String?,
+    @Json(name = "gravatar_id") val gravatarId: String,
+    @Json(name = "url") val profileApiUrl: String,
+    @Json(name = "avatar_url") val avatarUrl: String
 )
 
 fun Actor.toRoomActor() = RoomActor(

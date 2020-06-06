@@ -1,8 +1,8 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class OauthToken(
-  @SerializedName("access_token") val accessToken: String,
-  @SerializedName("scope") val scope: String
+  @Json(name = "access_token") val accessToken: String,
+  @Json(name = "scope") val scope: String
 )

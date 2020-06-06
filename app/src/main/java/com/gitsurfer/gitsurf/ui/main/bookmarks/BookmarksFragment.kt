@@ -17,10 +17,9 @@ import com.gitsurfer.gitsurf.databinding.FragmentBookmarksBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
 import com.gitsurfer.gitsurf.utils.ui.SwipeController
-import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
-import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
 
 class BookmarksFragment :
     BaseFragment<FragmentBookmarksBinding, BookmarksViewModel, MainViewModel>() {
@@ -77,7 +76,6 @@ class BookmarksFragment :
     })
 
     listenToLiveData()
-    setListeners()
   }
 
   private fun listenToLiveData() {
@@ -88,13 +86,5 @@ class BookmarksFragment :
             viewModel.adapter.submitList(roomFeedList)
           })
     }
-  }
-
-  private fun setListeners() {
-    binding.rvBookmarks.addOnScrollListener(object : ItemOnScrollListener() {
-      override fun onLoadMore() {
-
-      }
-    })
   }
 }

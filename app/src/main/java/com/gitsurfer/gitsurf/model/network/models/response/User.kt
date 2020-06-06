@@ -1,27 +1,27 @@
 package com.gitsurfer.gitsurf.model.network.models.response
 
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import java.util.Date
 
 data class User(
-  @SerializedName("login") val login: String,
-  @SerializedName("id") val id: String,
-  @SerializedName("name") val name: String,
-  @SerializedName("avatar_url") val avatarUrl: String,
-  @SerializedName("html_url") val profileUrl: String,
-  @SerializedName("company") val company: String,
-  @SerializedName("blog") val blog: String,
-  @SerializedName("location") val location: String,
-  @SerializedName("email") val email: String,
-  @SerializedName("bio") val bio: String,
-  @SerializedName("type") val type: String,
-  @SerializedName("public_repos") val publicRepos: Int,
-  @SerializedName("public_gists") val publicGists: Int,
-  @SerializedName("followers") val followers: Int,
-  @SerializedName("following") val following: Int,
-  @SerializedName("createdAt") val createdAt: Date,
-  @SerializedName("updatedAt") val updatedAt: Date
+  @Json(name = "login") val login: String,
+  @Json(name = "id") val id: String,
+  @Json(name = "name") val name: String,
+  @Json(name = "avatar_url") val avatarUrl: String,
+  @Json(name = "html_url") val profileUrl: String,
+  @Json(name = "company") val company: String,
+  @Json(name = "blog") val blog: String,
+  @Json(name = "location") val location: String,
+  @Json(name = "email") val email: String,
+  @Json(name = "bio") val bio: String,
+  @Json(name = "type") val type: String,
+  @Json(name = "public_repos") val publicRepos: Int,
+  @Json(name = "public_gists") val publicGists: Int,
+  @Json(name = "followers") val followers: Int,
+  @Json(name = "following") val following: Int,
+  @Json(name = "created_at") val createdAt: Date,
+  @Json(name = "updated_at") val updatedAt: Date
 )
 
 fun User.toRoomUser() = RoomUser(
