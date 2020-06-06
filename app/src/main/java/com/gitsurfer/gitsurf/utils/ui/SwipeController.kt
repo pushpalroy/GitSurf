@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.utils.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
@@ -37,7 +38,7 @@ class SwipeController constructor(
   private var buttonInstance: RectF? = null
 
   companion object {
-    private const val buttonWidth: Float = 250F
+    private const val buttonWidth: Float = 200F
   }
 
   override fun getMovementFlags(
@@ -201,12 +202,12 @@ class SwipeController constructor(
     val leftBtnBg = RectF(
         itemView.left.toFloat(),
         itemView.top.toFloat(),
-        itemView.right.toFloat() / 2,
+        buttonWidth,
         itemView.bottom.toFloat()
     )
 
     val rightBtnBg = RectF(
-        itemView.right.toFloat() / 2,
+        itemView.right.toFloat() - buttonWidth,
         itemView.top.toFloat(),
         itemView.right.toFloat(),
         itemView.bottom.toFloat()
@@ -219,8 +220,8 @@ class SwipeController constructor(
           .toBitmap()
       c.drawBitmap(
           leftBitmap,
-          itemView.left.toFloat() + 32,
-          itemView.top.toFloat() + 34,
+          getLeftButtonLeftCoordinate(leftBitmap = leftBitmap),
+          getLeftButtonTopCoordinate(itemView = itemView, leftBitmap = leftBitmap),
           p
       )
 
@@ -230,8 +231,8 @@ class SwipeController constructor(
           .toBitmap()
       c.drawBitmap(
           rightBitmap,
-          itemView.right.toFloat() - (rightBitmap.width + 48),
-          itemView.top.toFloat() + 34,
+          getRightButtonLeftCoordinate(itemView = itemView, rightBitmap = rightBitmap),
+          getRightButtonTopCoordinate(itemView = itemView, rightBitmap = rightBitmap),
           p
       )
     }
@@ -249,5 +250,30 @@ class SwipeController constructor(
         drawButtons(c, itemViewHolder!!)
       }
     }
+  }
+
+  private fun getLeftButtonLeftCoordinate(leftBitmap: Bitmap): Float {
+    return buttonWidth / 2 - (leftBitmap.width / 2)
+  }
+
+  private fun getLeftButtonTopCoordinate(
+    itemView: View,
+    leftBitmap: Bitmap
+  ): Float {
+    return itemView.top.toFloat() + itemView.height / 2 - leftBitmap.height / 2
+  }
+
+  private fun getRightButtonLeftCoordinate(
+    itemView: View,
+    rightBitmap: Bitmap
+  ): Float {
+    return itemView.right.toFloat() - (rightBitmap.width * 3 / 2)
+  }
+
+  private fun getRightButtonTopCoordinate(
+    itemView: View,
+    rightBitmap: Bitmap
+  ): Float {
+    return itemView.top.toFloat() + itemView.height / 2 - rightBitmap.height / 2
   }
 }
