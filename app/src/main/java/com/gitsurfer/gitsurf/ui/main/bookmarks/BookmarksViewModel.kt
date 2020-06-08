@@ -8,6 +8,7 @@ import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.roomdatabase.models.RoomFeed
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.RoomFeedPagedListAdapter
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,6 +33,7 @@ class BookmarksViewModel @Inject constructor(
 
   fun removeBookmark(position: Int) {
     viewModelScope.launch {
+      delay(500)
       adapter.getFeedItem(position)
           ?.let { roomFeed ->
             appRepository.removeRoomFeed(roomFeed)
