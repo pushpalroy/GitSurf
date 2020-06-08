@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/feedFragment">
+
+  <fragment
+      android:id="@+id/feedFragment"
+      android:name="com.gitsurfer.gitsurf.ui.main.feed.FeedFragment"
+      android:label="@string/feeds"
+      tools:layout="@layout/fragment_feed">
+
+    <action
+        android:id="@+id/open_repo_from_feed"
+        app:destination="@+id/repoFragment" />
+
+  </fragment>
+
+  <fragment
+      android:id="@+id/bookmarksFragment"
+      android:name="com.gitsurfer.gitsurf.ui.main.bookmarks.BookmarksFragment"
+      android:label="@string/bookmarks"
+      tools:layout="@layout/fragment_bookmarks">
+    <action
+        android:id="@+id/action_bookmarksFragment_to_repoFragment"
+        app:destination="@id/repoFragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/repoFragment"
+      android:name="com.gitsurfer.gitsurf.ui.main.repo.RepoFragment"
+      android:label="@string/repositories"
+      tools:layout="@layout/fragment_repo">
+    <argument
+        android:name="repoId"
+        app:argType="string" />
+    <argument
+        android:name="repoUrl"
+        app:argType="string" />
+  </fragment>
+</navigation>

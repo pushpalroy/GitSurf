@@ -6,6 +6,8 @@ import com.gitsurfer.gitsurf.ui.login.LoginViewModel
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.ui.main.bookmarks.BookmarksViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
+import com.gitsurfer.gitsurf.ui.main.repo.RepoViewModel
+import com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -32,4 +34,14 @@ abstract class ViewModelFactoryModule {
   @IntoMap
   @ViewModelKey(BookmarksViewModel::class)
   abstract fun bindBookmarksViewModel(bookmarksViewModel: BookmarksViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelKey(RepoViewModel::class)
+  abstract fun bindRepoViewModel(repoViewModel: RepoViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelKey(ReadmeViewModel::class)
+  abstract fun bindReadmeViewModel(readmeViewModel: ReadmeViewModel): ViewModel
 }

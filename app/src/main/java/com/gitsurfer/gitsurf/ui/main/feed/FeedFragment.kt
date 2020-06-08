@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -17,10 +19,10 @@ import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
-import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
-import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
+import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
+import com.gitsurfer.gitsurf.utils.ui.SwipeController
 
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
@@ -102,6 +104,15 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
 
       viewModel.exceptionLiveData.observe(owner, Observer { exception ->
         activityViewModel.updateExceptionLiveData(exception)
+      })
+
+      viewModel.feedClickedLiveData.observe(owner, Observer { feedClicked ->
+
+        val bundle = bundleOf(
+            "repoId" to feedClicked.id,
+            "repoUrl" to feedClicked.repo.url
+        )
+        findNavController().navigate(R.id.repoFragment, bundle)
       })
     }
   }

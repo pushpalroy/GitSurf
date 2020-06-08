@@ -1,6 +1,7 @@
 package com.gitsurfer.gitsurf.ui.main.feed
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -9,6 +10,7 @@ import com.gitsurfer.gitsurf.model.network.models.response.Feed
 import com.gitsurfer.gitsurf.model.network.models.response.toRoomFeed
 import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
+import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedClickListener
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.INITIAL_LOAD_SIZE_HINT
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.PAGE_SIZE
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSourceFactory
@@ -21,14 +23,15 @@ import javax.inject.Inject
 class FeedViewModel @Inject constructor(
   private val appRepository: AppRepository,
   prefUtils: SharedPrefUtils
-) : BaseViewModel() {
+) : BaseViewModel(), FeedClickListener {
 
   companion object {
     private const val TAG = "Feed"
   }
 
+  var feedClickedLiveData = MutableLiveData<Feed>()
   private var feedPagedList: LiveData<PagedList<Feed>>
-  val adapter: FeedPagedListAdapter = FeedPagedListAdapter()
+  val adapter: FeedPagedListAdapter = FeedPagedListAdapter(feedClickListener = this)
   val initialProgressLiveData = SingleLiveData<Boolean>()
   private var noMoreItemsToLoad: Boolean = false
 
@@ -82,5 +85,9 @@ class FeedViewModel @Inject constructor(
                 .i(res.toString())
           }
     }
+  }
+
+  override fun onFeedClicked(position: Int) {
+    feedClickedLiveData.value = adapter.getFeedItem(position)
   }
 }

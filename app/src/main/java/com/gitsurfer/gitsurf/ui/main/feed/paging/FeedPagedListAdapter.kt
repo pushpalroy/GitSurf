@@ -16,10 +16,11 @@ import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
 import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction
 import com.gitsurfer.gitsurf.utils.GithubUtil.getIconFromEventType
 
-class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
+class FeedPagedListAdapter(
+  private val feedClickListener: FeedClickListener
+) : PagedListAdapter<Feed, FeedViewHolder>(
     FEED_COMPARATOR
 ) {
-
   private var feedItemsList: List<Feed> = listOf()
 
   override fun onCreateViewHolder(
@@ -27,10 +28,11 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     viewType: Int
   ): FeedViewHolder {
     return FeedViewHolder(
-        DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             layout.item_feed, parent, false
-        )
+        ),
+        feedClickListener = feedClickListener
     )
   }
 
@@ -51,13 +53,19 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
     position: Int
   ) {
     val feed = getItem(position)
-    feed?.let { holder.bind(it) }
+    feed?.let { holder.bind(feed = it, position = position) }
   }
 
-  class FeedViewHolder(private val binding: ItemFeedBinding) :
+  class FeedViewHolder(
+    private val binding: ItemFeedBinding,
+    private val feedClickListener: FeedClickListener
+  ) :
       RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(feed: Feed) {
+    fun bind(
+      feed: Feed,
+      position: Int
+    ) {
       binding.feed = feed
       val action = getActionFromEventType(feed.type)
       val description = getDescriptionFromAction(action, feed)
@@ -74,6 +82,10 @@ class FeedPagedListAdapter : PagedListAdapter<Feed, FeedViewHolder>(
         HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
       binding.tvTimestamp.text = DateUtil.getTimeAgo(feed.createdAt.time)
       binding.ivIcon.setImageResource(getIconFromEventType(feed.type))
+
+      binding.root.setOnClickListener {
+        feedClickListener.onFeedClicked(position)
+      }
     }
   }
 
