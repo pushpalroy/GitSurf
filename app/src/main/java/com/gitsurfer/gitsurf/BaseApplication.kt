@@ -1,17 +1,12 @@
 package com.gitsurfer.gitsurf
 
-import com.gitsurfer.gitsurf.injection.component.DaggerAppComponent
+import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-class BaseApplication : DaggerApplication() {
-
-  override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-    return DaggerAppComponent.factory()
-        .create(this)
-  }
+@HiltAndroidApp
+class BaseApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()

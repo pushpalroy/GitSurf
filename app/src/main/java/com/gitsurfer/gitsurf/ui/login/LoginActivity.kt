@@ -18,7 +18,9 @@ import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.utils.clearErrorOnTextChange
 import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
 import com.gitsurfer.gitsurf.utils.hideKeyboard
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
   override fun getViewModelClass() = LoginViewModel::class.java

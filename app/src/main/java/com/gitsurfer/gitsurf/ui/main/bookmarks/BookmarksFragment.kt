@@ -20,9 +20,11 @@ import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
 import com.gitsurfer.gitsurf.utils.ui.SwipeController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookmarksFragment :
-    BaseFragment<FragmentBookmarksBinding, BookmarksViewModel, MainViewModel>() {
+  BaseFragment<FragmentBookmarksBinding, BookmarksViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
 
@@ -46,22 +48,22 @@ class BookmarksFragment :
   private fun init() {
     binding.viewModel = viewModel
     binding.rvBookmarks.addItemDecoration(
-        DividerItemDecorator(
-            context, resources.getDrawable(drawable.divider_drawable, null)
-        )
+      DividerItemDecorator(
+        context, resources.getDrawable(drawable.divider_drawable, null)
+      )
     )
 
     val swipeController = SwipeController(
-        context, object : SwipeClickActions() {
-      override fun onLeftClicked(position: Int) {
-        showToast("Bookmark Removed")
-        viewModel.removeBookmark(position)
-      }
+      context, object : SwipeClickActions() {
+        override fun onLeftClicked(position: Int) {
+          showToast("Bookmark Removed")
+          viewModel.removeBookmark(position)
+        }
 
-      override fun onRightClicked(position: Int) {
-        showToast("Repository Starred")
-      }
-    })
+        override fun onRightClicked(position: Int) {
+          showToast("Repository Starred")
+        }
+      })
     val itemTouchHelper = ItemTouchHelper(swipeController)
     itemTouchHelper.attachToRecyclerView(binding.rvBookmarks)
 
@@ -81,10 +83,10 @@ class BookmarksFragment :
   private fun listenToLiveData() {
     activity?.let { owner ->
       viewModel.getRoomFeed()
-          .observe(owner, Observer { roomFeedList ->
-            viewModel.updateAdapter(roomFeedList)
-            viewModel.adapter.submitList(roomFeedList)
-          })
+        .observe(owner, Observer { roomFeedList ->
+          viewModel.updateAdapter(roomFeedList)
+          viewModel.adapter.submitList(roomFeedList)
+        })
     }
   }
 }

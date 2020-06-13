@@ -29,9 +29,11 @@ object Dependencies {
 
   val dagger = "com.google.dagger:dagger:${Versions.dagger}"
   val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-  val dagger_android = "com.google.dagger:dagger-android:${Versions.dagger}"
-  val dagger_android_support = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-  val dagger_android_compiler = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+  val hilt_android_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_android}"
+  val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt_android}"
+  val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt_android}"
+  val hilt_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt}"
+  val hilt_compiler = "androidx.hilt:hilt-compiler:${Versions.hilt}"
 
   val arch_core_testing = "androidx.arch.core:core-testing:${Versions.archCoreTesting}"
   val mock_web_server = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"

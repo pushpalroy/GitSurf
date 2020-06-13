@@ -23,7 +23,9 @@ import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
 import com.gitsurfer.gitsurf.utils.ui.SwipeController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
@@ -48,23 +50,23 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
   private fun init() {
     binding.viewModel = viewModel
     binding.rvFeed.addItemDecoration(
-        DividerItemDecorator(
-            context, resources.getDrawable(drawable.divider_drawable, null)
-        )
+      DividerItemDecorator(
+        context, resources.getDrawable(drawable.divider_drawable, null)
+      )
     )
     binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
 
     val swipeController = SwipeController(
-        context, object : SwipeClickActions() {
-      override fun onLeftClicked(position: Int) {
-        showToast("Feed Bookmarked")
-        viewModel.bookmarkFeed(position)
-      }
+      context, object : SwipeClickActions() {
+        override fun onLeftClicked(position: Int) {
+          showToast("Feed Bookmarked")
+          viewModel.bookmarkFeed(position)
+        }
 
-      override fun onRightClicked(position: Int) {
-        showToast("Repository Starred")
-      }
-    })
+        override fun onRightClicked(position: Int) {
+          showToast("Repository Starred")
+        }
+      })
     val itemTouchHelper = ItemTouchHelper(swipeController)
     itemTouchHelper.attachToRecyclerView(binding.rvFeed)
 
@@ -85,10 +87,10 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
   private fun listenToLiveData() {
     activity?.let { owner ->
       viewModel.getFeed()
-          .observe(owner, Observer { feedList ->
-            viewModel.updateAdapter(feedList)
-            viewModel.adapter.submitList(feedList)
-          })
+        .observe(owner, Observer { feedList ->
+          viewModel.updateAdapter(feedList)
+          viewModel.adapter.submitList(feedList)
+        })
 
       viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
         activityViewModel.progressLiveData.value = isLoading
@@ -109,8 +111,8 @@ class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewMo
       viewModel.feedClickedLiveData.observe(owner, Observer { feedClicked ->
 
         val bundle = bundleOf(
-            "repoId" to feedClicked.id,
-            "repoUrl" to feedClicked.repo.url
+          "repoId" to feedClicked.id,
+          "repoUrl" to feedClicked.repo.url
         )
         findNavController().navigate(R.id.repoFragment, bundle)
       })

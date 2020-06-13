@@ -10,9 +10,12 @@ import com.gitsurfer.gitsurf.ui.main.repo.RepoViewModel
 import com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.multibindings.IntoMap
 
 @Module
+@InstallIn(ApplicationComponent::class)
 abstract class ViewModelFactoryModule {
 
   @Binds

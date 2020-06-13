@@ -13,9 +13,11 @@ import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.ui.main.repo.adapter.RepoViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RepoFragment :
-    BaseFragment<FragmentRepoBinding, RepoViewModel, MainViewModel>() {
+  BaseFragment<FragmentRepoBinding, RepoViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
 

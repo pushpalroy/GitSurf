@@ -6,6 +6,7 @@ plugins {
   kotlin("android.extensions")
   kotlin("kapt")
   id("androidx.navigation.safeargs.kotlin")
+  id("dagger.hilt.android.plugin")
 }
 
 val preDexEnabled = "true" == System.getProperty("pre-dex", "true")
@@ -47,8 +48,12 @@ android {
     correctErrorTypes = true
   }
 
-  dataBinding {
-    isEnabled = true
+  buildFeatures {
+    dataBinding = true
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
 
   compileOptions {
@@ -97,10 +102,12 @@ dependencies {
   implementation(Dependencies.swipeRefresh)
 
   implementation(Dependencies.dagger)
-  implementation(Dependencies.dagger_android)
-  implementation(Dependencies.dagger_android_support)
-  kapt(Dependencies.dagger_android_compiler)
   kapt(Dependencies.dagger_compiler)
+
+  implementation(Dependencies.hilt_android)
+  kapt(Dependencies.hilt_android_compiler)
+  implementation(Dependencies.hilt_viewmodel)
+  kapt(Dependencies.hilt_compiler)
 
   implementation(Dependencies.rx_java)
   implementation(Dependencies.rx_android)

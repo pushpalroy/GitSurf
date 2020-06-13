@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.gitsurfer.gitsurf.BR
 import com.google.android.material.snackbar.Snackbar
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewModel> :
-    DaggerFragment() {
+  Fragment() {
 
   lateinit var binding: B
   lateinit var viewModel: VM
@@ -39,9 +39,9 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewM
 
   private fun bindContentView() {
     viewModel = ViewModelProvider(this, viewModelFactory)
-        .get(getViewModelClass())
+      .get(getViewModelClass())
     activityViewModel = ViewModelProvider(getActivityViewModelOwner(), viewModelFactory)
-        .get(getActivityViewModelClass())
+      .get(getActivityViewModelClass())
     binding.setVariable(BR.viewModel, viewModel)
   }
 
@@ -51,7 +51,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewM
   fun showSnackBar(text: CharSequence?) {
     text?.let {
       Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT)
-          .show()
+        .show()
     }
   }
 
@@ -61,7 +61,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewM
   ) {
     text?.let {
       Toast.makeText(requireContext().applicationContext, text, length)
-          .show()
+        .show()
     }
   }
 }

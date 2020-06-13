@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.gitsurfer.gitsurf.BuildConfig
-import com.gitsurfer.gitsurf.injection.qualifiers.ApplicationContext
 import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.model.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.model.network.api.LoginApi
@@ -20,14 +19,18 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
+import java.util.Date
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class RepositoryModule {
 
   @Provides
@@ -36,8 +39,8 @@ class RepositoryModule {
     networkDataProvider: NetworkDataProvider,
     localDataProvider: LocalDataProvider
   ) = AppRepository(
-      networkDataProvider = networkDataProvider,
-      localDataProvider = localDataProvider
+    networkDataProvider = networkDataProvider,
+    localDataProvider = localDataProvider
   )
 
   @Provides
@@ -46,8 +49,8 @@ class RepositoryModule {
     loginApi: LoginApi,
     userApi: UserApi
   ) = NetworkDataProvider(
-      loginApi = loginApi,
-      userApi = userApi
+    loginApi = loginApi,
+    userApi = userApi
   )
 
   @Provides
@@ -56,7 +59,7 @@ class RepositoryModule {
     database: AppDatabase
   ): LocalDataProvider {
     return LocalDataProvider(
-        appDatabase = database
+      appDatabase = database
     )
   }
 
@@ -78,11 +81,11 @@ class RepositoryModule {
     @ApplicationContext context: Context
   ): AppDatabase {
     return Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        ROOM_DATABASE_NAME
+      context,
+      AppDatabase::class.java,
+      ROOM_DATABASE_NAME
     )
-        .build()
+      .build()
   }
 
   @Provides
@@ -102,9 +105,9 @@ class RepositoryModule {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         httpBuilder.interceptors()
-            .add(httpLoggingInterceptor)
+          .add(httpLoggingInterceptor)
         httpBuilder.interceptors()
-            .add(ChuckInterceptor(context))
+          .add(ChuckInterceptor(context))
       }
     }
     return httpBuilder.build()
@@ -117,9 +120,9 @@ class RepositoryModule {
       .build()
 
     return Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .client(okHttpClient)
-        .build()
+      .baseUrl(BASE_URL)
+      .addConverterFactory(MoshiConverterFactory.create(moshi))
+      .client(okHttpClient)
+      .build()
   }
 }

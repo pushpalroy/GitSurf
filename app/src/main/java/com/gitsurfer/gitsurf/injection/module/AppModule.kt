@@ -5,30 +5,25 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.gitsurfer.gitsurf.BaseApplication
 import com.gitsurfer.gitsurf.injection.factory.ViewModelFactory
-import com.gitsurfer.gitsurf.injection.qualifiers.ApplicationContext
 import com.gitsurfer.gitsurf.model.network.NetworkManager
 import com.gitsurfer.gitsurf.utils.AUTH_DATA
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class AppModule {
 
   @Provides
   @Singleton
   fun provideViewModelFactory(creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>): ViewModelProvider.Factory {
     return ViewModelFactory(creators = creators)
-  }
-
-  @Provides
-  @Singleton
-  @ApplicationContext
-  fun provideAppContext(baseApplication: BaseApplication): Context {
-    return baseApplication
   }
 
   @Provides
@@ -45,7 +40,7 @@ class AppModule {
 
   @Provides
   @Singleton
-  fun provideSharePrefs(context: BaseApplication): SharedPreferences {
+  fun provideSharePrefs(@ApplicationContext context: Context): SharedPreferences {
     return context.getSharedPreferences(AUTH_DATA, Context.MODE_PRIVATE)
   }
 }

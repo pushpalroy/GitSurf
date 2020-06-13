@@ -10,9 +10,11 @@ import com.gitsurfer.gitsurf.databinding.FragmentReadmeBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReadmeFragment constructor(private val repoUrl: String?) :
-    BaseFragment<FragmentReadmeBinding, ReadmeViewModel, MainViewModel>() {
+  BaseFragment<FragmentReadmeBinding, ReadmeViewModel, MainViewModel>() {
 
   private var fragmentView: View? = null
 

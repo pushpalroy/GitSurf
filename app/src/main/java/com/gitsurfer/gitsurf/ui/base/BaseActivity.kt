@@ -1,16 +1,16 @@
 package com.gitsurfer.gitsurf.ui.base
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.gitsurfer.gitsurf.BR
 import com.gitsurfer.gitsurf.utils.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : DaggerAppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
   private var snackBar: Snackbar? = null
   lateinit var viewModel: VM
@@ -28,7 +28,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : DaggerApp
 
   private fun initView() {
     viewModel = ViewModelProvider(this, viewModelFactory)
-        .get(getViewModelClass())
+      .get(getViewModelClass())
     binding = DataBindingUtil.setContentView(this, getLayoutId())
     binding.setVariable(BR.viewModel, viewModel)
   }
@@ -63,7 +63,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : DaggerApp
     duration: Int = Snackbar.LENGTH_SHORT
   ) {
     Snackbar.make(binding.root, message, duration)
-        .setAction(snackBarAction.title, snackBarAction.listener)
-        .show()
+      .setAction(snackBarAction.title, snackBarAction.listener)
+      .show()
   }
 }
