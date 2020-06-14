@@ -2,12 +2,9 @@ package com.gitsurfer.gitsurf.ui.main.bookmarks
 
 import android.graphics.Canvas
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -16,35 +13,23 @@ import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.R.drawable
 import com.gitsurfer.gitsurf.databinding.FragmentBookmarksBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
-import com.gitsurfer.gitsurf.ui.main.MainActivity
-import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
 import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookmarksFragment :
-  BaseFragment<FragmentBookmarksBinding>() {
+class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
 
-  private var fragmentView: View? = null
-  override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
-  override fun getLayoutId(): Int = R.layout.fragment_bookmarks
   private val viewModel: BookmarksViewModel by viewModels()
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    if (fragmentView == null) {
-      fragmentView = super.onCreateView(inflater, container, savedInstanceState)
-      init()
-    }
-    return fragmentView
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    init(view)
   }
 
-  private fun init() {
+  private fun init(view: View) {
+    val binding = FragmentBookmarksBinding.bind(view)
     binding.viewModel = viewModel
     binding.rvBookmarks.addItemDecoration(
       DividerItemDecorator(

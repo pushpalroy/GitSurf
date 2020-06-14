@@ -1,27 +1,13 @@
 package com.gitsurfer.gitsurf.ui.base
 
-import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.gitsurfer.gitsurf.utils.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
 
   private var snackBar: Snackbar? = null
-  lateinit var binding: B
-
-  abstract fun getLayoutId(): Int
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    initView()
-  }
-
-  private fun initView() {
-    binding = DataBindingUtil.setContentView(this, getLayoutId())
-  }
 
   override fun onDestroy() {
     snackBar?.dismiss()
@@ -30,6 +16,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
   protected fun showSnackBarMessage(
     message: Int?,
+    view: View,
     duration: Int = Snackbar.LENGTH_SHORT
   ) {
     snackBar = snackBar?.let {
@@ -40,7 +27,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
       it
     } ?: run {
       message?.let {
-        snackBar = Snackbar.make(binding.root, it, duration)
+        snackBar = Snackbar.make(view, it, duration)
         snackBar?.show()
         snackBar
       }
@@ -50,9 +37,10 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
   protected fun showSnackBarWithAction(
     message: String,
     snackBarAction: SnackBarAction,
-    duration: Int = Snackbar.LENGTH_SHORT
+    duration: Int = Snackbar.LENGTH_SHORT,
+    view: View
   ) {
-    Snackbar.make(binding.root, message, duration)
+    Snackbar.make(view, message, duration)
       .setAction(snackBarAction.title, snackBarAction.listener)
       .show()
   }

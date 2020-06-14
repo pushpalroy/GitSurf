@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -24,10 +26,17 @@ import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity(R.layout.activity_main) {
 
-  override fun getLayoutId() = R.layout.activity_main
   private val viewModel: MainViewModel by viewModels()
+  private lateinit var binding: ActivityMainBinding
+
+  private val navController: NavController by lazy {
+    Navigation.findNavController(
+      this,
+      R.id.nav_host_fragment
+    )
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -79,7 +88,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   }
 
   private fun setUpNavigation() {
-    val navController = findNavController(R.id.nav_host_fragment)
 
     // Ensures that the title in the action bar will automatically be updated when the
     // destination changes. In addition, the Up button will be displayed when you are on a

@@ -2,13 +2,10 @@ package com.gitsurfer.gitsurf.ui.main.feed
 
 import android.graphics.Canvas
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +15,6 @@ import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.R.drawable
 import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
-import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
@@ -27,27 +23,18 @@ import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedFragment : BaseFragment<FragmentFeedBinding>() {
+class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
-  private var fragmentView: View? = null
-  override fun getActivityViewModelOwner(): ViewModelStoreOwner = (activity as MainActivity)
-  override fun getLayoutId() = R.layout.fragment_feed
   private val viewModel: FeedViewModel by viewModels()
   private val activityViewModel: MainViewModel by viewModels()
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    if (fragmentView == null) {
-      fragmentView = super.onCreateView(inflater, container, savedInstanceState)
-      init()
-    }
-    return fragmentView
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    init(view)
   }
 
-  private fun init() {
+  private fun init(view: View) {
+    val binding = FragmentFeedBinding.bind(view)
     binding.viewModel = viewModel
     binding.rvFeed.addItemDecoration(
       DividerItemDecorator(
@@ -80,11 +67,11 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>() {
       }
     })
 
-    listenToLiveData()
-    setListeners()
+    listenToLiveData(binding)
+    setListeners(binding)
   }
 
-  private fun listenToLiveData() {
+  private fun listenToLiveData(binding: FragmentFeedBinding) {
     activity?.let { owner ->
       viewModel.getFeed()
         .observe(owner, Observer { feedList ->
@@ -119,7 +106,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>() {
     }
   }
 
-  private fun setListeners() {
+  private fun setListeners(binding: FragmentFeedBinding) {
     binding.swipeContainer.setOnRefreshListener {
       viewModel.setNoMoreItemsToLoad(false)
       viewModel.refresh()

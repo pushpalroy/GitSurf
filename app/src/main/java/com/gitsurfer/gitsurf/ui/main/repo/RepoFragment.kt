@@ -1,44 +1,29 @@
 package com.gitsurfer.gitsurf.ui.main.repo
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewpager2.widget.ViewPager2
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.FragmentRepoBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
-import com.gitsurfer.gitsurf.ui.main.MainActivity
-import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import com.gitsurfer.gitsurf.ui.main.repo.adapter.RepoViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RepoFragment :
-  BaseFragment<FragmentRepoBinding>() {
+class RepoFragment : BaseFragment(R.layout.fragment_repo) {
 
-  private var fragmentView: View? = null
-  override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
-  override fun getLayoutId(): Int = R.layout.fragment_repo
   private val viewModel: RepoViewModel by viewModels()
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    if (fragmentView == null) {
-      fragmentView = super.onCreateView(inflater, container, savedInstanceState)
-      init()
-    }
-    return fragmentView
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    init(view)
   }
 
-  private fun init() {
+  private fun init(view: View) {
     val tabs = listOf("README", "FILES", "COMMITS", "RELEASES", "CONTRIBUTORS")
+    val binding = FragmentRepoBinding.bind(view)
     binding.viewModel = viewModel
     binding.pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     binding.pager.adapter = RepoViewPagerAdapter(this, tabs, arguments?.getString("repoUrl", ""))

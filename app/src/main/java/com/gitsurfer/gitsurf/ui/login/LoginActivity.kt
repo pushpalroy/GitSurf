@@ -22,10 +22,10 @@ import com.gitsurfer.gitsurf.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<ActivityLoginBinding>() {
+class LoginActivity : BaseActivity(R.layout.activity_login) {
 
-  override fun getLayoutId() = R.layout.activity_login
   private val viewModel: LoginViewModel by viewModels()
+  private lateinit var binding: ActivityLoginBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -65,18 +65,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
       it?.let {
         when (it) {
           is NoInternetException ->
-            showSnackBarMessage(R.string.msg_no_internet)
+            showSnackBarMessage(R.string.msg_no_internet, binding.root)
 
           is ValidationException -> when (it) {
             is UsernameEmpty -> {
-              showSnackBarMessage(R.string.msg_username_empty)
+              showSnackBarMessage(R.string.msg_username_empty, binding.root)
             }
             is PasswordEmpty -> {
-              showSnackBarMessage(R.string.msg_password_empty)
+              showSnackBarMessage(R.string.msg_password_empty, binding.root)
             }
           }
           else -> {
-            showSnackBarMessage(R.string.msg_unknown_error)
+            showSnackBarMessage(R.string.msg_unknown_error, binding.root)
           }
         }
       }
