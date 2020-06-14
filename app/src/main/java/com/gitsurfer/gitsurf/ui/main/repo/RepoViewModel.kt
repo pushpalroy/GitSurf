@@ -1,9 +1,9 @@
 package com.gitsurfer.gitsurf.ui.main.repo
 
+import androidx.hilt.lifecycle.ViewModelInject
 import com.gitsurfer.gitsurf.model.AppRepository
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
-import javax.inject.Inject
 
-class RepoViewModel @Inject constructor(
+class RepoViewModel @ViewModelInject constructor(
   val appRepository: AppRepository
 ) : BaseViewModel()

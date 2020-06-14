@@ -4,24 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelStoreOwner
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.FragmentReadmeBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainActivity
-import com.gitsurfer.gitsurf.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReadmeFragment constructor(private val repoUrl: String?) :
-  BaseFragment<FragmentReadmeBinding, ReadmeViewModel, MainViewModel>() {
+  BaseFragment<FragmentReadmeBinding>() {
 
   private var fragmentView: View? = null
-
-  override fun getViewModelClass() = ReadmeViewModel::class.java
-  override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
   override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
   override fun getLayoutId(): Int = R.layout.fragment_readme
+  private val viewModel: ReadmeViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,

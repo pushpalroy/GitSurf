@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.ui.main.feed
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,9 +19,8 @@ import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter
 import com.gitsurfer.gitsurf.utils.SingleLiveData
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-class FeedViewModel @Inject constructor(
+class FeedViewModel @ViewModelInject constructor(
   private val appRepository: AppRepository,
   prefUtils: SharedPrefUtils
 ) : BaseViewModel(), FeedClickListener {
@@ -36,18 +36,18 @@ class FeedViewModel @Inject constructor(
   private var noMoreItemsToLoad: Boolean = false
 
   private var feedDataSourceFactory = FeedDataSourceFactory(
-      appRepository = appRepository,
-      prefUtils = prefUtils,
-      scope = viewModelScope,
-      viewModel = this
+    appRepository = appRepository,
+    prefUtils = prefUtils,
+    scope = viewModelScope,
+    viewModel = this
   )
 
   init {
     val config = PagedList.Config.Builder()
-        .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
-        .setPageSize(PAGE_SIZE)
-        .build()
+      .setEnablePlaceholders(true)
+      .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
+      .setPageSize(PAGE_SIZE)
+      .build()
     feedPagedList = LivePagedListBuilder(feedDataSourceFactory, config).build()
   }
 
@@ -77,13 +77,13 @@ class FeedViewModel @Inject constructor(
   fun bookmarkFeed(position: Int) {
     viewModelScope.launch {
       adapter.getFeedItem(position)
-          ?.let { roomFeed ->
-            val res = appRepository.insertRoomFeed(
-                roomFeed.toRoomFeed()
-            )
-            Timber.tag(TAG)
-                .i(res.toString())
-          }
+        ?.let { roomFeed ->
+          val res = appRepository.insertRoomFeed(
+            roomFeed.toRoomFeed()
+          )
+          Timber.tag(TAG)
+            .i(res.toString())
+        }
     }
   }
 

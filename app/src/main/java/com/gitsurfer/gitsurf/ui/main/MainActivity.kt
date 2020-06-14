@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
@@ -23,10 +24,10 @@ import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-  override fun getViewModelClass() = MainViewModel::class.java
   override fun getLayoutId() = R.layout.activity_main
+  private val viewModel: MainViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

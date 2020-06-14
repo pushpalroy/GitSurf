@@ -8,24 +8,14 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.gitsurfer.gitsurf.BR
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewModel> :
+abstract class BaseFragment<B : ViewDataBinding> :
   Fragment() {
 
   lateinit var binding: B
-  lateinit var viewModel: VM
-  lateinit var activityViewModel: AVM
-
-  abstract fun getViewModelClass(): Class<VM>
   abstract fun getLayoutId(): Int
-
-  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -33,19 +23,9 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel, AVM : ViewM
     savedInstanceState: Bundle?
   ): View? {
     binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-    bindContentView()
     return binding.root
   }
 
-  private fun bindContentView() {
-    viewModel = ViewModelProvider(this, viewModelFactory)
-      .get(getViewModelClass())
-    activityViewModel = ViewModelProvider(getActivityViewModelOwner(), viewModelFactory)
-      .get(getActivityViewModelClass())
-    binding.setVariable(BR.viewModel, viewModel)
-  }
-
-  abstract fun getActivityViewModelClass(): Class<AVM>
   abstract fun getActivityViewModelOwner(): ViewModelStoreOwner
 
   fun showSnackBar(text: CharSequence?) {

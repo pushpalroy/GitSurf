@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.ui.main.bookmarks
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
@@ -10,9 +11,8 @@ import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.RoomFeedPagedListAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class BookmarksViewModel @Inject constructor(
+class BookmarksViewModel @ViewModelInject constructor(
   val appRepository: AppRepository
 ) : BaseViewModel() {
 
@@ -35,9 +35,9 @@ class BookmarksViewModel @Inject constructor(
     viewModelScope.launch {
       delay(500)
       adapter.getFeedItem(position)
-          ?.let { roomFeed ->
-            appRepository.removeRoomFeed(roomFeed)
-          }
+        ?.let { roomFeed ->
+          appRepository.removeRoomFeed(roomFeed)
+        }
     }
   }
 

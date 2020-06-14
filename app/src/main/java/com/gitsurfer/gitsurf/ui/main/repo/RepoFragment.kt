@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewpager2.widget.ViewPager2
 import com.gitsurfer.gitsurf.R
@@ -17,14 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RepoFragment :
-  BaseFragment<FragmentRepoBinding, RepoViewModel, MainViewModel>() {
+  BaseFragment<FragmentRepoBinding>() {
 
   private var fragmentView: View? = null
-
-  override fun getViewModelClass() = RepoViewModel::class.java
-  override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
   override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
   override fun getLayoutId(): Int = R.layout.fragment_repo
+  private val viewModel: RepoViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,

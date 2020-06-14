@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -24,14 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BookmarksFragment :
-  BaseFragment<FragmentBookmarksBinding, BookmarksViewModel, MainViewModel>() {
+  BaseFragment<FragmentBookmarksBinding>() {
 
   private var fragmentView: View? = null
-
-  override fun getViewModelClass() = BookmarksViewModel::class.java
-  override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
   override fun getActivityViewModelOwner(): ViewModelStoreOwner = activity as MainActivity
   override fun getLayoutId(): Int = R.layout.fragment_bookmarks
+  private val viewModel: BookmarksViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,

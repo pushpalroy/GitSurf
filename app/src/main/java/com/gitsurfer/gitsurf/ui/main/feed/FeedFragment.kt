@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
@@ -26,14 +27,13 @@ import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel, MainViewModel>() {
+class FeedFragment : BaseFragment<FragmentFeedBinding>() {
 
   private var fragmentView: View? = null
-
-  override fun getViewModelClass() = FeedViewModel::class.java
-  override fun getActivityViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
   override fun getActivityViewModelOwner(): ViewModelStoreOwner = (activity as MainActivity)
   override fun getLayoutId() = R.layout.fragment_feed
+  private val viewModel: FeedViewModel by viewModels()
+  private val activityViewModel: MainViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,

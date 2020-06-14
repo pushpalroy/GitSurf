@@ -2,6 +2,7 @@ package com.gitsurfer.gitsurf.ui.login
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.github.razir.progressbutton.attachTextChangeAnimator
 import com.github.razir.progressbutton.bindProgressButton
@@ -21,10 +22,10 @@ import com.gitsurfer.gitsurf.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
-  override fun getViewModelClass() = LoginViewModel::class.java
   override fun getLayoutId() = R.layout.activity_login
+  private val viewModel: LoginViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
   }
 
   private fun initView() {
+    binding.viewModel = viewModel
     bindProgressButton(binding.loginBtn)
     binding.loginBtn.attachTextChangeAnimator()
     binding.userNameEt.clearErrorOnTextChange(binding.userNameLayout)

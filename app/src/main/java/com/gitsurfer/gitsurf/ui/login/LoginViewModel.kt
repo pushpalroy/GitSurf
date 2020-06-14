@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.ui.login
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -20,9 +21,8 @@ import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.launch
 import okhttp3.Credentials
 import timber.log.Timber
-import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(
+class LoginViewModel @ViewModelInject constructor(
   private val appRepository: AppRepository,
   private val networkManager: NetworkManager,
   private val sharedPrefUtils: SharedPrefUtils
@@ -80,19 +80,19 @@ class LoginViewModel @Inject constructor(
 
     val authRequestModel =
       AuthRequestModel(
-          scopes = listOf("user", "repo", "gist", "notifications"),
-          applicationId = APPLICATION_ID,
-          clientId = CLIENT_ID,
-          clientSecret = CLIENT_SECRET,
-          callbackUrl = CALLBACK_URL
+        scopes = listOf("user", "repo", "gist", "notifications"),
+        applicationId = APPLICATION_ID,
+        clientId = CLIENT_ID,
+        clientSecret = CLIENT_SECRET,
+        callbackUrl = CALLBACK_URL
       )
 
     val credential =
       username?.let {
         password?.let { password ->
           Credentials.basic(
-              username = username,
-              password = password
+            username = username,
+            password = password
           )
         }
       }
@@ -102,20 +102,20 @@ class LoginViewModel @Inject constructor(
         when {
           networkManager.hasInternetAccess() -> {
             val basicTokenResponse = appRepository.getBasicToken(
-                credential = credential,
-                authRequestModel = authRequestModel
+              credential = credential,
+              authRequestModel = authRequestModel
             )
 
             basicTokenResponse.first?.let { basicToken ->
               Timber.tag(TAG)
-                  .i("BasicToken: $basicToken")
+                .i("BasicToken: $basicToken")
               getUserInfo(basicToken)
               sharedPrefUtils.authToken = basicToken.token
             }
             basicTokenResponse.second?.let {
               _userLoggedInLiveData.value = false
               Timber.tag(TAG)
-                  .e("Exception: $it")
+                .e("Exception: $it")
             }
           }
         }
@@ -128,17 +128,17 @@ class LoginViewModel @Inject constructor(
       when {
         networkManager.hasInternetAccess() -> {
           val userInfoResponse = appRepository.getUserInfo(
-              authToken = TOKEN_PREFIX + basicToken.token
+            authToken = TOKEN_PREFIX + basicToken.token
           )
 
           userInfoResponse.first?.let { user ->
             Timber.tag(TAG)
-                .i("User: $user")
+              .i("User: $user")
             insertUserInDb(user, basicToken.token)
           }
           userInfoResponse.second?.let {
             Timber.tag(TAG)
-                .e("Exception: $it")
+              .e("Exception: $it")
           }
         }
       }
@@ -151,7 +151,7 @@ class LoginViewModel @Inject constructor(
   ) {
     viewModelScope.launch {
       appRepository.insertRoomUser(
-          roomUser = user.toRoomUser(authToken)
+        roomUser = user.toRoomUser(authToken)
       )
       _userLoggedInLiveData.value = true
     }

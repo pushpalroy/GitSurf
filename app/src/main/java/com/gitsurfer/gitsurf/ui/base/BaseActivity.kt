@@ -4,22 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
-import com.gitsurfer.gitsurf.BR
 import com.gitsurfer.gitsurf.utils.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
   private var snackBar: Snackbar? = null
-  lateinit var viewModel: VM
   lateinit var binding: B
 
-  abstract fun getViewModelClass(): Class<VM>
   abstract fun getLayoutId(): Int
-
-  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -27,10 +20,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel> : AppCompat
   }
 
   private fun initView() {
-    viewModel = ViewModelProvider(this, viewModelFactory)
-      .get(getViewModelClass())
     binding = DataBindingUtil.setContentView(this, getLayoutId())
-    binding.setVariable(BR.viewModel, viewModel)
   }
 
   override fun onDestroy() {
