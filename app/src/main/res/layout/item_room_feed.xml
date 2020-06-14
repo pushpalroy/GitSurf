@@ -8,7 +8,7 @@
 
     <variable
         name="roomFeed"
-        type="com.gitsurfer.gitsurf.model.roomdatabase.models.RoomFeed"
+        type="com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed"
         />
     <variable
         name="HtmlCompat"

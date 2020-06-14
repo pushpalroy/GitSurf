@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.gitsurfer.gitsurf.model.AppRepository
-import com.gitsurfer.gitsurf.model.network.models.response.Feed
-import com.gitsurfer.gitsurf.model.network.models.response.toRoomFeed
-import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
+import com.gitsurfer.gitsurf.data.AppRepository
+import com.gitsurfer.gitsurf.data.network.models.response.Feed
+import com.gitsurfer.gitsurf.data.network.models.response.toRoomFeed
+import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedClickListener
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.INITIAL_LOAD_SIZE_HINT

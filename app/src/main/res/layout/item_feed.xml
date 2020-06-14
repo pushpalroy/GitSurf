@@ -8,7 +8,7 @@
 
     <variable
         name="feed"
-        type="com.gitsurfer.gitsurf.model.network.models.response.Feed"
+        type="com.gitsurfer.gitsurf.data.network.models.response.Feed"
         />
     <variable
         name="HtmlCompat"

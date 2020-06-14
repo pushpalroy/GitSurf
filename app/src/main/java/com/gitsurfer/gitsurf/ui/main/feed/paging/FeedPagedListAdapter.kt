@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
-import com.gitsurfer.gitsurf.model.network.models.response.Feed
+import com.gitsurfer.gitsurf.data.network.models.response.Feed
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHolder
 import com.gitsurfer.gitsurf.utils.DateUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType

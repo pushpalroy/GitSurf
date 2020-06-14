@@ -5,9 +5,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -26,20 +26,20 @@ import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
 
   private val viewModel: MainViewModel by viewModels()
   private lateinit var binding: ActivityMainBinding
 
   private val navController: NavController by lazy {
-    Navigation.findNavController(
-      this,
+    findNavController(
       R.id.nav_host_fragment
     )
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     viewModel.setAuthorizedFromPref()
     setSupportActionBar(toolbar)
     setUpNavigation()
@@ -83,6 +83,9 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
   }
 
   override fun onSupportNavigateUp(): Boolean {
+    val navController = findNavController(
+      R.id.nav_host_fragment
+    )
     // Ensures that the menu items in the Nav Drawer stay in sync with the navigation graph
     return navigateUp(findNavController(R.id.nav_host_fragment), drawerLayout)
   }

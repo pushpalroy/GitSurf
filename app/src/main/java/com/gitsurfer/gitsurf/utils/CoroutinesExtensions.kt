@@ -1,6 +1,6 @@
 package com.gitsurfer.gitsurf.utils
 
-import com.gitsurfer.gitsurf.model.network.models.ResponseUnauthorized
+import com.gitsurfer.gitsurf.data.network.models.ResponseUnauthorized
 import com.gitsurfer.gitsurf.utils.exceptions.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

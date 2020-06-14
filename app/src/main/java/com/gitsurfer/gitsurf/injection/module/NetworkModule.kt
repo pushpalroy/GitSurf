@@ -3,9 +3,9 @@ package com.gitsurfer.gitsurf.injection.module
 import android.content.Context
 import android.net.ConnectivityManager
 import com.gitsurfer.gitsurf.BuildConfig
-import com.gitsurfer.gitsurf.model.network.NetworkManager
-import com.gitsurfer.gitsurf.model.network.api.LoginApi
-import com.gitsurfer.gitsurf.model.network.api.UserApi
+import com.gitsurfer.gitsurf.data.network.NetworkManager
+import com.gitsurfer.gitsurf.data.network.api.LoginApi
+import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.utils.BASE_URL
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.moshi.Moshi

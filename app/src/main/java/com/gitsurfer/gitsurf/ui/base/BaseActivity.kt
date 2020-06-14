@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.gitsurfer.gitsurf.utils.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
+abstract class BaseActivity : AppCompatActivity() {
 
   private var snackBar: Snackbar? = null
 

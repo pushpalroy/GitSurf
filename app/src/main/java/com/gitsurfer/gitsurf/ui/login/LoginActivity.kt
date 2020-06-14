@@ -3,16 +3,17 @@ package com.gitsurfer.gitsurf.ui.login
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.github.razir.progressbutton.attachTextChangeAnimator
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.gitsurfer.gitsurf.R
+import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException
+import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException.PasswordEmpty
+import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException.UsernameEmpty
 import com.gitsurfer.gitsurf.databinding.ActivityLoginBinding
-import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException
-import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.PasswordEmpty
-import com.gitsurfer.gitsurf.model.usecases.exceptions.ValidationException.UsernameEmpty
 import com.gitsurfer.gitsurf.ui.base.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.main.MainActivity
@@ -22,7 +23,7 @@ import com.gitsurfer.gitsurf.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity(R.layout.activity_login) {
+class LoginActivity : BaseActivity() {
 
   private val viewModel: LoginViewModel by viewModels()
   private lateinit var binding: ActivityLoginBinding
@@ -30,6 +31,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
     initView()
     listenToLiveData()
   }

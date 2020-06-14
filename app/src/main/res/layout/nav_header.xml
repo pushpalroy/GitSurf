@@ -7,7 +7,7 @@
   <data>
     <variable
         name="roomUser"
-        type="com.gitsurfer.gitsurf.model.roomdatabase.models.RoomUser"
+        type="com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser"
         />
   </data>
 

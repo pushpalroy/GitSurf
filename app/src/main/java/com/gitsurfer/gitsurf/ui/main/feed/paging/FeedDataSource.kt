@@ -1,9 +1,9 @@
 package com.gitsurfer.gitsurf.ui.main.feed.paging
 
 import androidx.paging.PageKeyedDataSource
-import com.gitsurfer.gitsurf.model.AppRepository
-import com.gitsurfer.gitsurf.model.network.models.response.Feed
-import com.gitsurfer.gitsurf.model.utils.SharedPrefUtils
+import com.gitsurfer.gitsurf.data.AppRepository
+import com.gitsurfer.gitsurf.data.network.models.response.Feed
+import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.main.feed.FeedViewModel
 import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.CoroutineScope

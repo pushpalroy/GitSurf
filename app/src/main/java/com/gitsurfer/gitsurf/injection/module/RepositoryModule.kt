@@ -1,11 +1,11 @@
 package com.gitsurfer.gitsurf.injection.module
 
-import com.gitsurfer.gitsurf.model.AppRepository
-import com.gitsurfer.gitsurf.model.network.NetworkDataProvider
-import com.gitsurfer.gitsurf.model.network.api.LoginApi
-import com.gitsurfer.gitsurf.model.network.api.UserApi
-import com.gitsurfer.gitsurf.model.roomdatabase.LocalDataProvider
-import com.gitsurfer.gitsurf.model.roomdatabase.base.AppDatabase
+import com.gitsurfer.gitsurf.data.AppRepository
+import com.gitsurfer.gitsurf.data.network.NetworkDataProvider
+import com.gitsurfer.gitsurf.data.network.api.LoginApi
+import com.gitsurfer.gitsurf.data.network.api.UserApi
+import com.gitsurfer.gitsurf.data.roomdatabase.LocalDataProvider
+import com.gitsurfer.gitsurf.data.roomdatabase.base.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
