@@ -1,9 +1,8 @@
-<h1>GitSurf</h1>
+# GitSurf
 
-<p align="left">  
+![Master Status](https://github.com/pushpalroy/GitSurf/workflows/Master%20Status/badge.svg?branch=master)
+
 A client for GitHub based on moderns android app tech stacks built using kotlin, mvvm architechture and dagger-hilt for dependency injection.
-</p>
-<br>
 
 ## Tech stack & libraries
 
@@ -20,6 +19,7 @@ A client for GitHub based on moderns android app tech stacks built using kotlin,
 - Moshi - JSON library
 - Glide - Loading image
 - Timber for logging
+- GitHub Actions for automation
 
 
 ## Architecture
