@@ -1,6 +1,6 @@
 # GitSurf
 
-![](https://github.com/actions/pushpalroy/workflows/.github/workflows/android-feature.yml/badge.svg) ![](https://github.com/actions/pushpalroy/workflows/.github/workflows/android-master.yml/badge.svg)
+![Master Status](https://github.com/pushpalroy/GitSurf/workflows/Master%20Status/badge.svg?branch=master)
 
 A client for GitHub based on moderns android app tech stacks built using kotlin, mvvm architechture and dagger-hilt for dependency injection.
 
