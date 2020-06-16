@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.base
+package com.gitsurfer.gitsurf.data.persistence.base
 
 import androidx.room.RoomDatabase
 import timber.log.Timber

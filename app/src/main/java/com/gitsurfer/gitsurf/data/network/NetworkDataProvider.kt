@@ -3,7 +3,7 @@ package com.gitsurfer.gitsurf.data.network
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
-import com.gitsurfer.gitsurf.utils.networkCall
+import com.gitsurfer.gitsurf.data.utils.networkCall
 
 class NetworkDataProvider(
   private val loginApi: LoginApi,

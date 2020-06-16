@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.base
+package com.gitsurfer.gitsurf.data.persistence.base
 
 /*
 * This abstract class is a blueprint for any database to be used in the app

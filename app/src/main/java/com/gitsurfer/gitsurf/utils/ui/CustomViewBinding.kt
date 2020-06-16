@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.utils
+package com.gitsurfer.gitsurf.utils.ui
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

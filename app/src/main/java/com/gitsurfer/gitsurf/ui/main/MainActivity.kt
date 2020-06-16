@@ -15,7 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
 import com.gitsurfer.gitsurf.databinding.NavHeaderBinding
-import com.gitsurfer.gitsurf.ui.base.AppNavigator
+import com.gitsurfer.gitsurf.utils.ui.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.login.LoginActivity
 import com.gitsurfer.gitsurf.utils.exceptions.ForbiddenException
@@ -83,11 +83,8 @@ class MainActivity : BaseActivity() {
   }
 
   override fun onSupportNavigateUp(): Boolean {
-    val navController = findNavController(
-      R.id.nav_host_fragment
-    )
     // Ensures that the menu items in the Nav Drawer stay in sync with the navigation graph
-    return navigateUp(findNavController(R.id.nav_host_fragment), drawerLayout)
+    return navigateUp(navController, drawerLayout)
   }
 
   private fun setUpNavigation() {

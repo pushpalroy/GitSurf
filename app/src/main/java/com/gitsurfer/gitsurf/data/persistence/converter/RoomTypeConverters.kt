@@ -1,9 +1,9 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.converter
+package com.gitsurfer.gitsurf.data.persistence.converter
 
 import androidx.room.TypeConverter
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomActor
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomPayload
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomRepo
+import com.gitsurfer.gitsurf.data.persistence.models.RoomActor
+import com.gitsurfer.gitsurf.data.persistence.models.RoomPayload
+import com.gitsurfer.gitsurf.data.persistence.models.RoomRepo
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter

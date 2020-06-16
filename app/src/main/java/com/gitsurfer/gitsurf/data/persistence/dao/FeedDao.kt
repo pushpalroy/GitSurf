@@ -1,10 +1,10 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.dao
+package com.gitsurfer.gitsurf.data.persistence.dao
 
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
-import com.gitsurfer.gitsurf.data.roomdatabase.base.BaseDAO
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed
+import com.gitsurfer.gitsurf.data.persistence.base.BaseDAO
+import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 
 @Dao
 abstract class FeedDao : BaseDAO<RoomFeed> {

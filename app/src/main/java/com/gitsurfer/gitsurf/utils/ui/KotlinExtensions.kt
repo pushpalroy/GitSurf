@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.utils
+package com.gitsurfer.gitsurf.utils.ui
 
 import android.app.Activity
 import android.content.Context

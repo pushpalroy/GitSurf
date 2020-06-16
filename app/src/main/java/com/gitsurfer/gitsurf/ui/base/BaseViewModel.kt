@@ -3,7 +3,7 @@ package com.gitsurfer.gitsurf.ui.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gitsurfer.gitsurf.utils.SingleLiveData
+import com.gitsurfer.gitsurf.utils.ui.SingleLiveData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

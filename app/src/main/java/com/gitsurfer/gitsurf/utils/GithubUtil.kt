@@ -2,7 +2,7 @@ package com.gitsurfer.gitsurf.utils
 
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.data.network.models.response.Feed
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed
+import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 
 object GithubUtil {
 

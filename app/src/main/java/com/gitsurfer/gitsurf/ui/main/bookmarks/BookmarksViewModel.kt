@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.gitsurfer.gitsurf.data.AppRepository
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed
+import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.ui.main.feed.paging.RoomFeedPagedListAdapter
 import kotlinx.coroutines.delay

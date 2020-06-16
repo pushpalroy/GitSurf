@@ -2,9 +2,9 @@ package com.gitsurfer.gitsurf.data
 
 import com.gitsurfer.gitsurf.data.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
-import com.gitsurfer.gitsurf.data.roomdatabase.LocalDataProvider
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser
+import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
+import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
+import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 
 class AppRepository(
   private val networkDataProvider: NetworkDataProvider,

@@ -2,7 +2,7 @@ package com.gitsurfer.gitsurf.ui.base
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.gitsurfer.gitsurf.utils.SnackBarAction
+import com.gitsurfer.gitsurf.utils.ui.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity() {

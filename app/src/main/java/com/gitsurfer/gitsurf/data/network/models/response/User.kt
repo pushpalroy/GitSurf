@@ -1,6 +1,6 @@
 package com.gitsurfer.gitsurf.data.network.models.response
 
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser
+import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.squareup.moshi.Json
 import java.util.Date
 

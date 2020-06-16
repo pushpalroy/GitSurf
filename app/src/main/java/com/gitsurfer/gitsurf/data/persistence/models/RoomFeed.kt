@@ -1,9 +1,9 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.models
+package com.gitsurfer.gitsurf.data.persistence.models
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomFeed.Companion.ROOM_FEED
+import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed.Companion.ROOM_FEED
 import kotlinx.android.parcel.Parcelize
 import java.util.Date
 

@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.utils
+package com.gitsurfer.gitsurf.data.utils
 
 import com.gitsurfer.gitsurf.data.network.models.ResponseUnauthorized
 import com.gitsurfer.gitsurf.utils.exceptions.*
