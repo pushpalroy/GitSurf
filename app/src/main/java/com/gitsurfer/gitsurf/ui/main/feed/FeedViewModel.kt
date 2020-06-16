@@ -16,7 +16,7 @@ import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.INITIA
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSource.Companion.PAGE_SIZE
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedDataSourceFactory
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter
-import com.gitsurfer.gitsurf.utils.SingleLiveData
+import com.gitsurfer.gitsurf.utils.ui.SingleLiveData
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -32,7 +32,8 @@ class FeedViewModel @ViewModelInject constructor(
   var feedClickedLiveData = MutableLiveData<Feed>()
   private var feedPagedList: LiveData<PagedList<Feed>>
   val adapter: FeedPagedListAdapter = FeedPagedListAdapter(feedClickListener = this)
-  val initialProgressLiveData = SingleLiveData<Boolean>()
+  val initialProgressLiveData =
+    SingleLiveData<Boolean>()
   private var noMoreItemsToLoad: Boolean = false
 
   private var feedDataSourceFactory = FeedDataSourceFactory(

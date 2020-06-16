@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.gitsurfer.gitsurf.utils
+package com.gitsurfer.gitsurf.utils.ui
 
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable

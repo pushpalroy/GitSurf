@@ -1,9 +1,9 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.models
+package com.gitsurfer.gitsurf.data.persistence.models
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser.Companion.ROOM_USER
+import com.gitsurfer.gitsurf.data.persistence.models.RoomUser.Companion.ROOM_USER
 import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = ROOM_USER)

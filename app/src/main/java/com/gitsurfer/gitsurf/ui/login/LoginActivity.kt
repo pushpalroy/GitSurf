@@ -10,16 +10,16 @@ import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.gitsurfer.gitsurf.R
-import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException
-import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException.PasswordEmpty
-import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException.UsernameEmpty
+import com.gitsurfer.gitsurf.utils.exceptions.ValidationException
+import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.PasswordEmpty
+import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.UsernameEmpty
 import com.gitsurfer.gitsurf.databinding.ActivityLoginBinding
-import com.gitsurfer.gitsurf.ui.base.AppNavigator
+import com.gitsurfer.gitsurf.utils.ui.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.main.MainActivity
-import com.gitsurfer.gitsurf.utils.clearErrorOnTextChange
+import com.gitsurfer.gitsurf.utils.ui.clearErrorOnTextChange
 import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
-import com.gitsurfer.gitsurf.utils.hideKeyboard
+import com.gitsurfer.gitsurf.utils.ui.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -3,7 +3,7 @@ package com.gitsurfer.gitsurf.injection.module
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.gitsurfer.gitsurf.data.roomdatabase.base.AppDatabase
+import com.gitsurfer.gitsurf.data.persistence.database.AppDatabase
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.utils.AUTH_DATA
 import com.gitsurfer.gitsurf.utils.ROOM_DATABASE_NAME

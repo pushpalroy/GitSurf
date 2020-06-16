@@ -1,9 +1,9 @@
-package com.gitsurfer.gitsurf.data.roomdatabase.dao
+package com.gitsurfer.gitsurf.data.persistence.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.gitsurfer.gitsurf.data.roomdatabase.base.BaseDAO
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser
+import com.gitsurfer.gitsurf.data.persistence.base.BaseDAO
+import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 
 @Dao
 abstract class UserDao : BaseDAO<RoomUser> {

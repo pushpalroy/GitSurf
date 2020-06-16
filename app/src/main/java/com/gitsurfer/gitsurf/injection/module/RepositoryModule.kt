@@ -4,8 +4,8 @@ import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
-import com.gitsurfer.gitsurf.data.roomdatabase.LocalDataProvider
-import com.gitsurfer.gitsurf.data.roomdatabase.base.AppDatabase
+import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
+import com.gitsurfer.gitsurf.data.persistence.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

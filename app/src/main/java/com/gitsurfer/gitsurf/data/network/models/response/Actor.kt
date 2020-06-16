@@ -1,6 +1,6 @@
 package com.gitsurfer.gitsurf.data.network.models.response
 
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomActor
+import com.gitsurfer.gitsurf.data.persistence.models.RoomActor
 import com.squareup.moshi.Json
 
 data class Actor(

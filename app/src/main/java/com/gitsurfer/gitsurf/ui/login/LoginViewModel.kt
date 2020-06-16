@@ -10,7 +10,7 @@ import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.data.network.models.response.BasicToken
 import com.gitsurfer.gitsurf.data.network.models.response.User
 import com.gitsurfer.gitsurf.data.network.models.response.toRoomUser
-import com.gitsurfer.gitsurf.data.usecases.exceptions.ValidationException
+import com.gitsurfer.gitsurf.utils.exceptions.ValidationException
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import com.gitsurfer.gitsurf.utils.APPLICATION_ID

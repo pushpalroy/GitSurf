@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.base
+package com.gitsurfer.gitsurf.utils.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -25,7 +25,9 @@ object AppNavigator {
     }
     activity.startActivity(intent)
     if (finishAfter) {
-      finishActivityWithAnimation(activity = activity)
+      finishActivityWithAnimation(
+        activity = activity
+      )
     }
     if (!withoutAnimation) {
       activity.overridePendingTransition(0, 0)

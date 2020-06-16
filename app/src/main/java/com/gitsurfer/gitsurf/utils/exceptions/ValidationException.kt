@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.data.usecases.exceptions
+package com.gitsurfer.gitsurf.utils.exceptions
 
 sealed class ValidationException : Exception() {
   object UsernameEmpty : ValidationException()

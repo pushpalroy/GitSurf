@@ -1,6 +1,6 @@
 package com.gitsurfer.gitsurf.data.network.models.response
 
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomMember
+import com.gitsurfer.gitsurf.data.persistence.models.RoomMember
 import com.squareup.moshi.Json
 
 data class Member(

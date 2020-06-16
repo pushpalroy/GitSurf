@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.network.NetworkManager
-import com.gitsurfer.gitsurf.data.roomdatabase.models.RoomUser
+import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
