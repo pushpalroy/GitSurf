@@ -1,9 +1,8 @@
-<h1>GitSurf</h1>
+# GitSurf
 
-<p align="left">  
+![](https://github.com/actions/pushpalroy/workflows/.github/workflows/android-feature.yml/badge.svg) ![](https://github.com/actions/pushpalroy/workflows/.github/workflows/android-master.yml/badge.svg)
+
 A client for GitHub based on moderns android app tech stacks built using kotlin, mvvm architechture and dagger-hilt for dependency injection.
-</p>
-<br>
 
 ## Tech stack & libraries
 
@@ -20,6 +19,7 @@ A client for GitHub based on moderns android app tech stacks built using kotlin,
 - Moshi - JSON library
 - Glide - Loading image
 - Timber for logging
+- GitHub Actions for automation
 
 
 ## Architecture
