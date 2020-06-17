@@ -44,4 +44,12 @@ abstract class BaseActivity : AppCompatActivity() {
       .setAction(snackBarAction.title, snackBarAction.listener)
       .show()
   }
+
+  protected fun dismissSnackBar() {
+    snackBar?.let { snack ->
+      if (snack.isShown) {
+        snack.dismiss()
+      }
+    }
+  }
 }

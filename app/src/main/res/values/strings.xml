@@ -18,4 +18,5 @@
   <string name="con_desc_feed_icon">Feed icon</string>
   <string name="starred">Starred</string>
   <string name="bookmarks">Bookmarks</string>
+  <string name="lost_internet_message">You have lost internet connection</string>
 </resources>

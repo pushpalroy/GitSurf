@@ -13,13 +13,15 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.gitsurfer.gitsurf.R
+import com.gitsurfer.gitsurf.R.string
 import com.gitsurfer.gitsurf.databinding.ActivityMainBinding
 import com.gitsurfer.gitsurf.databinding.NavHeaderBinding
-import com.gitsurfer.gitsurf.utils.ui.AppNavigator
 import com.gitsurfer.gitsurf.ui.base.BaseActivity
 import com.gitsurfer.gitsurf.ui.login.LoginActivity
 import com.gitsurfer.gitsurf.utils.exceptions.ForbiddenException
 import com.gitsurfer.gitsurf.utils.exceptions.UnauthorizedException
+import com.gitsurfer.gitsurf.utils.ui.AppNavigator
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
@@ -45,6 +47,7 @@ class MainActivity : BaseActivity() {
     setUpNavigation()
     listenToLiveData()
     viewModel.getLocalUserDetails()
+    viewModel.registerNetworkListener()
   }
 
   private fun listenToLiveData() {
@@ -71,6 +74,14 @@ class MainActivity : BaseActivity() {
       val navHeaderBinding: NavHeaderBinding = NavHeaderBinding
         .bind(navigationView.getHeaderView(0))
       navHeaderBinding.roomUser = roomUser
+    })
+
+    viewModel.isInternetAvailable.observe(this, Observer { isAvailable ->
+      if (!isAvailable) {
+        showSnackBarMessage(string.lost_internet_message, binding.root, Snackbar.LENGTH_INDEFINITE)
+      } else {
+        dismissSnackBar()
+      }
     })
   }
 

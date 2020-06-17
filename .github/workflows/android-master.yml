@@ -1,4 +1,4 @@
-name: Master Status
+name: Android CI
 
 on:
   pull_request:

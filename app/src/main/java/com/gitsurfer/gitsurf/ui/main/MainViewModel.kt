@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.network.NetworkManager
+import com.gitsurfer.gitsurf.data.network.NetworkManager.NetworkListener
 import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
@@ -24,6 +25,10 @@ class MainViewModel @ViewModelInject constructor(
   private val _roomUserLiveData = MutableLiveData<RoomUser>()
   val roomUserLiveData: LiveData<RoomUser>
     get() = _roomUserLiveData
+
+  private val _isInternetAvailable = MutableLiveData<Boolean>()
+  val isInternetAvailable: LiveData<Boolean>
+    get() = _isInternetAvailable
 
   fun setAuthorizedFromPref() {
     _isAuthorizedLiveData.value = prefUtils.authToken != null
@@ -47,5 +52,13 @@ class MainViewModel @ViewModelInject constructor(
         }
       }
     }
+  }
+
+  fun registerNetworkListener() {
+    networkManager.registerNetworkListener(object : NetworkListener {
+      override fun onAvailability(isAvailable: Boolean) {
+        _isInternetAvailable.postValue(isAvailable)
+      }
+    })
   }
 }
