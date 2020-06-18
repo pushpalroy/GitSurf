@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -26,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
   private val viewModel: FeedViewModel by viewModels()
-  private val activityViewModel: MainViewModel by viewModels()
+  private val mainViewModel: MainViewModel by activityViewModels()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -80,7 +81,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         })
 
       viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
-        activityViewModel.progressLiveData.value = isLoading
+        mainViewModel.updateProgressLiveData(progress = isLoading)
         binding.swipeContainer.isRefreshing = isLoading
       })
 
@@ -92,7 +93,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
       })
 
       viewModel.exceptionLiveData.observe(owner, Observer { exception ->
-        activityViewModel.updateExceptionLiveData(exception)
+        mainViewModel.updateExceptionLiveData(exception)
       })
 
       viewModel.feedClickedLiveData.observe(owner, Observer { feedClicked ->
@@ -115,7 +116,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     binding.rvFeed.addOnScrollListener(object : ItemOnScrollListener() {
       override fun onLoadMore() {
         if (!viewModel.isNoMoreItemsToLoad()) {
-          viewModel.updateProgressLiveData(true)
+          viewModel.updateProgressLiveData(progress = true)
         }
       }
     })

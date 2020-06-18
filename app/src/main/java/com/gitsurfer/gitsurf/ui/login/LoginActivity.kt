@@ -50,7 +50,7 @@ class LoginActivity : BaseActivity() {
   }
 
   private fun listenToLiveData() {
-    viewModel.progressLiveData.observeSingleLiveData(this, Observer {
+    viewModel.progressLiveData.observe(this, Observer {
       if (it == true) {
         binding.loginBtn.isEnabled = false
         binding.loginBtn.showProgress {

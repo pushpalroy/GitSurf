@@ -10,6 +10,7 @@ import com.gitsurfer.gitsurf.data.network.NetworkManager.NetworkListener
 import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
+import com.gitsurfer.gitsurf.utils.ui.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
@@ -26,8 +27,8 @@ class MainViewModel @ViewModelInject constructor(
   val roomUserLiveData: LiveData<RoomUser>
     get() = _roomUserLiveData
 
-  private val _isInternetAvailable = MutableLiveData<Boolean>()
-  val isInternetAvailable: LiveData<Boolean>
+  private val _isInternetAvailable = SingleLiveEvent<Boolean>()
+  val isInternetAvailable: SingleLiveEvent<Boolean>
     get() = _isInternetAvailable
 
   fun setAuthorizedFromPref() {

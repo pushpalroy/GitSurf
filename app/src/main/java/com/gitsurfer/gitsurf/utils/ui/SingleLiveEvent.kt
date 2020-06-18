@@ -1,3 +1,5 @@
+package com.gitsurfer.gitsurf.utils.ui
+
 /*
  *  Copyright 2017 Google Inc.
  *
@@ -14,10 +16,7 @@
  *  limitations under the License.
  */
 
-package com.gitsurfer.gitsurf.utils.ui
-
 import androidx.annotation.MainThread
-import androidx.annotation.Nullable
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -36,45 +35,38 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  * Note that only one observer is going to be notified of changes.
  */
-class SingleLiveData<T> : MutableLiveData<T>() {
-
-  private val mPending = AtomicBoolean(false)
+class SingleLiveEvent<T> : MutableLiveData<T>() {
+  private val pending = AtomicBoolean(false)
 
   @MainThread
-  fun observeSingleLiveData(
-    owner: LifecycleOwner,
-    observer: Observer<T>
-  ) {
-
+  override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
     if (hasActiveObservers()) {
-      Timber.w("Multiple observers registered but only one will be notified of changes.")
+      Timber.tag(TAG)
+        .w("Multiple observers registered but only one will be notified of changes.")
     }
-
     // Observe the internal MutableLiveData
     super.observe(owner, Observer { t ->
-      if (mPending.compareAndSet(true, false)) {
+      if (pending.compareAndSet(true, false)) {
         observer.onChanged(t)
       }
     })
   }
 
   @MainThread
-  fun setLiveDataValue(@Nullable t: T?) {
-    mPending.set(true)
+  override fun setValue(t: T?) {
+    pending.set(true)
     super.setValue(t)
   }
 
-  private fun postLiveDataValue(@Nullable t: T?) {
-    mPending.set(true)
-    super.postValue(t)
-  }
-
+  /**
+   * Used for cases where T is Void, to make calls cleaner.
+   */
   @MainThread
-  fun call(t: T? = null) {
-    postLiveDataValue(t)
+  fun call() {
+    value = null
   }
 
   companion object {
-    private const val TAG = "SingleLiveData"
+    private const val TAG = "SingleLiveEvent"
   }
 }

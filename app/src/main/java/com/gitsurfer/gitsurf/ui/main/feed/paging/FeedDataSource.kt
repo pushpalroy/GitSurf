@@ -76,10 +76,10 @@ class FeedDataSource constructor(
 
   private suspend fun getReceivedFeeds(page: Int?): Pair<List<Feed>?, Exception?> {
     return appRepository.getReceivedFeeds(
-        authToken = TOKEN_PREFIX + prefUtils.authToken,
-        user = prefUtils.userName,
-        page = page,
-        perPage = PAGE_SIZE
+      authToken = TOKEN_PREFIX + prefUtils.authToken,
+      user = prefUtils.userName,
+      page = page,
+      perPage = PAGE_SIZE
     )
   }
 
@@ -92,7 +92,7 @@ class FeedDataSource constructor(
   }
 
   private fun newItemsLoaded() {
-    viewModel.updateProgressLiveData(false)
+    viewModel.updateProgressLiveData(progress = false)
   }
 
   private fun setNoMoreItemsToLoad() {

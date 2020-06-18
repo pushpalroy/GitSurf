@@ -71,9 +71,7 @@ class MainActivity : BaseActivity() {
     })
 
     viewModel.roomUserLiveData.observe(this, Observer { roomUser ->
-      val navHeaderBinding: NavHeaderBinding = NavHeaderBinding
-        .bind(navigationView.getHeaderView(0))
-      navHeaderBinding.roomUser = roomUser
+      NavHeaderBinding.bind(navigationView.getHeaderView(0)).roomUser = roomUser
     })
 
     viewModel.isInternetAvailable.observe(this, Observer { isAvailable ->
