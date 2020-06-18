@@ -17,8 +17,7 @@ A client for GitHub based on moderns android app tech stacks built using kotlin,
   - Repository pattern
 - Retrofit2 & OkHttp3 for networking
 - Moshi - JSON library
-- Glide - Loading image
-- Timber for logging
+- Coil - Coroutines image loader
 - GitHub Actions for automation
 
 

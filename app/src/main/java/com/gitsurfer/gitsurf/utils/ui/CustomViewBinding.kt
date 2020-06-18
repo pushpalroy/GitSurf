@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.api.load
 
 @BindingAdapter(value = ["setAdapter"])
 fun RecyclerView.bindRecyclerViewAdapter(adapter: PagedListAdapter<*, *>) {
@@ -19,8 +19,6 @@ fun RecyclerView.bindRecyclerViewAdapter(adapter: PagedListAdapter<*, *>) {
 @BindingAdapter(value = ["setImageUrl"])
 fun ImageView.bindImageUrl(url: String?) {
   url?.let {
-    Glide.with(context)
-        .load(url)
-        .into(this)
+    load(url)
   }
 }

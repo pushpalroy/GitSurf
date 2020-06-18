@@ -125,8 +125,7 @@ dependencies {
   implementation(Dependencies.timber)
   debugImplementation(Dependencies.memory_leak_debug)
 
-  implementation(Dependencies.glide)
-  kapt(Dependencies.glide_compiler)
+  implementation(Dependencies.coil_kt)
 
   implementation(Dependencies.circularImageView)
   implementation(Dependencies.progress_button)

@@ -44,7 +44,7 @@ object Versions {
   const val timber = "4.7.1"
   const val memoryLeak = "2.0-beta-2"
   const val progressButton = "2.0.1"
-  const val glide = "4.9.0"
+  const val coil = "0.11.0"
   const val baseAdapter = "0.1.3"
   const val androidVeil = "1.0.6"
   const val circularImageView = "3.1.0"
