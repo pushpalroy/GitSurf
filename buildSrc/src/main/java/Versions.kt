@@ -1,17 +1,16 @@
 @file:Suppress("MemberVisibilityCanBePrivate")
 
 object Versions {
-  const val versionMajor = 1
-  const val versionMinor = 0
-  const val versionPatch = 0
-  const val versionBuild = 0
+  const val verMajor = 1
+  const val verMinor = 0
+  const val verPatch = 0
+  const val verBuild = 0
 
   const val compileSdk = 29
   const val minSdk = 24
   const val targetSdk = 29
-  const val versionCode =
-    versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-  const val versionName = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
+  const val versionCode = verMajor * 10000 + verMinor * 1000 + verPatch * 100 + verBuild
+  const val versionName = "$verMajor.$verMinor.$verPatch.$verBuild"
 
   const val proguard_android = "proguard-android.txt"
   const val proguard_common = "proguard-common.txt"
@@ -33,7 +32,6 @@ object Versions {
   const val paging = "2.1.2"
   const val swipeRefresh = "1.0.0"
   const val archCoreTesting = "2.1.0"
-  const val dagger = "2.28"
   const val hilt_android = "2.28-alpha"
   const val hilt = "1.0.0-alpha01"
   const val rxJava = "2.2.11"
@@ -45,8 +43,6 @@ object Versions {
   const val memoryLeak = "2.0-beta-2"
   const val progressButton = "2.0.1"
   const val coil = "0.11.0"
-  const val baseAdapter = "0.1.3"
-  const val androidVeil = "1.0.6"
   const val circularImageView = "3.1.0"
   const val threeTenApb = "1.2.4"
   const val chuck = "1.1.0"
@@ -55,7 +51,4 @@ object Versions {
   const val mockitoKotlin = "2.1.0"
   const val mockWebServer = "3.14.0"
   const val espresso = "3.0.2"
-  const val jaxbCore = "2.3.0.1"
-  const val jaxbApi = "2.3.1"
-  const val jaxbImpl = "2.3.2"
 }

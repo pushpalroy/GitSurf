@@ -21,8 +21,8 @@ android {
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles(
-          getDefaultProguardFile(Versions.proguard_android), Versions.proguard_common,
-          Versions.proguard_specific
+        getDefaultProguardFile(Versions.proguard_android), Versions.proguard_common,
+        Versions.proguard_specific
       )
       buildConfigField("boolean", "ENABLE_LOGGING", "false")
     }
@@ -34,7 +34,7 @@ android {
     targetSdkVersion(Versions.targetSdk)
     versionCode = Versions.versionCode
     versionName = Versions.versionName
-    testInstrumentationRunner = Dependencies.android_junit_runner
+    testInstrumentationRunner = Testing.android_junit_runner
     buildConfigField("String", "CLIENT_ID", "\"${loadPropertiesFile()["CLIENT_ID"]}\"")
     buildConfigField("String", "CLIENT_SECRET", "\"${loadPropertiesFile()["CLIENT_SECRET"]}\"")
     buildConfigField("String", "CALLBACK_URL", "\"${loadPropertiesFile()["CALLBACK_URL"]}\"")
@@ -66,7 +66,7 @@ android {
 
 tasks {
   fun getVersionName(): String {
-    return "${Versions.versionMajor}.${Versions.versionMinor}.${Versions.versionPatch}"
+    return "${Versions.verMajor}.${Versions.verMinor}.${Versions.verPatch}"
   }
 }
 
@@ -81,66 +81,60 @@ fun loadPropertiesFile(): Properties {
 
 dependencies {
   implementation(Dependencies.kotlin_stdlib)
-  implementation(Dependencies.support_appcompat)
-  implementation(Dependencies.support_design)
-  implementation(Dependencies.constraint_layout)
 
-  implementation(Dependencies.lifecycle_extensions)
-  implementation(Dependencies.lifecycle_view_model)
-  implementation(Dependencies.lifecycle_live_data)
-  kapt(Dependencies.lifecycle_compiler)
+  implementation(Android.support_appcompat)
+  implementation(Android.support_design)
+  implementation(Android.constraint_layout)
+  implementation(Android.paging)
+  implementation(Android.swipeRefresh)
+  implementation(Android.activity)
+  implementation(Android.fragment)
 
-  implementation(Dependencies.navigation_fragment)
-  implementation(Dependencies.navigation_ui)
-  implementation(Dependencies.navigation_dynamic_feature)
+  implementation(Lifecycle.lifecycle_extensions)
+  implementation(Lifecycle.lifecycle_view_model)
+  implementation(Lifecycle.lifecycle_live_data)
+  kapt(Lifecycle.lifecycle_compiler)
 
-  implementation(Dependencies.room)
-  implementation(Dependencies.room_ktx)
-  kapt(Dependencies.room_compiler)
+  implementation(Navigation.navigation_fragment)
+  implementation(Navigation.navigation_ui)
+  implementation(Navigation.navigation_dynamic_feature)
 
-  implementation(Dependencies.paging)
-  implementation(Dependencies.swipeRefresh)
+  implementation(Room.room)
+  implementation(Room.room_ktx)
+  kapt(Room.room_compiler)
 
-  implementation(Dependencies.dagger)
-  kapt(Dependencies.dagger_compiler)
+  implementation(Hilt.hilt_android)
+  implementation(Hilt.hilt_viewmodel)
+  kapt(Hilt.hilt_android_compiler)
+  kapt(Hilt.hilt_compiler)
 
-  implementation(Dependencies.hilt_android)
-  kapt(Dependencies.hilt_android_compiler)
-  implementation(Dependencies.hilt_viewmodel)
-  kapt(Dependencies.hilt_compiler)
+  implementation(Rx.rx_java)
+  implementation(Rx.rx_android)
 
-  implementation(Dependencies.rx_java)
-  implementation(Dependencies.rx_android)
+  implementation(Networking.retrofit)
+  implementation(Networking.ok_http)
+  implementation(Networking.ok_http_logger)
+  implementation(Networking.coil_kt)
 
-  implementation(Dependencies.retrofit)
-  implementation(Dependencies.retrofit_moshi)
-  implementation(Dependencies.ok_http)
-  implementation(Dependencies.ok_http_logger)
+  implementation(Moshi.moshi)
+  implementation(Moshi.moshi_adapter)
+  implementation(Moshi.retrofit_moshi)
 
-  implementation(Dependencies.moshi)
-  implementation(Dependencies.moshi_adapter)
+  implementation(Util.three_ten_abp)
+  implementation(Util.timber)
+  debugImplementation(Util.memory_leak_debug)
+  implementation(Util.circularImageView)
+  implementation(Util.progress_button)
+  debugImplementation(Util.chuckDebug)
+  releaseImplementation(Util.chuckRelease)
+  debugImplementation(Util.dbInspector)
 
-  implementation(Dependencies.three_ten_abp)
-
-  implementation(Dependencies.timber)
-  debugImplementation(Dependencies.memory_leak_debug)
-
-  implementation(Dependencies.coil_kt)
-
-  implementation(Dependencies.circularImageView)
-  implementation(Dependencies.progress_button)
-
-  debugImplementation(Dependencies.chuckDebug)
-  releaseImplementation(Dependencies.chuckRelease)
-
-  debugImplementation(Dependencies.dbInspector)
-
-  testImplementation(Dependencies.navigation_testing)
-  testImplementation(Dependencies.arch_core_testing)
-  testImplementation(Dependencies.mock_web_server)
+  testImplementation(Navigation.navigation_testing)
+  testImplementation(Testing.arch_core_testing)
+  testImplementation(Testing.mock_web_server)
   testImplementation(Dependencies.junit)
-  testImplementation(Dependencies.mockito)
-  testImplementation(Dependencies.mockito_kotlin)
-  androidTestImplementation(Dependencies.mockito_android)
-  androidTestImplementation(Dependencies.espresso)
+  testImplementation(Mockito.mockito)
+  testImplementation(Mockito.mockito_kotlin)
+  androidTestImplementation(Mockito.mockito_android)
+  androidTestImplementation(Testing.espresso)
 }
