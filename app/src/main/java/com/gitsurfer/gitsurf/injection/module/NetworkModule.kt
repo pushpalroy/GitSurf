@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import com.gitsurfer.gitsurf.BuildConfig
 import com.gitsurfer.gitsurf.data.network.NetworkManager
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
+import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.utils.BASE_URL
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -37,6 +38,12 @@ object NetworkModule {
   @Singleton
   fun provideUserApi(retrofit: Retrofit): UserApi {
     return retrofit.create(UserApi::class.java)
+  }
+
+  @Provides
+  @Singleton
+  fun provideRepoApi(retrofit: Retrofit): RepoApi {
+    return retrofit.create(RepoApi::class.java)
   }
 
   @Provides

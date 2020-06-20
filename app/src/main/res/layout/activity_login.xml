@@ -7,7 +7,7 @@
   <data>
 
     <variable
-        name="viewModel"
+        name="vm"
         type="com.gitsurfer.gitsurf.ui.login.LoginViewModel"
         />
   </data>
@@ -37,7 +37,7 @@
           android:imeOptions="actionNext"
           android:inputType="textPersonName"
           android:maxLines="1"
-          android:text="@={viewModel.username}"
+          android:text="@={vm.username}"
           />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
           android:imeOptions="actionNext"
           android:inputType="textPassword"
           android:maxLines="1"
-          android:text="@={viewModel.password}"
+          android:text="@={vm.password}"
           />
     </com.google.android.material.textfield.TextInputLayout>
 

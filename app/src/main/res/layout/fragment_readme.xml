@@ -2,7 +2,7 @@
 <layout>
   <data>
     <variable
-        name="viewModel"
+        name="vm"
         type="com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel"
         />
   </data>

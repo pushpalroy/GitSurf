@@ -15,14 +15,14 @@ class AppRepository(
     credential: String,
     authRequestModel: AuthRequestModel
   ) = networkDataProvider.getBasicToken(
-      credential = credential,
-      authRequestModel = authRequestModel
+    credential = credential,
+    authRequestModel = authRequestModel
   )
 
   suspend fun getUserInfo(
     authToken: String
   ) = networkDataProvider.getUserInfo(
-      authToken = authToken
+    authToken = authToken
   )
 
   suspend fun getReceivedFeeds(
@@ -31,10 +31,10 @@ class AppRepository(
     page: Int?,
     perPage: Int?
   ) = networkDataProvider.getReceivedFeeds(
-      authToken = authToken,
-      user = user,
-      page = page,
-      perPage = perPage
+    authToken = authToken,
+    user = user,
+    page = page,
+    perPage = perPage
   )
 
   suspend fun getAccessToken(
@@ -43,28 +43,38 @@ class AppRepository(
     code: String,
     state: String
   ) = networkDataProvider.getAccessToken(
-      clientId = clientId,
-      clientSecret = clientSecret,
-      code = code,
-      state = state
+    clientId = clientId,
+    clientSecret = clientSecret,
+    code = code,
+    state = state
+  )
+
+  suspend fun getRepoDetails(
+    authToken: String,
+    owner: String,
+    repoName: String
+  ) = networkDataProvider.getRepoDetails(
+    authToken = authToken,
+    owner = owner,
+    repoName = repoName
   )
 
   suspend fun insertRoomUser(
     roomUser: RoomUser
   ) = localDataProvider.insertUser(
-      roomUser = roomUser
+    roomUser = roomUser
   )
 
   suspend fun getRoomUser(
     login: String
   ): RoomUser? = localDataProvider.getUser(
-      login = login
+    login = login
   )
 
   suspend fun insertRoomFeed(
     roomFeed: RoomFeed
   ) = localDataProvider.insertFeed(
-      roomFeed = roomFeed
+    roomFeed = roomFeed
   )
 
   fun getRoomFeeds() = localDataProvider.getAllFeeds()

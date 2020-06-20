@@ -12,15 +12,15 @@ data class RoomUser(
   @PrimaryKey(autoGenerate = false)
   val login: String,
   val authToken: String,
-  val name: String,
-  val avatarUrl: String,
-  val profileUrl: String,
-  val company: String,
-  val blog: String,
-  val location: String,
-  val email: String,
-  val bio: String,
-  val type: String
+  val name: String?,
+  val avatarUrl: String?,
+  val profileUrl: String?,
+  val company: String?,
+  val blog: String?,
+  val location: String?,
+  val email: String?,
+  val bio: String?,
+  val type: String?
 ) : Parcelable {
 
   companion object {

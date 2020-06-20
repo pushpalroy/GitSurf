@@ -1,26 +1,33 @@
 package com.gitsurfer.gitsurf.ui.base
 
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
 import com.gitsurfer.gitsurf.utils.ui.SnackBarAction
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
 
+  protected abstract val viewModel: VM
+  protected lateinit var binding: VB
   private var snackBar: Snackbar? = null
 
-  override fun onDestroy() {
-    snackBar?.dismiss()
-    super.onDestroy()
+  abstract fun getViewBinding(): VB
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = getViewBinding()
   }
 
-  protected fun showSnackBarMessage(
+  protected fun showSnackBar(
     message: Int?,
     view: View,
     duration: Int = Snackbar.LENGTH_SHORT
   ) {
     snackBar = snackBar?.let {
-      message?.let { it1 -> it.setText(it1) }
+      message?.let { msg -> it.setText(msg) }
       if (!it.isShown) {
         it.show()
       }
@@ -51,5 +58,10 @@ abstract class BaseActivity : AppCompatActivity() {
         snack.dismiss()
       }
     }
+  }
+
+  override fun onDestroy() {
+    snackBar?.dismiss()
+    super.onDestroy()
   }
 }

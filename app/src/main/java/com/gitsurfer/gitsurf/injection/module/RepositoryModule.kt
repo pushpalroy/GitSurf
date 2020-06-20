@@ -3,6 +3,7 @@ package com.gitsurfer.gitsurf.injection.module
 import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.network.NetworkDataProvider
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
+import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
 import com.gitsurfer.gitsurf.data.persistence.database.AppDatabase
@@ -30,10 +31,12 @@ object RepositoryModule {
   @Singleton
   fun provideNetworkDataProvider(
     loginApi: LoginApi,
-    userApi: UserApi
+    userApi: UserApi,
+    repoApi: RepoApi
   ) = NetworkDataProvider(
     loginApi = loginApi,
-    userApi = userApi
+    userApi = userApi,
+    repoApi = repoApi
   )
 
   @Provides

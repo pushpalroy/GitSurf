@@ -1,8 +1,9 @@
 package com.gitsurfer.gitsurf.ui.main.repo
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.databinding.FragmentRepoBinding
@@ -12,23 +13,45 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RepoFragment : BaseFragment(R.layout.fragment_repo) {
+class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(R.layout.fragment_repo) {
 
-  private val viewModel: RepoViewModel by viewModels()
+  override val viewModel: RepoViewModel by viewModels()
+  override fun getViewBinding(view: View) = FragmentRepoBinding.bind(view)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    init(view)
+  companion object {
+    val tabs = listOf("README", "FILES", "COMMITS", "RELEASES", "CONTRIBUTORS")
   }
 
-  private fun init(view: View) {
-    val tabs = listOf("README", "FILES", "COMMITS", "RELEASES", "CONTRIBUTORS")
-    val binding = FragmentRepoBinding.bind(view)
-    binding.viewModel = viewModel
+  override fun init() {
+    binding.vm = viewModel
     binding.pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-    binding.pager.adapter = RepoViewPagerAdapter(this, tabs, arguments?.getString("repoUrl", ""))
-    TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-      tab.text = "OBJECT ${(position + 1)}"
-    }.attach()
+
+    listenToLiveData()
+    fetchRepo()
+  }
+
+  private fun fetchRepo() {
+    viewModel.fetchRepoDetails(
+      arguments?.getString("repoOwner", ""),
+      arguments?.getString("repoName", "")
+    )
+  }
+
+  private fun listenToLiveData() {
+    viewModel.repoLiveData.observe(viewLifecycleOwner, Observer { repo ->
+      binding.pager.adapter = RepoViewPagerAdapter(
+        this,
+        tabs,
+        repo
+      )
+      TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+        tab.text = tabs[position]
+      }.attach()
+    })
+  }
+
+  override fun onDetach() {
+    super.onDetach()
+    findNavController().popBackStack()
   }
 }

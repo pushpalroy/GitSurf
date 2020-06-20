@@ -16,10 +16,10 @@ data class Feed(
 )
 
 fun Feed.toRoomFeed() = RoomFeed(
-    id = id,
-    type = type,
-    actor = actor.toRoomActor(),
-    repo = repo.toRoomRepo(),
-    payload = payload?.toRoomPayload(),
-    createdAt = createdAt
+  id = id,
+  type = type,
+  actor = actor.toRoomActor(),
+  repo = repo.toRoomRepo(),
+  payload = payload?.toRoomPayload(),
+  createdAt = createdAt
 )

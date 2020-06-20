@@ -3,41 +3,39 @@ package com.gitsurfer.gitsurf.ui.login
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.github.razir.progressbutton.attachTextChangeAnimator
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.gitsurfer.gitsurf.R
+import com.gitsurfer.gitsurf.databinding.ActivityLoginBinding
+import com.gitsurfer.gitsurf.ui.base.BaseActivity
+import com.gitsurfer.gitsurf.ui.main.MainActivity
+import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.PasswordEmpty
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.UsernameEmpty
-import com.gitsurfer.gitsurf.databinding.ActivityLoginBinding
 import com.gitsurfer.gitsurf.utils.ui.AppNavigator
-import com.gitsurfer.gitsurf.ui.base.BaseActivity
-import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.utils.ui.clearErrorOnTextChange
-import com.gitsurfer.gitsurf.utils.exceptions.NoInternetException
 import com.gitsurfer.gitsurf.utils.ui.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
-  private val viewModel: LoginViewModel by viewModels()
-  private lateinit var binding: ActivityLoginBinding
+  override val viewModel: LoginViewModel by viewModels()
+  override fun getViewBinding() = ActivityLoginBinding.inflate(layoutInflater)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
     initView()
     listenToLiveData()
   }
 
   private fun initView() {
-    binding.viewModel = viewModel
+    setContentView(binding.root)
+    binding.vm = viewModel
     bindProgressButton(binding.loginBtn)
     binding.loginBtn.attachTextChangeAnimator()
     binding.userNameEt.clearErrorOnTextChange(binding.userNameLayout)
@@ -67,18 +65,18 @@ class LoginActivity : BaseActivity() {
       it?.let {
         when (it) {
           is NoInternetException ->
-            showSnackBarMessage(R.string.msg_no_internet, binding.root)
+            showSnackBar(R.string.msg_no_internet, binding.root)
 
           is ValidationException -> when (it) {
             is UsernameEmpty -> {
-              showSnackBarMessage(R.string.msg_username_empty, binding.root)
+              showSnackBar(R.string.msg_username_empty, binding.root)
             }
             is PasswordEmpty -> {
-              showSnackBarMessage(R.string.msg_password_empty, binding.root)
+              showSnackBar(R.string.msg_password_empty, binding.root)
             }
           }
           else -> {
-            showSnackBarMessage(R.string.msg_unknown_error, binding.root)
+            showSnackBar(R.string.msg_unknown_error, binding.root)
           }
         }
       }

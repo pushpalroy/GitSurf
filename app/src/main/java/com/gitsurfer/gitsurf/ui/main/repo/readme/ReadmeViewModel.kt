@@ -6,4 +6,6 @@ import com.gitsurfer.gitsurf.ui.base.BaseViewModel
 
 class ReadmeViewModel @ViewModelInject constructor(
   val appRepository: AppRepository
-) : BaseViewModel()
+) : BaseViewModel() {
+
+}

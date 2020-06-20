@@ -17,3 +17,5 @@ const val CLIENT_SECRET: String = BuildConfig.CLIENT_SECRET
 const val CALLBACK_URL: String = BuildConfig.CALLBACK_URL
 
 const val TOKEN_PREFIX: String = "token "
+
+const val GITHUB_BASE_URL = "https://github.com/"

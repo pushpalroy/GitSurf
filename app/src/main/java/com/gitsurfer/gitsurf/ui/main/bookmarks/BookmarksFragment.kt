@@ -1,7 +1,6 @@
 package com.gitsurfer.gitsurf.ui.main.bookmarks
 
 import android.graphics.Canvas
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,17 +18,13 @@ import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
+class BookmarksFragment :
+  BaseFragment<BookmarksViewModel, FragmentBookmarksBinding>(R.layout.fragment_bookmarks) {
 
-  private val viewModel: BookmarksViewModel by viewModels()
+  override val viewModel: BookmarksViewModel by viewModels()
+  override fun getViewBinding(view: View) = FragmentBookmarksBinding.bind(view)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    init(view)
-  }
-
-  private fun init(view: View) {
-    val binding = FragmentBookmarksBinding.bind(view)
+  override fun init() {
     binding.viewModel = viewModel
     binding.rvBookmarks.addItemDecoration(
       DividerItemDecorator(

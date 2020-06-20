@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -28,10 +27,10 @@ import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-  private val viewModel: MainViewModel by viewModels()
-  private lateinit var binding: ActivityMainBinding
+  override val viewModel: MainViewModel by viewModels()
+  override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
   private val navController: NavController by lazy {
     findNavController(
@@ -41,7 +40,7 @@ class MainActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    setContentView(binding.root)
     viewModel.setAuthorizedFromPref()
     setSupportActionBar(toolbar)
     setUpNavigation()
@@ -76,7 +75,7 @@ class MainActivity : BaseActivity() {
 
     viewModel.isInternetAvailable.observe(this, Observer { isAvailable ->
       if (!isAvailable) {
-        showSnackBarMessage(string.lost_internet_message, binding.root, Snackbar.LENGTH_INDEFINITE)
+        showSnackBar(string.lost_internet_message, binding.root, Snackbar.LENGTH_INDEFINITE)
       } else {
         dismissSnackBar()
       }

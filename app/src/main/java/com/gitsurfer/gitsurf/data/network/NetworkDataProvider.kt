@@ -1,13 +1,15 @@
 package com.gitsurfer.gitsurf.data.network
 
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
+import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.data.utils.networkCall
 
 class NetworkDataProvider(
   private val loginApi: LoginApi,
-  private val userApi: UserApi
+  private val userApi: UserApi,
+  private val repoApi: RepoApi
 ) {
 
   suspend fun getBasicToken(
@@ -39,5 +41,13 @@ class NetworkDataProvider(
     state: String
   ) = networkCall {
     loginApi.getAccessToken(clientId, clientSecret, code, state)
+  }
+
+  suspend fun getRepoDetails(
+    authToken: String,
+    owner: String,
+    repoName: String
+  ) = networkCall {
+    repoApi.getRepoDetails(authToken, owner, repoName)
   }
 }

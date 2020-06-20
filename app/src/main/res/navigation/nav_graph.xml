@@ -32,11 +32,12 @@
       android:name="com.gitsurfer.gitsurf.ui.main.repo.RepoFragment"
       android:label="@string/repositories"
       tools:layout="@layout/fragment_repo">
+
     <argument
-        android:name="repoId"
+        android:name="repoOwner"
         app:argType="string" />
     <argument
-        android:name="repoUrl"
+        android:name="repoName"
         app:argType="string" />
   </fragment>
 </navigation>

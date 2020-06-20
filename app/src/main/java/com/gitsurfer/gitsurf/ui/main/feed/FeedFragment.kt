@@ -1,7 +1,6 @@
 package com.gitsurfer.gitsurf.ui.main.feed
 
 import android.graphics.Canvas
-import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -24,18 +23,13 @@ import com.gitsurfer.gitsurf.utils.ui.SwipeController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedFragment : BaseFragment(R.layout.fragment_feed) {
+class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.fragment_feed) {
 
-  private val viewModel: FeedViewModel by viewModels()
-  private val mainViewModel: MainViewModel by activityViewModels()
+  override val viewModel: FeedViewModel by viewModels()
+  private val activityViewModel: MainViewModel by activityViewModels()
+  override fun getViewBinding(view: View) = FragmentFeedBinding.bind(view)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    init(view)
-  }
-
-  private fun init(view: View) {
-    val binding = FragmentFeedBinding.bind(view)
+  override fun init() {
     binding.viewModel = viewModel
     binding.rvFeed.addItemDecoration(
       DividerItemDecorator(
@@ -81,7 +75,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         })
 
       viewModel.initialProgressLiveData.observe(owner, Observer { isLoading ->
-        mainViewModel.updateProgressLiveData(progress = isLoading)
+        activityViewModel.updateProgressLiveData(progress = isLoading)
         binding.swipeContainer.isRefreshing = isLoading
       })
 
@@ -93,16 +87,16 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
       })
 
       viewModel.exceptionLiveData.observe(owner, Observer { exception ->
-        mainViewModel.updateExceptionLiveData(exception)
+        activityViewModel.updateExceptionLiveData(exception)
       })
 
       viewModel.feedClickedLiveData.observe(owner, Observer { feedClicked ->
-
         val bundle = bundleOf(
-          "repoId" to feedClicked.id,
-          "repoUrl" to feedClicked.repo.url
+          "repoOwner" to feedClicked.actor.login,
+          "repoName" to feedClicked.repo.name
         )
-        findNavController().navigate(R.id.repoFragment, bundle)
+        findNavController()
+          .navigate(R.id.repoFragment, bundle)
       })
     }
   }
