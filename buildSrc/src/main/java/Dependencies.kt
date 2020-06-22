@@ -86,4 +86,5 @@ object Util {
   const val circularImageView = "de.hdodenhof:circleimageview:${Versions.circularImageView}"
   const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
   const val memory_leak_debug = "com.squareup.leakcanary:leakcanary-android:${Versions.memoryLeak}"
+  const val markdown_view = "com.github.mukeshsolanki:MarkdownView-Android:${Versions.markdown_view}"
 }

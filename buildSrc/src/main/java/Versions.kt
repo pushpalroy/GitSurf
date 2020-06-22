@@ -41,6 +41,7 @@ object Versions {
   const val moshi = "1.9.2"
   const val timber = "4.7.1"
   const val memoryLeak = "2.0-beta-2"
+  const val markdown_view = "1.0.8"
   const val progressButton = "2.0.1"
   const val coil = "0.11.0"
   const val circularImageView = "3.1.0"

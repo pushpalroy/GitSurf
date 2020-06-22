@@ -11,8 +11,9 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
-    <com.gitsurfer.gitsurf.utils.ui.GitSurfWebView
-        android:id="@+id/web_view"
+
+    <com.mukesh.MarkdownView
+        android:id="@+id/markdown_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

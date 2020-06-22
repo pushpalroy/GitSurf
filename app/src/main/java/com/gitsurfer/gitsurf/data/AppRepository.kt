@@ -59,6 +59,9 @@ class AppRepository(
     repoName = repoName
   )
 
+  suspend fun getFileAsHtmlStream(url: String) =
+    networkDataProvider.getFileAsHtmlStream(url = url)
+
   suspend fun insertRoomUser(
     roomUser: RoomUser
   ) = localDataProvider.insertUser(

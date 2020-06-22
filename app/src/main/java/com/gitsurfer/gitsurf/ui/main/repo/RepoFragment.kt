@@ -19,7 +19,7 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(R.layout.f
   override fun getViewBinding(view: View) = FragmentRepoBinding.bind(view)
 
   companion object {
-    val tabs = listOf("README", "FILES", "COMMITS", "RELEASES", "CONTRIBUTORS")
+    val tabs = listOf("README", "FILES", "COMMITS")
   }
 
   override fun init() {
