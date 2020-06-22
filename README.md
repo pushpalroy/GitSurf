@@ -19,7 +19,6 @@ A client for GitHub based on moderns android app tech stacks built using kotlin,
 - [Moshi](https://github.com/square/moshi/) - JSON library
 - [Coil](https://github.com/coil-kt/coil) - Coroutines image loader
 - [GitHub Actions](https://github.com/features/actions) for workflow automation
-- [Markdown View](https://github.com/mukeshsolanki/MarkdownView-Android) for rendering markdown text
 
 
 ## Architecture
