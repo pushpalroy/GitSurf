@@ -80,6 +80,8 @@ fun loadPropertiesFile(): Properties {
 }
 
 dependencies {
+  implementation(project(":mdview"))
+
   implementation(Dependencies.kotlin_stdlib)
 
   implementation(Android.support_appcompat)
@@ -123,7 +125,6 @@ dependencies {
   implementation(Util.three_ten_abp)
   implementation(Util.timber)
   debugImplementation(Util.memory_leak_debug)
-  implementation(Util.markdown_view)
   implementation(Util.circularImageView)
   implementation(Util.progress_button)
   debugImplementation(Util.chuckDebug)

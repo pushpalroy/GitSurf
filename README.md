@@ -2,7 +2,7 @@
 
 ![Android CI](https://github.com/pushpalroy/GitSurf/workflows/Android%20CI/badge.svg?branch=master)
 
-A client for GitHub based on moderns android app tech stacks built using kotlin, mvvm architechture and dagger-hilt for dependency injection.
+A client for GitHub based on moderns android app tech stacks built using kotlin, mvvm architecture and dagger-hilt for dependency injection.
 
 ## Built With
 
