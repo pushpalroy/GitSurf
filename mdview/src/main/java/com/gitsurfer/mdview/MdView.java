@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -62,12 +63,11 @@ public class MdView extends WebView implements NestedScrollingChild {
     this.context = context;
     childHelper = new NestedScrollingChildHelper(this);
     setNestedScrollingEnabled(true);
-    init(attrs);
+    init();
   }
 
   @SuppressLint("SetJavaScriptEnabled")
-  private void init(AttributeSet attrs) {
-
+  private void init() {
     WebSettings settings = getSettings();
     settings.setJavaScriptEnabled(true);
     settings.setAppCachePath(getContext().getCacheDir().getPath());
@@ -76,6 +76,11 @@ public class MdView extends WebView implements NestedScrollingChild {
     settings.setDefaultTextEncodingName("utf-8");
     settings.setLoadsImagesAutomatically(true);
     settings.setBlockNetworkImage(false);
+    settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+    setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+    settings.setSupportZoom(true);
+    settings.setBuiltInZoomControls(true);
+    settings.setDisplayZoomControls(false);
 
     setWebChromeClient(new ChromeClient());
     setWebViewClient(new MdWebViewClient());
@@ -145,7 +150,7 @@ public class MdView extends WebView implements NestedScrollingChild {
     String bs64MdText = imgToBase64(markdownText);
     String escMdText = escapeForText(bs64MdText);
     previewText = String.format("preview('%s')", escMdText);
-    init(null);
+    init();
   }
 
   private String escapeForText(String mdText) {
