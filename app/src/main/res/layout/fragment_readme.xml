@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
   <data>
     <variable
         name="vm"
         type="com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel"
         />
   </data>
-  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
+  <com.gitsurfer.mdview.MdView
+      android:id="@+id/markdown_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      >
-    <com.gitsurfer.gitsurf.utils.ui.GitSurfWebView
-        android:id="@+id/web_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
 </layout>

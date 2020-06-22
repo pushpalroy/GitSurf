@@ -80,6 +80,8 @@ fun loadPropertiesFile(): Properties {
 }
 
 dependencies {
+  implementation(project(":mdview"))
+
   implementation(Dependencies.kotlin_stdlib)
 
   implementation(Android.support_appcompat)

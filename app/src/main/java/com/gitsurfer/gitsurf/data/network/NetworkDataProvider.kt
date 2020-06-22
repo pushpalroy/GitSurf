@@ -50,4 +50,8 @@ class NetworkDataProvider(
   ) = networkCall {
     repoApi.getRepoDetails(authToken, owner, repoName)
   }
+
+  suspend fun getFileAsHtmlStream(url: String) = networkCall {
+    repoApi.getFileAsHtmlStream(url)
+  }
 }

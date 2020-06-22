@@ -26,7 +26,6 @@ interface RepoApi {
   @GET
   @Headers("Accept: application/vnd.github.html")
   suspend fun getFileAsHtmlStream(
-    @Header("forceNetWork") forceNetWork: Boolean,
     @Url url: String?
   ): Response<ResponseBody>
 }
