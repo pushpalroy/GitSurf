@@ -39,9 +39,7 @@ class MdView : NestedScrollWebView {
     context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int
-  ) : super(context, attrs, defStyleAttr) {
-    init()
-  }
+  ) : super(context, attrs, defStyleAttr)
 
   fun setMarkDownText(markdownText: String?) {
     markdownText?.let {
@@ -120,4 +118,9 @@ class MdView : NestedScrollWebView {
       contentChangeListener?.onContentChanged(progress)
     }
   }
+}
+
+interface ContentChangeListener {
+  fun onContentChanged(progress: Int)
+  fun onScrollChanged(reachedTop: Boolean, scroll: Int)
 }

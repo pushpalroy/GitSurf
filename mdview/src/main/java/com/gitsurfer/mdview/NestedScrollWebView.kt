@@ -16,11 +16,11 @@ open class NestedScrollWebView :
 
   private var lastY = 0
   private val scrollOffset = IntArray(2)
-  private val mScrollConsumed = IntArray(2)
+  private val scrollConsumed = IntArray(2)
   private var nestedOffsetY = 0
   private var firstScroll = true
   private var interceptTouch = false
-  private var childHelper: NestedScrollingChildHelper = NestedScrollingChildHelper(this)
+  private lateinit var scrollingChildHelper: NestedScrollingChildHelper
 
   constructor(
     context: Context
@@ -46,7 +46,7 @@ open class NestedScrollWebView :
     dyUnconsumed: Int,
     offsetInWindow: IntArray?
   ): Boolean {
-    return childHelper
+    return scrollingChildHelper
       .dispatchNestedScroll(
         dxConsumed,
         dyConsumed,
@@ -57,7 +57,7 @@ open class NestedScrollWebView :
   }
 
   override fun isNestedScrollingEnabled(): Boolean {
-    return childHelper.isNestedScrollingEnabled
+    return scrollingChildHelper.isNestedScrollingEnabled
   }
 
   override fun dispatchNestedPreScroll(
@@ -66,43 +66,43 @@ open class NestedScrollWebView :
     consumed: IntArray?,
     offsetInWindow: IntArray?
   ): Boolean {
-    return childHelper.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
+    return scrollingChildHelper.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
   }
 
   override fun stopNestedScroll() {
-    childHelper.stopNestedScroll()
+    scrollingChildHelper.stopNestedScroll()
   }
 
   override fun hasNestedScrollingParent(): Boolean {
-    return childHelper.hasNestedScrollingParent()
+    return scrollingChildHelper.hasNestedScrollingParent()
   }
 
   override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
-    return childHelper.dispatchNestedPreFling(velocityX, velocityY)
+    return scrollingChildHelper.dispatchNestedPreFling(velocityX, velocityY)
   }
 
   override fun setNestedScrollingEnabled(enabled: Boolean) {
-    childHelper.isNestedScrollingEnabled = enabled
+    scrollingChildHelper = NestedScrollingChildHelper(this)
+    scrollingChildHelper.isNestedScrollingEnabled = enabled
   }
 
   override fun dispatchNestedFling(velocityX: Float, velocityY: Float, consumed: Boolean): Boolean {
-    return childHelper.dispatchNestedFling(velocityX, velocityY, consumed)
+    return scrollingChildHelper.dispatchNestedFling(velocityX, velocityY, consumed)
   }
 
   override fun startNestedScroll(axes: Int): Boolean {
-    return childHelper.startNestedScroll(axes)
+    return scrollingChildHelper.startNestedScroll(axes)
   }
 
   fun setInterceptTouch(interceptTouch: Boolean) {
     this.interceptTouch = interceptTouch
   }
 
-  override fun onTouchEvent(ev: MotionEvent?): Boolean {
-    if (parent != null) {
-      parent.requestDisallowInterceptTouchEvent(interceptTouch)
-    }
+  override fun onTouchEvent(motionEvent: MotionEvent?): Boolean {
+    parent?.requestDisallowInterceptTouchEvent(interceptTouch)
+
     val returnValue: Boolean
-    val event = MotionEvent.obtain(ev)
+    val event = MotionEvent.obtain(motionEvent)
     val action = MotionEventCompat.getActionMasked(event)
     if (action == MotionEvent.ACTION_DOWN) {
       nestedOffsetY = 0
@@ -112,8 +112,8 @@ open class NestedScrollWebView :
     when (action) {
       MotionEvent.ACTION_MOVE -> {
         var deltaY = lastY - eventY
-        if (dispatchNestedPreScroll(0, deltaY, mScrollConsumed, scrollOffset)) {
-          deltaY -= mScrollConsumed[1]
+        if (dispatchNestedPreScroll(0, deltaY, scrollConsumed, scrollOffset)) {
+          deltaY -= scrollConsumed[1]
           lastY = eventY - scrollOffset[1]
           event.offsetLocation(0f, (-scrollOffset[1]).toFloat())
           nestedOffsetY += scrollOffset[1]
