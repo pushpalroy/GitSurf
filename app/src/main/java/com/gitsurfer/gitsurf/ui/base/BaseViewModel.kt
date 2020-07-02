@@ -29,18 +29,14 @@ abstract class BaseViewModel : ViewModel() {
 
   override fun onCleared() {
     super.onCleared()
-    if (compositeDisposable != null) {
-      compositeDisposable!!.dispose()
-      compositeDisposable!!.clear()
-      compositeDisposable = null
-    }
+    compositeDisposable?.dispose()
+    compositeDisposable?.clear()
   }
 
   protected fun addDisposable(disposable: Disposable) {
     if (compositeDisposable == null) {
       compositeDisposable = CompositeDisposable()
     }
-    compositeDisposable!!.add(disposable)
-
+    compositeDisposable?.add(disposable)
   }
 }
