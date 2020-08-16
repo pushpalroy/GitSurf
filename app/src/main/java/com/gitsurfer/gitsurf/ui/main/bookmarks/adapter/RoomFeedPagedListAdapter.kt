@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.feed.paging
+package com.gitsurfer.gitsurf.ui.main.bookmarks.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.databinding.ItemRoomFeedBinding
 import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
-import com.gitsurfer.gitsurf.ui.main.feed.paging.RoomFeedPagedListAdapter.RoomFeedViewHolder
+import com.gitsurfer.gitsurf.ui.main.bookmarks.adapter.RoomFeedPagedListAdapter.RoomFeedViewHolder
 import com.gitsurfer.gitsurf.utils.DateUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
 import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction

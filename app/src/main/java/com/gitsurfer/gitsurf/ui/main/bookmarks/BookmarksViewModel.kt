@@ -8,7 +8,7 @@ import androidx.paging.PagedList
 import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
-import com.gitsurfer.gitsurf.ui.main.feed.paging.RoomFeedPagedListAdapter
+import com.gitsurfer.gitsurf.ui.main.bookmarks.adapter.RoomFeedPagedListAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
