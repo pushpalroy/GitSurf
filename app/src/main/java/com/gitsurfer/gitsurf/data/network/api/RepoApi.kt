@@ -31,10 +31,13 @@ interface RepoApi {
     @Url url: String?
   ): Response<ResponseBody>
 
-  @GET("repos/{owner}/{repo}/contents/")
+  @GET("repos/{owner}/{repo}/contents/{path}")
+  @Headers("Accept: application/json")
   suspend fun getRepoFiles(
+    @Header("Authorization") authToken: String,
     @Path("owner") owner: String,
     @Path("repo") repoName: String,
+    @Path(value = "path", encoded = true) path: String,
     @Query("ref") branch: String
   ): Response<List<RepoFile>>
 }

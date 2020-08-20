@@ -22,6 +22,7 @@ class FilesViewModel @ViewModelInject constructor(
   fun fetchRepoFiles(
     owner: String?,
     repoName: String?,
+    path: String,
     branch: String?
   ) {
     owner?.let {
@@ -34,10 +35,13 @@ class FilesViewModel @ViewModelInject constructor(
                   .getRepoFiles(
                     owner = owner,
                     repoName = repoName.split("/")[1],
+                    path = path,
                     branch = branch
                   )
                 repoFiles.first?.let { repoFilesList ->
-                  _repoFilesLiveData.postValue(repoFilesList)
+                  _repoFilesLiveData.postValue(
+                    repoFilesList.sortedWith(compareBy { it.size })
+                  )
                 }
                 repoFiles.second?.let {
                   updateExceptionLiveData(it)

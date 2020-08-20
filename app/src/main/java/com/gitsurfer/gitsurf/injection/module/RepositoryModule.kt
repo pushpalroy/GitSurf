@@ -7,6 +7,7 @@ import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
 import com.gitsurfer.gitsurf.data.persistence.database.AppDatabase
+import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +22,12 @@ object RepositoryModule {
   @Singleton
   fun provideAppRepository(
     networkDataProvider: NetworkDataProvider,
-    localDataProvider: LocalDataProvider
+    localDataProvider: LocalDataProvider,
+    prefUtils: SharedPrefUtils
   ) = AppRepository(
     networkDataProvider = networkDataProvider,
-    localDataProvider = localDataProvider
+    localDataProvider = localDataProvider,
+    prefUtils = prefUtils
   )
 
   @Provides

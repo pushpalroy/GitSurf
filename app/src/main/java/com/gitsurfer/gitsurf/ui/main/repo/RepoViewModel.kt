@@ -14,8 +14,7 @@ import kotlinx.coroutines.launch
 
 class RepoViewModel @ViewModelInject constructor(
   val appRepository: AppRepository,
-  private val networkManager: NetworkManager,
-  private val prefUtils: SharedPrefUtils
+  private val networkManager: NetworkManager
 ) : BaseViewModel() {
 
   private val _repoLiveData = MutableLiveData<Repo>()
@@ -32,7 +31,6 @@ class RepoViewModel @ViewModelInject constructor(
           when {
             networkManager.hasInternetAccess() -> {
               val repoDetails = appRepository.getRepoDetails(
-                authToken = TOKEN_PREFIX + prefUtils.authToken,
                 owner = repoName.split("/")[0],
                 repoName = repoName.split("/")[1]
               )

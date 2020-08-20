@@ -5,7 +5,6 @@ import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
 import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.data.utils.networkCall
-import java.nio.file.Path
 
 class NetworkDataProvider(
   private val loginApi: LoginApi,
@@ -57,10 +56,12 @@ class NetworkDataProvider(
   }
 
   suspend fun getRepoFiles(
+    authToken: String,
     owner: String,
     repoName: String,
+    path: String,
     branch: String
   ) = networkCall {
-    repoApi.getRepoFiles(owner, repoName, branch)
+    repoApi.getRepoFiles(authToken, owner, repoName, path, branch)
   }
 }

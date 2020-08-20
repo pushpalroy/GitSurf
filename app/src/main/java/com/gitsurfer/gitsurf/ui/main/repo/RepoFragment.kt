@@ -38,16 +38,18 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(R.layout.f
   }
 
   private fun listenToLiveData() {
-    viewModel.repoLiveData.observe(viewLifecycleOwner, Observer { repo ->
-      binding.pager.adapter = RepoViewPagerAdapter(
-        this,
-        tabs,
-        repo
-      )
-      TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-        tab.text = tabs[position]
-      }.attach()
-    })
+    viewModel.repoLiveData.observe(
+      viewLifecycleOwner, Observer { repo ->
+        binding.pager.adapter = RepoViewPagerAdapter(
+          this, tabs, repo
+        )
+        TabLayoutMediator(
+          binding.tabLayout,
+          binding.pager
+        ) { tab, position ->
+          tab.text = tabs[position]
+        }.attach()
+      })
   }
 
   override fun onDetach() {

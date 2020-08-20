@@ -17,6 +17,9 @@ object GithubUtil {
   private const val ACTION_STARTED = "started"
   private const val ACTION_ADDED = "added"
 
+  const val TYPE_DIR = "dir"
+  const val TYPE_FILE = "file"
+
   @JvmStatic
   fun getActionFromEventType(eventType: String?): String {
     eventType?.let {
@@ -69,5 +72,14 @@ object GithubUtil {
       }
     }
     return ""
+  }
+
+  @JvmStatic
+  fun getPreviousDirPath(currentPath: String): String {
+    return if (currentPath.contains("/")) {
+      currentPath.substringBeforeLast("/")
+    } else {
+      ""
+    }
   }
 }

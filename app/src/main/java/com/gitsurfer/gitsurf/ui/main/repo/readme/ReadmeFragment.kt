@@ -26,15 +26,9 @@ class ReadmeFragment constructor(
 
   override fun init() {
     binding.vm = viewModel
-
-    val readMeFileUrl = "$BASE_URL/repos/$repoName/readme?ref=$branch"
-    viewModel.getReadMeSource(readMeFileUrl)
-
-    binding.markdownView.isOpenUrlInBrowser = true
-    binding.markdownView.setEnableNestedScrolling(true)
-    binding.markdownView.setInterceptTouch(true)
-    binding.markdownView.setOnContentChangedListener(this)
-
+    fetchReadMe()
+    initMarkDown()
+    setListeners()
     listen()
   }
 
@@ -43,6 +37,7 @@ class ReadmeFragment constructor(
       context?.let {
         try {
           binding.markdownView.setMarkDownText(readMeSrc.string())
+          hideLoader()
         } catch (ex: IOException) {
           Timber.tag(MdView.TAG)
             .e(ex)
@@ -51,17 +46,42 @@ class ReadmeFragment constructor(
     })
   }
 
+  private fun setListeners() {
+    binding.swipeContainer.setOnRefreshListener {
+      fetchReadMe()
+    }
+  }
+
+  private fun initMarkDown() {
+    binding.markdownView.isOpenUrlInBrowser = true
+    binding.markdownView.setEnableNestedScrolling(true)
+    binding.markdownView.setInterceptTouch(true)
+    binding.markdownView.setOnContentChangedListener(this)
+  }
+
+  private fun fetchReadMe() {
+    showLoader()
+    val readMeFileUrl = "$BASE_URL/repos/$repoName/readme?ref=$branch"
+    viewModel.getReadMeSource(readMeFileUrl)
+  }
+
   override fun onContentChanged(progress: Int) {
-    Timber.tag(MdView.TAG)
-      .d("OnContentChanged: %s", progress)
+    Timber.d("OnContentChanged: %s", progress)
   }
 
   override fun onScrollChanged(
     reachedTop: Boolean,
     scroll: Int
   ) {
-    Timber.tag(MdView.TAG)
-      .d("onScrollChanged: %s, reachedTop: %s", scroll, reachedTop)
+    Timber.d("onScrollChanged: %s, reachedTop: %s", scroll, reachedTop)
+  }
+
+  private fun showLoader() {
+    binding.swipeContainer.isRefreshing = true
+  }
+
+  private fun hideLoader() {
+    binding.swipeContainer.isRefreshing = false
   }
 }
 

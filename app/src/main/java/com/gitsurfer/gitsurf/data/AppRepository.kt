@@ -5,10 +5,13 @@ import com.gitsurfer.gitsurf.data.network.models.request.AuthRequestModel
 import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
 import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
+import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
+import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 
 class AppRepository(
   private val networkDataProvider: NetworkDataProvider,
-  private val localDataProvider: LocalDataProvider
+  private val localDataProvider: LocalDataProvider,
+  private val prefUtils: SharedPrefUtils
 ) {
 
   suspend fun getBasicToken(
@@ -50,11 +53,10 @@ class AppRepository(
   )
 
   suspend fun getRepoDetails(
-    authToken: String,
     owner: String,
     repoName: String
   ) = networkDataProvider.getRepoDetails(
-    authToken = authToken,
+    authToken = getAuthToken(),
     owner = owner,
     repoName = repoName
   )
@@ -62,10 +64,13 @@ class AppRepository(
   suspend fun getRepoFiles(
     owner: String,
     repoName: String,
+    path: String,
     branch: String
   ) = networkDataProvider.getRepoFiles(
+    authToken = getAuthToken(),
     owner = owner,
     repoName = repoName,
+    path = path,
     branch = branch
   )
 
@@ -89,6 +94,10 @@ class AppRepository(
   ) = localDataProvider.insertFeed(
     roomFeed = roomFeed
   )
+
+  private fun getAuthToken(): String {
+    return TOKEN_PREFIX + prefUtils.authToken
+  }
 
   fun getRoomFeeds() = localDataProvider.getAllFeeds()
 

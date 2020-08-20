@@ -8,11 +8,17 @@
         type="com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel"
         />
   </data>
-  <com.gitsurfer.mdview.MdView
-      android:id="@+id/markdown_view"
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/swipe_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+      >
+    <com.gitsurfer.mdview.MdView
+        android:id="@+id/markdown_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
