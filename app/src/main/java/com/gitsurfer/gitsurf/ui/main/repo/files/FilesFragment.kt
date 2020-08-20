@@ -3,17 +3,20 @@ package com.gitsurfer.gitsurf.ui.main.repo.files
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.data.network.models.response.RepoFile
 import com.gitsurfer.gitsurf.databinding.FragmentFilesBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.repo.files.adapter.FileClickListener
 import com.gitsurfer.gitsurf.ui.main.repo.files.adapter.FilesAdapter
-import com.gitsurfer.gitsurf.utils.GithubUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.TYPE_DIR
+import com.gitsurfer.gitsurf.utils.GithubUtil.TYPE_FILE
 import com.gitsurfer.gitsurf.utils.GithubUtil.getPreviousDirPath
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -82,12 +85,22 @@ class FilesFragment(
 
   override fun onFileClicked(position: Int) {
     val repoFile = viewModel.repoFileLiveData.value?.get(position)
-    repoFile?.let {
-      if (it.type == TYPE_DIR) {
-        currentPath = it.path
+    repoFile?.let { file ->
+      if (file.type == TYPE_DIR) {
+        currentPath = file.path
         fetchRepoFiles()
+      } else if (file.type == TYPE_FILE) {
+        navToCodeViewer(file)
       }
     }
+  }
+
+  private fun navToCodeViewer(file: RepoFile) {
+    val bundle = bundleOf(
+      "fileUrl" to file.url,
+      "fileName" to file.fileName
+    )
+    findNavController().navigate(R.id.codeFragment, bundle)
   }
 
   private fun navToPrevDir() {

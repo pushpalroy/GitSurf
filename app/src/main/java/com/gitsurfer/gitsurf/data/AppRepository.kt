@@ -75,7 +75,10 @@ class AppRepository(
   )
 
   suspend fun getFileAsHtmlStream(url: String) =
-    networkDataProvider.getFileAsHtmlStream(url = url)
+    networkDataProvider.getFileAsHtmlStream(
+      authToken = getAuthToken(),
+      url = url
+    )
 
   suspend fun insertRoomUser(
     roomUser: RoomUser

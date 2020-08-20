@@ -39,5 +39,24 @@
     <argument
         android:name="repoName"
         app:argType="string" />
+
+    <action
+        android:id="@+id/open_code_from_repo"
+        app:destination="@+id/codeFragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/codeFragment"
+      android:name="com.gitsurfer.gitsurf.ui.main.repo.files.code.CodeFragment"
+      android:label="@string/code"
+      tools:layout="@layout/fragment_code">
+
+    <argument
+        android:name="fileName"
+        app:argType="string" />
+
+    <argument
+        android:name="fileUrl"
+        app:argType="string" />
   </fragment>
 </navigation>

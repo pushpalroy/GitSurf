@@ -28,6 +28,7 @@ interface RepoApi {
   @GET
   @Headers("Accept: application/vnd.github.html")
   suspend fun getFileAsHtmlStream(
+    @Header("Authorization") authToken: String,
     @Url url: String?
   ): Response<ResponseBody>
 

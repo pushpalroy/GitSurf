@@ -90,6 +90,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     )
   }
 
+  fun updateTitle(title: String?) {
+    title?.let {
+      toolbar.title = it
+    }
+  }
+
   override fun onSupportNavigateUp(): Boolean {
     // Ensures that the menu items in the Nav Drawer stay in sync with the navigation graph
     return navigateUp(navController, drawerLayout)
