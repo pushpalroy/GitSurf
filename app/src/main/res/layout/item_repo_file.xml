@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:paddingStart="@dimen/dimen_10dp"
+      android:paddingTop="@dimen/dimen_10dp"
+      android:paddingEnd="@dimen/dimen_10dp"
+      android:paddingBottom="@dimen/dimen_10dp"
+      >
+
+    <ImageView
+        android:id="@+id/iv_file_icon"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:contentDescription="@string/con_desc_repo_icon"
+        android:src="@drawable/ic_file"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="@font/muli_regular"
+        android:textColor="@color/textBlackDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_file_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_file_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text=".gitignore"
+        />
+
+    <TextView
+        android:id="@+id/tv_file_size"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_light"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/textBlackMedium"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_file_name"
+        tools:text="1.22 kB"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

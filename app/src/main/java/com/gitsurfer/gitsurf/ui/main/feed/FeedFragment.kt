@@ -31,42 +31,12 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
 
   override fun init() {
     binding.viewModel = viewModel
-    binding.rvFeed.addItemDecoration(
-      DividerItemDecorator(
-        context, resources.getDrawable(drawable.divider_drawable, null)
-      )
-    )
-    binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
-
-    val swipeController = SwipeController(
-      context, object : SwipeClickActions() {
-        override fun onLeftClicked(position: Int) {
-          showToast("Feed Bookmarked")
-          viewModel.bookmarkFeed(position)
-        }
-
-        override fun onRightClicked(position: Int) {
-          showToast("Repository Starred")
-        }
-      })
-    val itemTouchHelper = ItemTouchHelper(swipeController)
-    itemTouchHelper.attachToRecyclerView(binding.rvFeed)
-
-    binding.rvFeed.addItemDecoration(object : ItemDecoration() {
-      override fun onDraw(
-        c: Canvas,
-        parent: RecyclerView,
-        state: State
-      ) {
-        swipeController.onDraw(c)
-      }
-    })
-
-    listenToLiveData(binding)
-    setListeners(binding)
+    initRecyclerView()
+    setListeners()
+    listenToLiveData()
   }
 
-  private fun listenToLiveData(binding: FragmentFeedBinding) {
+  private fun listenToLiveData() {
     activity?.let { owner ->
       viewModel.getFeed()
         .observe(owner, Observer { feedList ->
@@ -101,7 +71,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
     }
   }
 
-  private fun setListeners(binding: FragmentFeedBinding) {
+  private fun setListeners() {
     binding.swipeContainer.setOnRefreshListener {
       viewModel.setNoMoreItemsToLoad(false)
       viewModel.refresh()
@@ -114,5 +84,42 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
         }
       }
     })
+  }
+
+  private fun initRecyclerView() {
+    binding.rvFeed.addItemDecoration(
+      DividerItemDecorator(
+        context, resources.getDrawable(drawable.divider_drawable, null)
+      )
+    )
+    binding.swipeContainer.setColorSchemeColors(resources.getColor(R.color.colorAccent, null))
+
+    val swipeController = initSwipeRefresher()
+    val itemTouchHelper = ItemTouchHelper(swipeController)
+    itemTouchHelper.attachToRecyclerView(binding.rvFeed)
+
+    binding.rvFeed.addItemDecoration(object : ItemDecoration() {
+      override fun onDraw(
+        c: Canvas,
+        parent: RecyclerView,
+        state: State
+      ) {
+        swipeController.onDraw(c)
+      }
+    })
+  }
+
+  private fun initSwipeRefresher(): SwipeController {
+    return SwipeController(
+      context, object : SwipeClickActions() {
+        override fun onLeftClicked(position: Int) {
+          showToast("Feed Bookmarked")
+          viewModel.bookmarkFeed(position)
+        }
+
+        override fun onRightClicked(position: Int) {
+          showToast("Repository Starred")
+        }
+      })
   }
 }

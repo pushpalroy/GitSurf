@@ -59,6 +59,16 @@ class AppRepository(
     repoName = repoName
   )
 
+  suspend fun getRepoFiles(
+    owner: String,
+    repoName: String,
+    branch: String
+  ) = networkDataProvider.getRepoFiles(
+    owner = owner,
+    repoName = repoName,
+    branch = branch
+  )
+
   suspend fun getFileAsHtmlStream(url: String) =
     networkDataProvider.getFileAsHtmlStream(url = url)
 

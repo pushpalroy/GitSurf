@@ -3,6 +3,7 @@ package com.gitsurfer.gitsurf.ui.main.repo.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.gitsurfer.gitsurf.data.network.models.response.Repo
+import com.gitsurfer.gitsurf.ui.main.repo.files.FilesFragment
 import com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeFragment
 
 class RepoViewPagerAdapter(
@@ -18,6 +19,7 @@ class RepoViewPagerAdapter(
   override fun createFragment(position: Int): Fragment {
     when (position) {
       0 -> return ReadmeFragment(repo.fullName, repo.defaultBranch)
+      1 -> return FilesFragment(repo.fullName, repo.defaultBranch, repo.owner?.login)
     }
     return ReadmeFragment(repo.fullName, repo.defaultBranch)
   }

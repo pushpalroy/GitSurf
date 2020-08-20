@@ -1,5 +1,6 @@
 package com.gitsurfer.gitsurf.ui.main.bookmarks.adapter
 
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
@@ -17,7 +18,7 @@ import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction
 import com.gitsurfer.gitsurf.utils.GithubUtil.getIconFromEventType
 
 class RoomFeedPagedListAdapter : PagedListAdapter<RoomFeed, RoomFeedViewHolder>(
-    ROOM_FEED_COMPARATOR
+  ROOM_FEED_COMPARATOR
 ) {
 
   private var roomFeedItemsList: List<RoomFeed?> = listOf()
@@ -27,10 +28,11 @@ class RoomFeedPagedListAdapter : PagedListAdapter<RoomFeed, RoomFeedViewHolder>(
     viewType: Int
   ): RoomFeedViewHolder {
     return RoomFeedViewHolder(
-        DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layout.item_room_feed, parent, false
-        )
+      DataBindingUtil.inflate(
+        LayoutInflater.from(parent.context),
+        layout.item_room_feed,
+        parent, false
+      )
     )
   }
 
@@ -54,42 +56,50 @@ class RoomFeedPagedListAdapter : PagedListAdapter<RoomFeed, RoomFeedViewHolder>(
     feed?.let { holder.bind(it) }
   }
 
-  class RoomFeedViewHolder(private val binding: ItemRoomFeedBinding) :
-      RecyclerView.ViewHolder(binding.root) {
-
+  class RoomFeedViewHolder(
+    private val binding: ItemRoomFeedBinding
+  ) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(roomFeed: RoomFeed) {
       binding.roomFeed = roomFeed
+      binding.tvAction.text = getSpanned(roomFeed)
+      binding.tvTimestamp.text = DateUtil.getTimeAgo(roomFeed.createdAt?.time) ?: ""
+      binding.ivIcon.setImageResource(getIconFromEventType(roomFeed.type))
+    }
+
+    private fun getEvent(
+      roomFeed: RoomFeed
+    ): String {
       val action = getActionFromEventType(roomFeed.type)
       val description = getDescriptionFromAction(action, roomFeed)
+      return roomFeed.actor?.displayLogin +
+          " <b>" +
+          action +
+          "</b> " +
+          description +
+          roomFeed.repo?.name
+    }
 
-      val event =
-        roomFeed.actor!!.displayLogin +
-            " <b>" +
-            action +
-            "</b> " +
-            description +
-            roomFeed.repo!!.name
-      HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
-      binding.tvAction.text =
-        HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
-      binding.tvTimestamp.text = DateUtil.getTimeAgo(roomFeed.createdAt!!.time)
-      binding.ivIcon.setImageResource(getIconFromEventType(roomFeed.type))
+    private fun getSpanned(roomFeed: RoomFeed): Spanned {
+      return HtmlCompat.fromHtml(
+        getEvent(roomFeed),
+        HtmlCompat.FROM_HTML_MODE_LEGACY
+      )
     }
   }
 
   companion object {
-    private val ROOM_FEED_COMPARATOR = object : DiffUtil.ItemCallback<RoomFeed>() {
-      override fun areItemsTheSame(
-        oldItem: RoomFeed,
-        newItem: RoomFeed
-      ): Boolean =
-        oldItem.id == newItem.id
+    private val ROOM_FEED_COMPARATOR =
+      object : DiffUtil.ItemCallback<RoomFeed>() {
+        override fun areItemsTheSame(
+          oldItem: RoomFeed,
+          newItem: RoomFeed
+        ): Boolean = oldItem.id == newItem.id
 
-      override fun areContentsTheSame(
-        oldItem: RoomFeed,
-        newItem: RoomFeed
-      ): Boolean =
-        newItem == oldItem
-    }
+        override fun areContentsTheSame(
+          oldItem: RoomFeed,
+          newItem: RoomFeed
+        ): Boolean = newItem == oldItem
+      }
   }
 }
