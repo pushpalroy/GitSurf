@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.repo.files.adapter
+package com.gitsurfer.gitsurf.ui.repo.files.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R
 import com.gitsurfer.gitsurf.data.network.models.response.RepoFile
 import com.gitsurfer.gitsurf.databinding.ItemRepoFileBinding
-import com.gitsurfer.gitsurf.ui.main.repo.files.adapter.FilesAdapter.FileViewHolder
+import com.gitsurfer.gitsurf.ui.repo.files.adapter.FilesAdapter.FileViewHolder
 import com.gitsurfer.gitsurf.utils.GithubUtil.TYPE_FILE
 
 class FilesAdapter constructor(

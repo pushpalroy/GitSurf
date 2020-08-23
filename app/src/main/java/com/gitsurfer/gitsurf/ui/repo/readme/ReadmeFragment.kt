@@ -1,12 +1,12 @@
-package com.gitsurfer.gitsurf.ui.main.repo.files.code
+package com.gitsurfer.gitsurf.ui.repo.readme
 
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.gitsurfer.gitsurf.R.layout
-import com.gitsurfer.gitsurf.databinding.FragmentCodeBinding
+import com.gitsurfer.gitsurf.databinding.FragmentReadmeBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
-import com.gitsurfer.gitsurf.ui.main.MainActivity
+import com.gitsurfer.gitsurf.utils.constants.BASE_URL
 import com.gitsurfer.mdview.ContentChangeListener
 import com.gitsurfer.mdview.MdView
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,24 +14,29 @@ import timber.log.Timber
 import java.io.IOException
 
 @AndroidEntryPoint
-class CodeFragment : BaseFragment<CodeViewModel, FragmentCodeBinding>(layout.fragment_code),
+class ReadmeFragment constructor(
+  private val repoName: String?,
+  private val branch: String?
+) :
+  BaseFragment<ReadmeViewModel, FragmentReadmeBinding>(layout.fragment_readme),
   ContentChangeListener {
 
-  override val viewModel: CodeViewModel by viewModels()
-  override fun getViewBinding(view: View) = FragmentCodeBinding.bind(view)
+  override val viewModel: ReadmeViewModel by viewModels()
+  override fun getViewBinding(view: View) = FragmentReadmeBinding.bind(view)
 
   override fun init() {
-    setToolbarTitle()
+    binding.vm = viewModel
+    fetchReadMe()
     initMarkDown()
-    fetchCode()
+    setListeners()
     listen()
   }
 
   private fun listen() {
-    viewModel.codeSrc.observe(viewLifecycleOwner, Observer { codeSrc ->
+    viewModel.readMeSrc.observe(viewLifecycleOwner, Observer { readMeSrc ->
       context?.let {
         try {
-          binding.markdownView.setMarkDownText(codeSrc.string())
+          binding.markdownView.setMarkDownText(readMeSrc.string())
           hideLoader()
         } catch (ex: IOException) {
           Timber.tag(MdView.TAG)
@@ -41,6 +46,12 @@ class CodeFragment : BaseFragment<CodeViewModel, FragmentCodeBinding>(layout.fra
     })
   }
 
+  private fun setListeners() {
+    binding.swipeContainer.setOnRefreshListener {
+      fetchReadMe()
+    }
+  }
+
   private fun initMarkDown() {
     binding.markdownView.isOpenUrlInBrowser = true
     binding.markdownView.setEnableNestedScrolling(true)
@@ -48,17 +59,10 @@ class CodeFragment : BaseFragment<CodeViewModel, FragmentCodeBinding>(layout.fra
     binding.markdownView.setOnContentChangedListener(this)
   }
 
-  private fun setToolbarTitle() {
-    (requireActivity() as MainActivity).updateTitle(
-      arguments?.getString("fileName", "")
-    )
-  }
-
-  private fun fetchCode() {
+  private fun fetchReadMe() {
     showLoader()
-    viewModel.fetchCode(
-      arguments?.getString("fileUrl", "")
-    )
+    val readMeFileUrl = "$BASE_URL/repos/$repoName/readme?ref=$branch"
+    viewModel.getReadMeSource(readMeFileUrl)
   }
 
   override fun onContentChanged(progress: Int) {
@@ -73,11 +77,11 @@ class CodeFragment : BaseFragment<CodeViewModel, FragmentCodeBinding>(layout.fra
   }
 
   private fun showLoader() {
-    binding.pbLoader.visibility = View.VISIBLE
+    binding.swipeContainer.isRefreshing = true
   }
 
   private fun hideLoader() {
-    binding.pbLoader.visibility = View.GONE
+    binding.swipeContainer.isRefreshing = false
   }
 }
 

@@ -29,7 +29,7 @@ class FeedViewModel @ViewModelInject constructor(
     private const val TAG = "Feed"
   }
 
-  var feedClickEvent = SingleLiveEvent<Pair<Feed, FragmentNavigator.Extras>>()
+  var feedClickEvent = SingleLiveEvent<Feed>()
   private var feedPagedList: LiveData<PagedList<Feed>>
   val adapter: FeedPagedListAdapter = FeedPagedListAdapter(feedClickListener = this)
 
@@ -92,11 +92,10 @@ class FeedViewModel @ViewModelInject constructor(
   }
 
   override fun onFeedClicked(
-    position: Int,
-    extras: FragmentNavigator.Extras
+    position: Int
   ) {
     adapter.getFeedItem(position)?.let {
-      feedClickEvent.postValue(Pair(it, extras))
+      feedClickEvent.postValue(it)
     }
   }
 }

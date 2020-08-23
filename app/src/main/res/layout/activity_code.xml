@@ -5,13 +5,32 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
       >
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          android:background="@color/colorPrimary"
+          android:theme="@style/ToolBarStyle"
+          app:layout_scrollFlags="scroll|enterAlways|snap"
+          />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <com.gitsurfer.mdview.MdView
         android:id="@+id/markdown_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         />
     <ProgressBar
         android:id="@+id/pb_loader"
@@ -20,12 +39,11 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="visible"
-        app:layout_anchor="@+id/markdown_view"
+        app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="top"
-        app:layout_constraintBottom_toTopOf="@+id/markdown_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 

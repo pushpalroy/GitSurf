@@ -13,11 +13,11 @@ import com.gitsurfer.gitsurf.data.network.models.response.toRoomUser
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
-import com.gitsurfer.gitsurf.utils.APPLICATION_ID
-import com.gitsurfer.gitsurf.utils.CALLBACK_URL
-import com.gitsurfer.gitsurf.utils.CLIENT_ID
-import com.gitsurfer.gitsurf.utils.CLIENT_SECRET
-import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
+import com.gitsurfer.gitsurf.utils.constants.APPLICATION_ID
+import com.gitsurfer.gitsurf.utils.constants.CALLBACK_URL
+import com.gitsurfer.gitsurf.utils.constants.CLIENT_ID
+import com.gitsurfer.gitsurf.utils.constants.CLIENT_SECRET
+import com.gitsurfer.gitsurf.utils.constants.TOKEN_PREFIX
 import kotlinx.coroutines.launch
 import okhttp3.Credentials
 import timber.log.Timber

@@ -2,9 +2,11 @@ package com.gitsurfer.gitsurf.ui.main.feed
 
 import android.graphics.Canvas
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,8 @@ import com.gitsurfer.gitsurf.R.drawable
 import com.gitsurfer.gitsurf.databinding.FragmentFeedBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
 import com.gitsurfer.gitsurf.ui.main.MainViewModel
+import com.gitsurfer.gitsurf.ui.repo.RepoActivity
+import com.gitsurfer.gitsurf.utils.ui.AppNavigator
 import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
@@ -61,10 +65,12 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
         activityViewModel.updateExceptionLiveData(exception)
       })
 
-      viewModel.feedClickEvent.observe(owner, Observer { feedWithExtras ->
-        findNavController().navigate(
-          FeedFragmentDirections.openRepoFromFeed(feedWithExtras.first),
-          feedWithExtras.second
+      viewModel.feedClickEvent.observe(owner, Observer { feedClicked ->
+        AppNavigator.startActivityWithData(
+          RepoActivity::class.java,
+          RepoActivity.getBundle(feedClicked),
+          requireActivity() as AppCompatActivity,
+          false
         )
       })
     }

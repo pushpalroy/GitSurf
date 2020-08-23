@@ -5,7 +5,7 @@
   <data>
     <variable
         name="vm"
-        type="com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeViewModel"
+        type="com.gitsurfer.gitsurf.ui.repo.readme.ReadmeViewModel"
         />
   </data>
   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

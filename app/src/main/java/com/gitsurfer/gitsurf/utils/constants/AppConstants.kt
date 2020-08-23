@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.utils
+package com.gitsurfer.gitsurf.utils.constants
 
 import com.gitsurfer.gitsurf.BuildConfig
 

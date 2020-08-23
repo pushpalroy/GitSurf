@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.ui.main.repo
+package com.gitsurfer.gitsurf.ui.repo
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData

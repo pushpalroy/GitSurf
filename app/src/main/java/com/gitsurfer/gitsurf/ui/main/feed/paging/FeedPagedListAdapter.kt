@@ -86,11 +86,7 @@ class FeedPagedListAdapter(
       binding.ivIcon.setImageResource(getIconFromEventType(feed.type))
 
       binding.root.setOnClickListener {
-        val extras = FragmentNavigatorExtras(
-          binding.ivFeedAvatar.toTransitionGroup(),
-          binding.tvFeedName.toTransitionGroup()
-        )
-        feedClickListener.onFeedClicked(position, extras)
+        feedClickListener.onFeedClicked(position)
       }
     }
   }

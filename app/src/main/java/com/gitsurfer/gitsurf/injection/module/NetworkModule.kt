@@ -7,7 +7,7 @@ import com.gitsurfer.gitsurf.data.network.NetworkManager
 import com.gitsurfer.gitsurf.data.network.api.LoginApi
 import com.gitsurfer.gitsurf.data.network.api.RepoApi
 import com.gitsurfer.gitsurf.data.network.api.UserApi
-import com.gitsurfer.gitsurf.utils.BASE_URL
+import com.gitsurfer.gitsurf.utils.constants.BASE_URL
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter

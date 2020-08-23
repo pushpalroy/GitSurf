@@ -1,11 +1,11 @@
-package com.gitsurfer.gitsurf.ui.main.repo.adapter
+package com.gitsurfer.gitsurf.ui.repo.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.gitsurfer.gitsurf.data.network.models.response.Repo
-import com.gitsurfer.gitsurf.ui.main.repo.files.FilesFragment
-import com.gitsurfer.gitsurf.ui.main.repo.readme.ReadmeFragment
+import com.gitsurfer.gitsurf.ui.repo.files.FilesFragment
+import com.gitsurfer.gitsurf.ui.repo.readme.ReadmeFragment
 
 class RepoViewPagerAdapter(
   activity: FragmentActivity,

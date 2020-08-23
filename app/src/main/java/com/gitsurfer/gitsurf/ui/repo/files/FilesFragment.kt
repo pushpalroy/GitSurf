@@ -1,8 +1,9 @@
-package com.gitsurfer.gitsurf.ui.main.repo.files
+package com.gitsurfer.gitsurf.ui.repo.files
 
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,11 +14,13 @@ import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.data.network.models.response.RepoFile
 import com.gitsurfer.gitsurf.databinding.FragmentFilesBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
-import com.gitsurfer.gitsurf.ui.main.repo.files.adapter.FileClickListener
-import com.gitsurfer.gitsurf.ui.main.repo.files.adapter.FilesAdapter
+import com.gitsurfer.gitsurf.ui.code.CodeActivity
+import com.gitsurfer.gitsurf.ui.repo.files.adapter.FileClickListener
+import com.gitsurfer.gitsurf.ui.repo.files.adapter.FilesAdapter
 import com.gitsurfer.gitsurf.utils.GithubUtil.TYPE_DIR
 import com.gitsurfer.gitsurf.utils.GithubUtil.TYPE_FILE
 import com.gitsurfer.gitsurf.utils.GithubUtil.getPreviousDirPath
+import com.gitsurfer.gitsurf.utils.ui.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -96,11 +99,14 @@ class FilesFragment(
   }
 
   private fun navToCodeViewer(file: RepoFile) {
-    val bundle = bundleOf(
-      "fileUrl" to file.url,
-      "fileName" to file.fileName
-    )
-    findNavController().navigate(R.id.codeFragment, bundle)
+    file.url?.let { fileUrl ->
+      AppNavigator.startActivityWithData(
+        CodeActivity::class.java,
+        CodeActivity.getBundle(fileName = file.fileName, fileUrl = fileUrl),
+        requireActivity() as AppCompatActivity,
+        false
+      )
+    }
   }
 
   private fun navToPrevDir() {

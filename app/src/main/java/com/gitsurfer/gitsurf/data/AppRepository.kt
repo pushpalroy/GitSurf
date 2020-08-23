@@ -6,7 +6,7 @@ import com.gitsurfer.gitsurf.data.persistence.LocalDataProvider
 import com.gitsurfer.gitsurf.data.persistence.models.RoomFeed
 import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
-import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
+import com.gitsurfer.gitsurf.utils.constants.TOKEN_PREFIX
 
 class AppRepository(
   private val networkDataProvider: NetworkDataProvider,
