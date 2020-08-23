@@ -27,28 +27,30 @@
       >
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_person_avatar"
+        android:id="@+id/iv_feed_avatar"
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_40dp"
         android:contentDescription="@string/con_desc_avatar"
         android:src="@color/veryLightGrey"
+        android:transitionName="@{@string/transition_avatar(feed.id)}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:setImageUrl="@{feed.actor.avatarUrl}"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        tools:srcCompat="@tools:sample/avatars"
         />
 
     <TextView
-        android:id="@+id/tv_action"
+        android:id="@+id/tv_feed_name"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:fontFamily="@font/muli_regular"
         android:textColor="@color/textBlackDark"
         android:textSize="14sp"
+        android:transitionName="@{@string/transition_name(feed.id)}"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_person_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_person_avatar"
+        app:layout_constraintStart_toEndOf="@+id/iv_feed_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_feed_avatar"
         tools:text="pushpalroy starred john/repo pushpalroy starred john/repo"
         />
     <ImageView
@@ -58,8 +60,8 @@
         android:layout_marginTop="8dp"
         android:contentDescription="@string/con_desc_feed_icon"
         android:src="@drawable/ic_fork"
-        app:layout_constraintStart_toStartOf="@+id/tv_action"
-        app:layout_constraintTop_toBottomOf="@+id/tv_action"
+        app:layout_constraintStart_toStartOf="@+id/tv_feed_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_feed_name"
         />
     <TextView
         android:id="@+id/tv_timestamp"

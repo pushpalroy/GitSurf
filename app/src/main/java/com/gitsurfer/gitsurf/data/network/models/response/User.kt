@@ -1,9 +1,12 @@
 package com.gitsurfer.gitsurf.data.network.models.response
 
+import android.os.Parcelable
 import com.gitsurfer.gitsurf.data.persistence.models.RoomUser
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 import java.util.Date
 
+@Parcelize
 data class User(
   @Json(name = "login") val login: String,
   @Json(name = "id") val id: String,
@@ -22,7 +25,7 @@ data class User(
   @Json(name = "following") val following: Int?,
   @Json(name = "created_at") val createdAt: Date?,
   @Json(name = "updated_at") val updatedAt: Date?
-)
+): Parcelable
 
 fun User.toRoomUser() = RoomUser(
   authToken = "",

@@ -25,6 +25,21 @@ class BookmarksFragment :
   override fun getViewBinding(view: View) = FragmentBookmarksBinding.bind(view)
 
   override fun init() {
+    initUi()
+    listenToLiveData()
+  }
+
+  private fun listenToLiveData() {
+    activity?.let { owner ->
+      viewModel.getRoomFeed()
+        .observe(owner, Observer { roomFeedList ->
+          viewModel.updateAdapter(roomFeedList)
+          viewModel.adapter.submitList(roomFeedList)
+        })
+    }
+  }
+
+  private fun initUi() {
     binding.viewModel = viewModel
     binding.rvBookmarks.addItemDecoration(
       DividerItemDecorator(
@@ -43,6 +58,7 @@ class BookmarksFragment :
           showToast("Repository Starred")
         }
       })
+
     val itemTouchHelper = ItemTouchHelper(swipeController)
     itemTouchHelper.attachToRecyclerView(binding.rvBookmarks)
 
@@ -55,17 +71,5 @@ class BookmarksFragment :
         swipeController.onDraw(c)
       }
     })
-
-    listenToLiveData()
-  }
-
-  private fun listenToLiveData() {
-    activity?.let { owner ->
-      viewModel.getRoomFeed()
-        .observe(owner, Observer { roomFeedList ->
-          viewModel.updateAdapter(roomFeedList)
-          viewModel.adapter.submitList(roomFeedList)
-        })
-    }
   }
 }

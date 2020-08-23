@@ -2,8 +2,8 @@ package com.gitsurfer.gitsurf.ui.main.feed
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.gitsurfer.gitsurf.data.AppRepository
@@ -29,7 +29,7 @@ class FeedViewModel @ViewModelInject constructor(
     private const val TAG = "Feed"
   }
 
-  var feedClickedLiveData = MutableLiveData<Feed>()
+  var feedClickEvent = SingleLiveEvent<Pair<Feed, FragmentNavigator.Extras>>()
   private var feedPagedList: LiveData<PagedList<Feed>>
   val adapter: FeedPagedListAdapter = FeedPagedListAdapter(feedClickListener = this)
 
@@ -91,7 +91,12 @@ class FeedViewModel @ViewModelInject constructor(
     }
   }
 
-  override fun onFeedClicked(position: Int) {
-    feedClickedLiveData.value = adapter.getFeedItem(position)
+  override fun onFeedClicked(
+    position: Int,
+    extras: FragmentNavigator.Extras
+  ) {
+    adapter.getFeedItem(position)?.let {
+      feedClickEvent.postValue(Pair(it, extras))
+    }
   }
 }

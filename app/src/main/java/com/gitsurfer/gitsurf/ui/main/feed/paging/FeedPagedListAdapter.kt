@@ -4,22 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gitsurfer.gitsurf.R.layout
-import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
 import com.gitsurfer.gitsurf.data.network.models.response.Feed
+import com.gitsurfer.gitsurf.databinding.ItemFeedBinding
 import com.gitsurfer.gitsurf.ui.main.feed.paging.FeedPagedListAdapter.FeedViewHolder
 import com.gitsurfer.gitsurf.utils.DateUtil
 import com.gitsurfer.gitsurf.utils.GithubUtil.getActionFromEventType
 import com.gitsurfer.gitsurf.utils.GithubUtil.getDescriptionFromAction
 import com.gitsurfer.gitsurf.utils.GithubUtil.getIconFromEventType
+import com.gitsurfer.gitsurf.utils.ui.extensions.toTransitionGroup
 
 class FeedPagedListAdapter(
   private val feedClickListener: FeedClickListener
 ) : PagedListAdapter<Feed, FeedViewHolder>(
-    FEED_COMPARATOR
+  FEED_COMPARATOR
 ) {
   private var feedItemsList: List<Feed> = listOf()
 
@@ -28,11 +30,11 @@ class FeedPagedListAdapter(
     viewType: Int
   ): FeedViewHolder {
     return FeedViewHolder(
-        binding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layout.item_feed, parent, false
-        ),
-        feedClickListener = feedClickListener
+      binding = DataBindingUtil.inflate(
+        LayoutInflater.from(parent.context),
+        layout.item_feed, parent, false
+      ),
+      feedClickListener = feedClickListener
     )
   }
 
@@ -60,7 +62,7 @@ class FeedPagedListAdapter(
     private val binding: ItemFeedBinding,
     private val feedClickListener: FeedClickListener
   ) :
-      RecyclerView.ViewHolder(binding.root) {
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
       feed: Feed,
@@ -78,13 +80,17 @@ class FeedPagedListAdapter(
             description +
             feed.repo.name
       HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
-      binding.tvAction.text =
+      binding.tvFeedName.text =
         HtmlCompat.fromHtml(event, HtmlCompat.FROM_HTML_MODE_LEGACY)
       binding.tvTimestamp.text = DateUtil.getTimeAgo(feed.createdAt.time)
       binding.ivIcon.setImageResource(getIconFromEventType(feed.type))
 
       binding.root.setOnClickListener {
-        feedClickListener.onFeedClicked(position)
+        val extras = FragmentNavigatorExtras(
+          binding.ivFeedAvatar.toTransitionGroup(),
+          binding.tvFeedName.toTransitionGroup()
+        )
+        feedClickListener.onFeedClicked(position, extras)
       }
     }
   }

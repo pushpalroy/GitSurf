@@ -1,7 +1,6 @@
 package com.gitsurfer.gitsurf.ui.login
 
 import android.graphics.Color
-import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.github.razir.progressbutton.attachTextChangeAnimator
@@ -17,8 +16,8 @@ import com.gitsurfer.gitsurf.utils.exceptions.ValidationException
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.PasswordEmpty
 import com.gitsurfer.gitsurf.utils.exceptions.ValidationException.UsernameEmpty
 import com.gitsurfer.gitsurf.utils.ui.AppNavigator
-import com.gitsurfer.gitsurf.utils.ui.clearErrorOnTextChange
-import com.gitsurfer.gitsurf.utils.ui.hideKeyboard
+import com.gitsurfer.gitsurf.utils.ui.extensions.clearErrorOnTextChange
+import com.gitsurfer.gitsurf.utils.ui.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,27 +26,21 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
   override val viewModel: LoginViewModel by viewModels()
   override fun getViewBinding() = ActivityLoginBinding.inflate(layoutInflater)
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    initView()
+  override fun init() {
+    initUi()
     listenToLiveData()
-  }
-
-  private fun initView() {
-    setContentView(binding.root)
-    binding.vm = viewModel
-    bindProgressButton(binding.loginBtn)
-    binding.loginBtn.attachTextChangeAnimator()
-    binding.userNameEt.clearErrorOnTextChange(binding.userNameLayout)
-    binding.passwordEt.clearErrorOnTextChange(binding.passwordLayout)
-
-    binding.loginBtn.setOnClickListener {
-      it?.context?.hideKeyboard()
-      viewModel.loginUser()
-    }
+    listenToUserInput()
   }
 
   private fun listenToLiveData() {
+    viewModel.userLoggedInLiveData.observe(this, Observer { isLoggedIn ->
+      run {
+        if (isLoggedIn) {
+          AppNavigator.startActivity(MainActivity::class.java, this, clearBackStack = true)
+        }
+      }
+    })
+
     viewModel.progressLiveData.observe(this, Observer {
       if (it == true) {
         binding.loginBtn.isEnabled = false
@@ -81,13 +74,20 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
       }
     })
+  }
 
-    viewModel.userLoggedInLiveData.observe(this, Observer { isLoggedIn ->
-      run {
-        if (isLoggedIn) {
-          AppNavigator.startActivity(MainActivity::class.java, this, clearBackStack = true)
-        }
-      }
-    })
+  private fun listenToUserInput() {
+    binding.loginBtn.setOnClickListener {
+      it?.context?.hideKeyboard()
+      viewModel.loginUser()
+    }
+  }
+
+  private fun initUi() {
+    binding.vm = viewModel
+    bindProgressButton(binding.loginBtn)
+    binding.loginBtn.attachTextChangeAnimator()
+    binding.userNameEt.clearErrorOnTextChange(binding.userNameLayout)
+    binding.passwordEt.clearErrorOnTextChange(binding.passwordLayout)
   }
 }

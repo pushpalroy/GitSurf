@@ -6,14 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gitsurfer.gitsurf.data.AppRepository
 import com.gitsurfer.gitsurf.data.network.NetworkManager
+import com.gitsurfer.gitsurf.data.network.models.response.Feed
 import com.gitsurfer.gitsurf.data.network.models.response.Repo
-import com.gitsurfer.gitsurf.data.utils.SharedPrefUtils
 import com.gitsurfer.gitsurf.ui.base.BaseViewModel
-import com.gitsurfer.gitsurf.utils.TOKEN_PREFIX
 import kotlinx.coroutines.launch
 
 class RepoViewModel @ViewModelInject constructor(
-  val appRepository: AppRepository,
+  private val appRepository: AppRepository,
   private val networkManager: NetworkManager
 ) : BaseViewModel() {
 
@@ -21,28 +20,21 @@ class RepoViewModel @ViewModelInject constructor(
   val repoLiveData: LiveData<Repo>
     get() = _repoLiveData
 
-  fun fetchRepoDetails(
-    owner: String?,
-    repoName: String?
-  ) {
-    owner?.let {
-      repoName?.let {
-        viewModelScope.launch {
-          when {
-            networkManager.hasInternetAccess() -> {
-              val repoDetails = appRepository.getRepoDetails(
-                owner = repoName.split("/")[0],
-                repoName = repoName.split("/")[1]
-              )
-              repoDetails.first?.let { repo ->
-                _repoLiveData.postValue(repo)
-              }
-              repoDetails.second?.let {
-                updateExceptionLiveData(it)
-              }
+  fun fetchRepoDetails(repoName: String) {
+      viewModelScope.launch {
+        when {
+          networkManager.hasInternetAccess() -> {
+            val repoDetails = appRepository.getRepoDetails(
+              owner = repoName.split("/")[0],
+              repoName = repoName.split("/")[1]
+            )
+            repoDetails.first?.let { repo ->
+              _repoLiveData.postValue(repo)
+            }
+            repoDetails.second?.let {
+              updateExceptionLiveData(it)
             }
           }
-        }
       }
     }
   }

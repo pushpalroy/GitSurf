@@ -1,8 +1,11 @@
 package com.gitsurfer.gitsurf.data.network.models.response
 
+import android.os.Parcelable
 import com.gitsurfer.gitsurf.data.persistence.models.RoomMember
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Member(
   @Json(name = "login") val login: String,
   @Json(name = "id") val id: String,
@@ -22,7 +25,7 @@ data class Member(
   @Json(name = "received_events_url") val receivedEventsUrl: String,
   @Json(name = "type") val type: String,
   @Json(name = "site_admin") val siteAdmin: Boolean
-)
+): Parcelable
 
 fun Member.toRoomMember() = RoomMember(
     login, id, avatarUrl, gravatarId, profileApiUrl, htmlUrl, type, siteAdmin

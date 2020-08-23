@@ -1,4 +1,4 @@
-package com.gitsurfer.gitsurf.utils.ui
+package com.gitsurfer.gitsurf.utils.ui.extensions
 
 import android.app.Activity
 import android.content.Context
@@ -11,18 +11,6 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 
-fun Activity.hideKeyboard() {
-  val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-  val view = findViewById<View>(android.R.id.content)
-  view?.let {
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
-  }
-}
-
-fun Fragment.hideKeyboard() {
-  activity?.hideKeyboard()
-}
-
 fun Context.hideKeyboard(resultReceiver: ResultReceiver? = null) {
   val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
   if (this is Activity) {
@@ -30,20 +18,6 @@ fun Context.hideKeyboard(resultReceiver: ResultReceiver? = null) {
     view?.let {
       imm.hideSoftInputFromWindow(view.windowToken, 0, resultReceiver)
     }
-  }
-}
-
-fun View.setVisible(visible: Boolean) {
-  when {
-    visible -> this.visibility = View.VISIBLE
-    else -> this.visibility = View.GONE
-  }
-}
-
-fun getViewVisibility(visible: Boolean): Int {
-  return when {
-    visible -> View.VISIBLE
-    else -> View.GONE
   }
 }
 

@@ -15,10 +15,13 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
   private var snackBar: Snackbar? = null
 
   abstract fun getViewBinding(): VB
+  abstract fun init()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = getViewBinding()
+    setContentView(binding.root)
+    init()
   }
 
   protected fun showSnackBar(

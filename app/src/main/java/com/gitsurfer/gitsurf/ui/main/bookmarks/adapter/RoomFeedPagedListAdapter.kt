@@ -62,7 +62,7 @@ class RoomFeedPagedListAdapter : PagedListAdapter<RoomFeed, RoomFeedViewHolder>(
     RecyclerView.ViewHolder(binding.root) {
     fun bind(roomFeed: RoomFeed) {
       binding.roomFeed = roomFeed
-      binding.tvAction.text = getSpanned(roomFeed)
+      binding.tvFeedName.text = getSpanned(roomFeed)
       binding.tvTimestamp.text = DateUtil.getTimeAgo(roomFeed.createdAt?.time) ?: ""
       binding.ivIcon.setImageResource(getIconFromEventType(roomFeed.type))
     }

@@ -1,6 +1,5 @@
 package com.gitsurfer.gitsurf.ui.main
 
-import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
@@ -38,13 +37,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     )
   }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(binding.root)
-    viewModel.setAuthorizedFromPref()
+  override fun init() {
     setSupportActionBar(toolbar)
     setUpNavigation()
     listenToLiveData()
+    viewModel.setAuthorizedFromPref()
     viewModel.getLocalUserDetails()
     viewModel.registerNetworkListener()
   }

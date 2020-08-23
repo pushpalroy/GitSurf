@@ -2,7 +2,6 @@ package com.gitsurfer.gitsurf.ui.main.feed
 
 import android.graphics.Canvas
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,6 +19,7 @@ import com.gitsurfer.gitsurf.utils.ui.DividerItemDecorator
 import com.gitsurfer.gitsurf.utils.ui.ItemOnScrollListener
 import com.gitsurfer.gitsurf.utils.ui.SwipeClickActions
 import com.gitsurfer.gitsurf.utils.ui.SwipeController
+import com.gitsurfer.gitsurf.utils.ui.extensions.waitForTransition
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +34,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
     initRecyclerView()
     setListeners()
     listenToLiveData()
+    waitForTransition(binding.rvFeed)
   }
 
   private fun listenToLiveData() {
@@ -60,13 +61,11 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
         activityViewModel.updateExceptionLiveData(exception)
       })
 
-      viewModel.feedClickedLiveData.observe(owner, Observer { feedClicked ->
-        val bundle = bundleOf(
-          "repoOwner" to feedClicked.actor.login,
-          "repoName" to feedClicked.repo.name
+      viewModel.feedClickEvent.observe(owner, Observer { feedWithExtras ->
+        findNavController().navigate(
+          FeedFragmentDirections.openRepoFromFeed(feedWithExtras.first),
+          feedWithExtras.second
         )
-        findNavController()
-          .navigate(R.id.repoFragment, bundle)
       })
     }
   }
@@ -107,6 +106,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FragmentFeedBinding>(R.layout.f
         swipeController.onDraw(c)
       }
     })
+    waitForTransition(binding.rvFeed)
   }
 
   private fun initSwipeRefresher(): SwipeController {

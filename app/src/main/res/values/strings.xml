@@ -21,4 +21,7 @@
   <string name="starred">Starred</string>
   <string name="bookmarks">Bookmarks</string>
   <string name="lost_internet_message">You have lost internet connection</string>
+
+  <string name="transition_avatar">avatar %s</string>
+  <string name="transition_name">name %s</string>
 </resources>
