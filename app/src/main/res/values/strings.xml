@@ -24,4 +24,5 @@
 
   <string name="transition_avatar">avatar %s</string>
   <string name="transition_name">name %s</string>
+  <string name="desc_toolbar_icon">Toolbar Icon</string>
 </resources>

@@ -15,7 +15,10 @@ data class Repo(
   @Json(name = "description") val description: String?,
   @Json(name = "url") val url: String,
   @Json(name = "default_branch") val defaultBranch: String?,
-  @Json(name = "language") val language: String?
+  @Json(name = "language") val language: String?,
+  @Json(name = "stargazers_count") val starsCount: Int?,
+  @Json(name = "forks_count") val forksCount: Int?,
+  @Json(name = "watchers_count") val watchersCount: Int?
 ): Parcelable
 
 fun Repo.toRoomRepo() = RoomRepo(

@@ -4,52 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-  <data>
-
-    <variable
-        name="feed"
-        type="com.gitsurfer.gitsurf.data.network.models.response.Feed"
-        />
-  </data>
-
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_feed_avatar"
-        android:layout_width="@dimen/dimen_60dp"
-        android:layout_height="@dimen/dimen_60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/con_desc_avatar"
-        android:src="@color/veryLightGrey"
-        android:transitionName="@{@string/transition_avatar(feed.id)}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:setImageUrl="@{feed.repo.owner.avatarUrl}"
-        tools:srcCompat="@tools:sample/avatars"
-        />
-
-    <TextView
-        android:id="@+id/tv_feed_name"
-        android:layout_width="@dimen/dimen_0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/repo_details_panel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/muli_regular"
-        android:text="@{feed.repo.name}"
-        android:textColor="@color/textBlackDark"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:transitionName="@{@string/transition_name(feed.id)}"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_feed_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_feed_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_feed_avatar"
-        tools:text="pushpalroy starred john/repo pushpalroy starred john/repo"
-        />
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/iv_feed_avatar"
+          android:layout_width="@dimen/dimen_60dp"
+          android:layout_height="@dimen/dimen_60dp"
+          android:layout_margin="16dp"
+          android:contentDescription="@string/con_desc_avatar"
+          android:src="@color/veryLightGrey"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:srcCompat="@tools:sample/avatars"
+          />
+
+      <ImageView
+          android:id="@+id/iv_star_icon"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_marginStart="64dp"
+          android:contentDescription="@string/con_desc_feed_icon"
+          android:src="@drawable/ic_star_outline"
+          app:layout_constraintStart_toEndOf="@+id/iv_feed_avatar"
+          app:layout_constraintTop_toTopOf="@+id/iv_feed_avatar"
+          />
+
+      <TextView
+          android:id="@+id/tv_star_count"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          app:layout_constraintEnd_toEndOf="@+id/iv_star_icon"
+          app:layout_constraintStart_toStartOf="@+id/iv_star_icon"
+          app:layout_constraintTop_toBottomOf="@+id/iv_star_icon"
+          tools:text="56"
+          />
+
+      <ImageView
+          android:id="@+id/iv_watch_icon"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_marginStart="32dp"
+          android:contentDescription="@string/con_desc_feed_icon"
+          android:src="@drawable/ic_watch"
+          app:layout_constraintStart_toEndOf="@+id/tv_star_count"
+          app:layout_constraintTop_toTopOf="@+id/iv_star_icon"
+          />
+
+      <TextView
+          android:id="@+id/tv_watch_count"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          app:layout_constraintEnd_toEndOf="@+id/iv_watch_icon"
+          app:layout_constraintStart_toStartOf="@+id/iv_watch_icon"
+          app:layout_constraintTop_toBottomOf="@+id/iv_watch_icon"
+          tools:text="23"
+          />
+
+      <ImageView
+          android:id="@+id/iv_fork_icon"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_marginStart="32dp"
+          android:contentDescription="@string/con_desc_feed_icon"
+          android:src="@drawable/ic_fork"
+          app:layout_constraintStart_toEndOf="@+id/tv_watch_count"
+          app:layout_constraintTop_toTopOf="@+id/iv_watch_icon"
+          />
+
+      <TextView
+          android:id="@+id/tv_fork_count"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          app:layout_constraintEnd_toEndOf="@+id/iv_fork_icon"
+          app:layout_constraintStart_toStartOf="@+id/iv_fork_icon"
+          app:layout_constraintTop_toBottomOf="@+id/iv_fork_icon"
+          tools:text="87"
+          />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -58,7 +109,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_feed_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/repo_details_panel"
         />
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"

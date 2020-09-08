@@ -49,7 +49,7 @@ class CodeFragment : BaseFragment<CodeViewModel, FragmentCodeBinding>(layout.fra
   }
 
   private fun setToolbarTitle() {
-    (requireActivity() as MainActivity).updateTitle(
+    (requireActivity() as MainActivity).setToolbarTitle(
       arguments?.getString("fileName", "")
     )
   }

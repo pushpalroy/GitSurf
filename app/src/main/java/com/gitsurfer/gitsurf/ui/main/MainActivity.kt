@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     )
   }
 
-  fun updateTitle(title: String?) {
+  fun setToolbarTitle(title: String?) {
     title?.let {
       toolbar.title = it
     }

@@ -9,7 +9,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.gitsurfer.gitsurf.R.layout
 import com.gitsurfer.gitsurf.databinding.FragmentRepoBinding
 import com.gitsurfer.gitsurf.ui.base.BaseFragment
+import com.gitsurfer.gitsurf.ui.main.MainActivity
 import com.gitsurfer.gitsurf.ui.main.repo.adapter.RepoViewPagerAdapter
+import com.gitsurfer.gitsurf.utils.ui.bindImageUrl
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +28,7 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(layout.fra
   private val args: RepoFragmentArgs by navArgs()
 
   override fun init() {
-    binding.feed = args.feed
+    setToolbar()
     initUi()
     listenToLiveData()
     fetchRepo()
@@ -39,6 +41,10 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(layout.fra
   private fun listenToLiveData() {
     viewModel.repoLiveData.observe(
       this, Observer { repo ->
+        binding.ivFeedAvatar.bindImageUrl(repo.owner?.avatarUrl)
+        binding.tvForkCount.text = repo.forksCount.toString()
+        binding.tvWatchCount.text = repo.watchersCount.toString()
+        binding.tvStarCount.text = repo.starsCount.toString()
         binding.pager.adapter = RepoViewPagerAdapter(
           requireActivity(), tabs, repo
         )
@@ -57,5 +63,11 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>(layout.fra
         .inflateTransition(android.R.transition.move)
     binding.pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     binding.executePendingBindings()
+  }
+
+  private fun setToolbar() {
+    with(activity as MainActivity) {
+      setToolbarTitle(args.feed.repo.name)
+    }
   }
 }
